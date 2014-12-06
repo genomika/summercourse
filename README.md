@@ -1,7 +1,8 @@
 I Curso de Verão de Bionformática pela Genomika
 ===============================
 
-Tema: Análise de dados NGS -  Extraindo informações clínicas de variantes genéticas.
++ Tema: Análise de dados NGS -  Extraindo informações clínicas de variantes genéticas.
+
 
 Abstract
 --------
