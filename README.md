@@ -18,4 +18,12 @@ Agenda (5 encontros com duração de 2 horas)
 Conheça a Genomika Diagnósticos
 -------------------------------
 
-Advances in NGS have provided unprecedented opportunities to mine genetic data from individuals to populations. The subsequent identification of genetic variants which may be implicated in disease is an important step in linking sequence data with disease and provides new approaches to improve human health. This course will explore the strategies of genomic data analysis and interpretation, an emergent discipline that seeks to deliver better answers from NGS data so that patients and their physicians can determine informed healthcare decisions.
+A Genomika Diagnósticos [http://www.genomika.com.br](http://www.genomika.com.br) é um dos pioneiros laboratórios do Brasil a trazer tecnologia de sequenciamento genético de nova geração (nextgen) para a identificação, análise e diagnóstico de doenças raras, além de contar com vários outros tipos de exames genéticos voltados para análise clínica.
+
+Formado por um time de especialistas em suas áreas (biomédicos, médicos, bioinformatas), trabalhamos com as tecnologias e equipamentos mais modernos voltados para testes genéticos. Especialmente no time de bioinformática, que precisa lidar constantemente com ferramentas, plataformas e equipamentos responsáveis por manipular grandes massas de dados a partir do DNA sequenciado e bases de dados de doenças genéticas.  
+
+Logo grandes volumes de dados exigem processos e desenvolvimento de ferramentas de alto desempenho e especializadas para auxiliar a nossa equipe de analistas na sua análise clínica.  Big Data voltado para saúde é o que também fazemos aqui na Genomika. Portanto fazer parte de nosso time é estar alinhado com pessoas de várias formações fazendo o melhor que fazem em suas áreas com o objetivo de possibilitar a milhões de brasileiros o acesso a informação detalhada e profunda sobre seu corpo e auxiliá-los nas suas escolhas sobre a sua vida e saúde.
+
+Em nosso setor de T.I e bioinformática trabalhamos com desenvolvimento de sistemas de suporte ao diagnóstico de doenças, análises de dados e ferramentas de gestão laboratorial hospedados em servidores de alto desempenho local e remoto fora do Brasil.
+
+[![ScreenShot](http://i1.ytimg.com/vi/pKA83K7sfS8/maxresdefault.jpg)](https://www.youtube.com/watch?v=pKA83K7sfS8)
