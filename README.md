@@ -8,7 +8,7 @@ I Workshop de Verão de Bionformática pela Genomika
 Abstract
 --------
 
-_Avanços no Sequenciamento de Nova Geração (NGS) têm possibilitado oportunidades sem precedentes para a disciplina mineração de dados genéticos de pessoas a populações. A análise subsequente dos dados em busca de variantes genéticas que podem estar associadas com algum tipo de doença genética é um importante passo para novas alternativas de diagnóstico e tratamento personalizado de um paciente. Este curso visa apresentar como realizar esta análise sobre os dados genéticos por meio da bioinformática passando pelas etapas de alinhamento, chamada de variantes e anotação. O resultado final é um arquivo rico com informações que permitem aos médicos e pacientes conhecerem mais sobre seu DNA e auxiliá-los nas decisões relacionadas à sua saúde._
+_Avanços no Sequenciamento de Nova Geração (NGS) têm possibilitado oportunidades sem precedentes para a disciplina mineração de dados genéticos de pessoas a populações. A análise subsequente dos dados em busca de variantes genéticas que podem estar associadas com algum tipo de doença genética é um importante passo para novas alternativas de diagnóstico e tratamento personalizado de um paciente. Este workshop visa apresentar como realizar esta análise sobre os dados genéticos por meio da disciplina de bioinformática passando pelas etapas de alinhamento, chamada de variantes e anotação. O resultado final é um arquivo rico em informações que permitem aos médicos e pacientes conhecerem mais sobre seu DNA e auxiliá-los nas decisões relacionadas à sua saúde._
 
 
 Agenda (5 encontros com duração de 2 horas)
