@@ -14,6 +14,11 @@ _Avanços no Sequenciamento de Nova Geração (NGS) têm possibilitado oportunid
 Agenda (5 encontros com duração de 2 horas)
 -------------------------------------------
 
+1.  Introdução a Genética e hands-on em programação, bash e ambiente Unix/Linux  (Dia xx/01/2014 )
+2.  Introdução ao Sequenciamento de nova geração e análise das sequências (Dia xx/01/2014)
+3.  Mapeamento, Alinhamento e limpeza/recalibração dos dados (Dia xx/01/2014)
+4.  Chamada de variantes e análise de cobertura (Dia xx/01/2014)
+5.  Anotação e visualização dos dados (Dia xx/01/2014)
 
 Conheça a Genomika Diagnósticos
 -------------------------------
