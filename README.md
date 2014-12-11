@@ -15,7 +15,7 @@ Abstract
 _Avanços no Sequenciamento de Nova Geração (NGS) têm possibilitado oportunidades sem precedentes para a disciplina mineração de dados genéticos de pessoas a populações. A análise subsequente dos dados em busca de variantes genéticas que podem estar associadas com algum tipo de doença genética é um importante passo para novas alternativas de diagnóstico e tratamento personalizado de um paciente. Este workshop visa apresentar como realizar esta análise sobre os dados genéticos por meio da disciplina de bioinformática passando pelas etapas de alinhamento, chamada de variantes e anotação. O resultado final é um arquivo rico em informações que permitem aos médicos e pacientes conhecerem mais sobre seu DNA e auxiliá-los nas decisões relacionadas à sua saúde._
 
 
-Agenda (5 encontros com duração de 2 horas)
+Agenda (6 encontros com duração de 2 horas)
 -------------------------------------------
 
 1.  Introdução a Genética e hands-on em programação, bash e ambiente Unix/Linux  (Dia 12/01/2014 )
