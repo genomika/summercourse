@@ -28,7 +28,7 @@ Inscrições
 ----------
 Curso gratuito porém com vagas limitadas. Resultado da seleção será postada aqui neste portal no dia 07 de janeiro de 2015.
 
-Para se inscrever basta acessar o link: [Formulário de inscrição](http://goo.gl/forms/ZjfIhNUMAs)
+Para se inscrever basta acessar o link: [Formulário de inscrição](http://goo.gl/forms/ZjfIhNUMAs) Após enviar respostas enviar seu curriculo em PDF para marcel@genomika.com.br . Só assim o interesse pela inscrição será efetuada.
 Conheça a Genomika Diagnósticos
 -------------------------------
 
