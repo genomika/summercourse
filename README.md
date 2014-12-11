@@ -6,7 +6,9 @@ I Workshop de Verão de Bionformática pela Genomika
 + Horários: 19:00hrs até as 21:00hrs   CH: 12 horas 
 + Local do Workshop:  Genomika Diagnósticos, Edf. Alfred Nobel, Sala 1301  Rua Senador José Henrique, 224. Ilha do Leite, Recife-PE
 + Vagas: Limitadas
-+ Inscrições gratuitas, seleção por análise de CV.
++ Inscrições gratuitas, seleção por análise de CV
+
+
 Abstract
 --------
 
