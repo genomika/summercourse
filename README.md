@@ -21,6 +21,14 @@ Agenda (5 encontros com duração de 2 horas)
 4.  Chamada de variantes e análise de cobertura (Dia xx/01/2014)
 5.  Anotação e visualização dos dados (Dia xx/01/2014)
 
+Inscrições
+----------
+Curso gratuito porém com vagas limitadas. Resultado da seleção será postada aqui neste portal no dia 07 de janeiro de 2015.
+
+Para se inscrever basta acessar o link:  
+
+<iframe src="https://docs.google.com/a/genomika.com.br/forms/d/163xP4NkxQNnKRa5pcW4KdOeCt0X7A9q2oBs2UddyYYs/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Carregando...</iframe>
+
 Conheça a Genomika Diagnósticos
 -------------------------------
 
