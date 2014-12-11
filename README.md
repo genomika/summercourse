@@ -2,10 +2,11 @@ I Workshop de Verão de Bionformática pela Genomika
 ===============================
 
 + Tema: Análise de dados NGS -  Extraindo informações clínicas de variantes genéticas.
-+ Período:  xx/xx/2014 até xx/xx/2014  
-+ Horários: 19:00hrs até as 21:00hrs   CH: 10 horas 
++ Período:  12/01/2014 até 28/01/2014  (6 encontros Segundas e Quartas-Feiras)
++ Horários: 19:00hrs até as 21:00hrs   CH: 12 horas 
 + Local do Workshop:  Genomika Diagnósticos, Edf. Alfred Nobel, Sala 1301  Rua Senador José Henrique, 224. Ilha do Leite, Recife-PE
-
++ Vagas: Limitadas
++ Inscrições gratuitas, seleção por análise de CV.
 Abstract
 --------
 
@@ -25,7 +26,7 @@ Inscrições
 ----------
 Curso gratuito porém com vagas limitadas. Resultado da seleção será postada aqui neste portal no dia 07 de janeiro de 2015.
 
-Para se inscrever basta acessar o link: [Formulário de inscrição](http://bit.ly/1AhwSEE)
+Para se inscrever basta acessar o link: [Formulário de inscrição](http://goo.gl/forms/ZjfIhNUMAs)
 Conheça a Genomika Diagnósticos
 -------------------------------
 
