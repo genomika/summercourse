@@ -2,8 +2,8 @@ I Workshop de Verão de Bionformática pela Genomika
 ===============================
 
 + Tema: Análise de dados NGS -  Extraindo informações clínicas de variantes genéticas.
-+ Período:  12/01/2014 até 28/01/2014  (6 encontros Segundas e Quartas-Feiras)
-+ Horários: 19:00hrs até as 21:00hrs   CH: 12 horas 
++ Período:  26/01/2014 até 09/02/2014  (5 encontros Segundas e Quartas-Feiras)
++ Horários: 19:00hrs até as 21:00hrs   CH: 10 horas 
 + Local do Workshop:  Genomika Diagnósticos, Edf. Alfred Nobel, Sala 1301  Rua Senador José Henrique, 224. Ilha do Leite, Recife-PE
 + Vagas: Limitadas
 + Inscrições gratuitas, seleção por análise de CV
@@ -18,15 +18,15 @@ _Avanços no Sequenciamento de Nova Geração (NGS) têm possibilitado oportunid
 Agenda (6 encontros com duração de 2 horas)
 -------------------------------------------
 
-1.  Introdução a Genética e hands-on em programação, bash e ambiente Unix/Linux  (Dia 12/01/2014 )
-2.  Introdução ao Sequenciamento de nova geração e análise das sequências (Dia 14/01/2014)
-3.  Mapeamento, Alinhamento e limpeza/recalibração dos dados (Dia 19/01/2014, 21/01/2014)
-4.  Chamada de variantes e análise de cobertura (Dia 26/01/2014)
-5.  Anotação e visualização dos dados (Dia 28/01/2014)
+1.  Introdução a Genética e hands-on em programação, bash e ambiente Unix/Linux  (Dia 26/01/2014 )
+2.  Introdução ao Sequenciamento de nova geração e análise das sequências (Dia 28/01/2014)
+3.  Mapeamento, Alinhamento e limpeza/recalibração dos dados (Dia 02/02/2014)
+4.  Chamada de variantes e análise de cobertura (Dia 04/02/2014)
+5.  Anotação e visualização dos dados (Dia 09/02/2014)
 
 Inscrições
 ----------
-Curso gratuito porém com vagas limitadas. Resultado da seleção será postada aqui neste portal no dia 07 de janeiro de 2015.
+Curso gratuito porém com vagas limitadas. Resultado da seleção será postada aqui neste portal no dia 19 de janeiro de 2015.
 
 Para se inscrever basta acessar o link: [Formulário de inscrição](http://goo.gl/forms/ZjfIhNUMAs) Após enviar respostas enviar seu curriculo em PDF para marcel@genomika.com.br . Só assim o interesse pela inscrição será efetuada.
 Conheça a Genomika Diagnósticos
