@@ -75,6 +75,6 @@ In the last day we will work on RNA-seq data analysis
 
 ----
 
-# About
+# Sobre
 
-This course is usually carried out by experienced researchers from CIPF, EMBL-EBI and University of Cambridge. You can ask any question to David Montaner (dmontaner@cipf.es), Marta Bleda (mb2033@cam.ac.uk) and Ignacio Medina (imedina@ebi.ac.uk).
+Este curso está sendo instruído pelos colaboradores da Genomika Diagnósticos. Você pode realizar qualquer pergunta para Marcel Caraciolo (marcel@genomika.com.br),  Rodrigo (rodrigo@genomika.com.br) e Filiphe Villar (filiphe@genomika.com.br).
