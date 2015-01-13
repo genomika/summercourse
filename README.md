@@ -4,6 +4,10 @@ Seja bem vindo a este curso introdutório sobre análise de _variantes clínicas
 
 Este workshop foi projetado para ser realizado em 4 encontros de 2 horas e meia e assume que todos tenham uma base sobre dados NGS e ambiente LINUX. Todos os materiais deste workshop são abertos e gratuitos, fique à vontade em usá-los. Todos os dados para os tutoriais estão disponíveis em nossa pasta do Dropbox [DropBox folder](https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a).
 
+#Abstract
+
+Avanços no Sequenciamento de Nova Geração (NGS) têm possibilitado oportunidades sem precedentes para a disciplina mineração de dados genéticos de pessoas a populações. A análise subsequente dos dados em busca de variantes genéticas que podem estar associadas com algum tipo de doença genética é um importante passo para novas alternativas de diagnóstico e tratamento personalizado de um paciente. Este workshop visa apresentar como realizar esta análise sobre os dados genéticos por meio da disciplina de bioinformática passando pelas etapas de alinhamento, chamada de variantes e anotação. O resultado final é um arquivo rico em informações que permitem aos médicos e pacientes conhecerem mais sobre seu DNA e auxiliá-los nas decisões relacionadas à sua saúde.
+
 
 # Agenda
 
