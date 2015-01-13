@@ -1,16 +1,13 @@
 # Overview
 
-Seja bem vindo a este curso introdutório sobre análise de dados _NGS em chamada de variantes para análises clínicas. Durante este curso você irá aprender os conceitos básicos de análise de dados NGS e visualização em um ambiente LINUX.
+Seja bem vindo a este curso introdutório sobre análise de _variantes clínicas em DNA humano com dados NGS_. Durante este curso você irá aprender os conceitos básicos de análise e visualização de dados NGS e visualização em um ambiente LINUX/UNIX, os softwares mais usados e melhores práticas serão explanadas. Este curso é focado em alinhamento de dados para apenas DNA, chamada de variantes e visualização de dados.
+
+Este workshop foi projetado para ser realizado em 4 encontros de 2 horas e meia e assume que todos tenham uma base sobre dados NGS e ambiente LINUX. Todos os materiais deste workshop são abertos e gratuitos, fique à vontade em usá-los. Todos os dados para os tutoriais estão disponíveis em nossa pasta do Dropbox [DropBox folder](https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a).
 
 
-Welcome to this introductory course about _NGS data analysis and visualization_. During this course you will learn the basics of NGS data analysis and visualization in a Linux environment, current used software and best practices will be explained. This course is focused in NGS data alignment for both DNA and RNA (RNA-seq), variant calling, differential expression analysis and data visualization.
+# Agenda
 
-This is course is scheduled for a 3 days and assumes a very basic knowledge of NGS data analysis and Linux. All materials in this is course are free and open, feel free to reuse them as you want. All the data for the tutorials are available in our [DropBox folder](https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a).
-
-
-# Schedule
-
-## Day 1
+## Dia 1
 
 During this first day we will start with an _introduction to NGS technology_ and in the data preparation for their analysis. You will also learn the basics of the _GNU/Linux shell introduction_. At this point we are ready to start preparing and working with the data: _Quality Control_ (QC) and _NGS data alignment_.
 
