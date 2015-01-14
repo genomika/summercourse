@@ -13,29 +13,29 @@ Avanços no Sequenciamento de Nova Geração (NGS) têm possibilitado oportunida
 
 ## Dia 1
 
-During this first day we will start with an _introduction to NGS technology_ and in the data preparation for their analysis. You will also learn the basics of the _GNU/Linux shell introduction_. At this point we are ready to start preparing and working with the data: _Quality Control_ (QC) and _NGS data alignment_.
+Neste primeiro dia iremos aprender o básico com uma _introdução a Genética e a tecnologia NGS_ , isto inclui preparação de dados para a análise.  Você também irá aprender os primeiros passos com _shell LINUX/GNU_.  Vamos também aprender sobre o pipeline _Variant Calling_ e manipular os primeiros dados ligados a _Controle de Qualidade (QC)_ .
 
-### Presentation
-- Presentation [[PDF](Course_Materials/presentation/presentation_mda14.pdf) | [OpenOffice](Course_Materials/presentation/presentation_mda14.odp)]
+### Apresentação (15 min)
+- Slides [[PDF](Course_Materials/presentation/presentation_mda14.pdf)]
 
-### Introduction to NGS technologies
-Very brief overview about NGS technologies and some concepts.
-- [Presentation](Course_Materials/intro-ngs/ngs_introduction_mda14.pdf)
+### Introdução a Tecnologias NGS's (45 min)
+Uma introdução rápida sobre as tecnologias NGS e alguns conceitos.
+- [Slides](Course_Materials/intro-ngs/ngs_introduction_mda14.pdf)
 
-### Introduction to GNU/Linux shell
+### Introdução ao Linux/SHELL (50 min)
 - Presentation [[PDF](Course_Materials/intro-linux/intro_Linux_mda14.pdf) | [OpenOffice](Course_Materials/intro-linux/intro_Linux_mda14.odp)]
 
-### Quality control for NGS raw data (FASTQ)
-- [Presentation](Course_Materials/quality_control/presentation/quality_control_presentation.pdf) - [Tutorial](Course_Materials/quality_control/tutorial/quality_control.html) - [Data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AAAqebBSC6JgDGq4emwNORCaa/quality_control)
-
-
-### DNA and RNA-seq read alignment
-- Presentation [[PDF](Course_Materials/alignment/presentation/ngs-read-mapping-imedina-mda14.pdf) | [OpenOffice](Course_Materials/alignment/presentation/ngs-read-mapping-imedina-mda14.odp)] - [Tutorial](Course_Materials/alignment/tutorial/example.html)
+### Controle de Qualidade para dados brutos de NGS (FASTQ) (30 min)
+- [Slides](Course_Materials/quality_control/presentation/quality_control_presentation.pdf) - [Tutorial](Course_Materials/quality_control/tutorial/quality_control.html) - [Dados](https://www.dropbox.com/sh/4qkqch7gyt888h7/AAAqebBSC6JgDGq4emwNORCaa/quality_control)
 
 
 ## Day 2
 
 During the second day we will focus on _Variant Calling_ and _Data Visualization_ of DNA and RNA-seq alignments together with VCF files. 
+
+
+### DNA and RNA-seq read alignment
+- Presentation [[PDF](Course_Materials/alignment/presentation/ngs-read-mapping-imedina-mda14.pdf) | [OpenOffice](Course_Materials/alignment/presentation/ngs-read-mapping-imedina-mda14.odp)] - [Tutorial](Course_Materials/alignment/tutorial/example.html)
 
 ###  NGS data Visualization
 
