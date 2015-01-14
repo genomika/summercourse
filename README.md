@@ -29,49 +29,50 @@ Uma introdução rápida sobre as tecnologias NGS e alguns conceitos.
 - [Slides](Course_Materials/quality_control/presentation/quality_control_presentation.pdf) - [Tutorial](Course_Materials/quality_control/tutorial/quality_control.html) - [Dados](https://www.dropbox.com/sh/4qkqch7gyt888h7/AAAqebBSC6JgDGq4emwNORCaa/quality_control)
 
 
-## Day 2
+## Dia 2
 
-During the second day we will focus on _Variant Calling_ and _Data Visualization_ of DNA and RNA-seq alignments together with VCF files. 
+Neste segundo dia vamos focar em _Variant Calling_ e _Visualização dos dados_ com  alinhamento dos dados e análise das sequências.
 
 
-### DNA and RNA-seq read alignment
-- Presentation [[PDF](Course_Materials/alignment/presentation/ngs-read-mapping-imedina-mda14.pdf) | [OpenOffice](Course_Materials/alignment/presentation/ngs-read-mapping-imedina-mda14.odp)] - [Tutorial](Course_Materials/alignment/tutorial/example.html)
+### Alinhamento dos dados
+- Slides [[PDF](Course_Materials/alignment/presentation/ngs-read-mapping-imedina-mda14.pdf) | - [Tutorial](Course_Materials/alignment/tutorial/example.html)
 
-###  NGS data Visualization
+### Visualização dos dados NGS PT1
 
-- [Presentation](Course_Materials/visualization/presentation/2014-Cambridge_visualisation.pdf) || [Guided example](Course_Materials/visualization/tutorial/000_example.html) || [Tutorial 1](Course_Materials/visualization/tutorial/010_example.html) || [Tutorial 2](Course_Materials/visualization/tutorial/020_example.html)
+- [Slides](Course_Materials/visualization/presentation/2014-Cambridge_visualisation.pdf) || [Guia de Exemplo](Course_Materials/visualization/tutorial/000_example.html) || [Tutorial 1](Course_Materials/visualization/tutorial/010_example.html) || [Tutorial 2](Course_Materials/visualization/tutorial/020_example.html)
 
-### Variant calling analysis
+## Dia 3
 
-- [Presentation](Course_Materials/variant_calling/presentation/2014-Cambridge_variant_calling.pdf) || [Tutorial 1](Course_Materials/variant_calling/tutorial/010_example.html) || [Tutorial 2](Course_Materials/variant_calling/tutorial/020_example.html) || [Tutorial 3](Course_Materials/variant_calling/tutorial/030_example.html)
+O terceiro dia será voltado para a limpeza e recalibração dos dados de alinhamento e para a chamada de variantes gerando os arquivos VCF.
 
-### Variant annotation
+### Análise de variantes
 
-- [Presentation](Course_Materials/variant_annotation/presentation/2014-Cambridge_variant_annotation.pdf) || [Annovar](Course_Materials/variant_annotation/tutorial/annovar.html) || [HPG-Variant](Course_Materials/variant_annotation/tutorial/hpg-variant.html)
+- [Slides](Course_Materials/variant_calling/presentation/2014-Cambridge_variant_calling.pdf) || [Tutorial 1](Course_Materials/variant_calling/tutorial/010_example.html) || [Tutorial 2](Course_Materials/variant_calling/tutorial/020_example.html) || [Tutorial 3](Course_Materials/variant_calling/tutorial/030_example.html)
+- 
+### Análise de Cobertura
 
-### Variant prioritization
+- [Slides](Course_Materials/association_studies/presentation/association_studies_presentation.pdf) - [Tutorial](Course_Materials/association_studies/tutorial/association_studies.html)
 
-- [Presentation](Course_Materials/variant_prioritization/presentation/2014-Cambridge_variant_prioritization.pdf) || [Data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AADPzrs9NGg0PjVqnwQocUJUa/annotation/hpg-variant/examples)
+### Anotação de variantes
 
-### Big Data analysis and visualization
+- [Slides](Course_Materials/variant_annotation/presentation/2014-Cambridge_variant_annotation.pdf) || [Annovar](Course_Materials/variant_annotation/tutorial/annovar.html) || [HPG-Variant](Course_Materials/variant_annotation/tutorial/hpg-variant.html)
 
-- [Presentation](Course_Materials/variant_prioritization/presentation/2014-Cambridge_variant_prioritization.pdf)
+## Dia 4
 
-## Day 3
+Neste último encontro o foco será na anotação das variantes com alguns bancos de dados e a detecção e filtragem de variantes relevantes ao caso clínico investigado.
 
-In the last day we will work on RNA-seq data analysis
+### Priorização de variantes
 
-### Association studies
+- [Slides](Course_Materials/variant_prioritization/presentation/2014-Cambridge_variant_prioritization.pdf) || [Data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AADPzrs9NGg0PjVqnwQocUJUa/annotation/hpg-variant/examples)
 
-- [Presentation](Course_Materials/association_studies/presentation/association_studies_presentation.pdf) - [Tutorial](Course_Materials/association_studies/tutorial/association_studies.html)
+### Análises, Big Data. 
 
-### RNA-Seq data analysis
+- [Slides](Course_Materials/variant_prioritization/presentation/2014-Cambridge_variant_prioritization.pdf)
 
-- [Presentation](Course_Materials/rna_seq/presentation/rna_seq.pdf) - [Tutorial](Course_Materials/rna_seq/tutorial/rna_seq.html) - [Data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AAB77HfUPkiXBj1MmshjyKtYa/rna_seq)
 
-### Functional analysis
+### Para onde podemos seguir a partir de  agora ? 
 
-- [Presentation](Course_Materials/functional/presentation/babelomics_data_analysis.pdf) - [Tutorial](http://bioinfo.cipf.es/babelomicstutorial/)
+- [Slides](Course_Materials/variant_prioritization/presentation/2014-Cambridge_variant_prioritization.pdf)
 
 
 ----
