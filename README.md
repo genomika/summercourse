@@ -16,7 +16,7 @@ Avanços no Sequenciamento de Nova Geração (NGS) têm possibilitado oportunida
 Neste primeiro dia iremos aprender o básico com uma _introdução a Genética e a tecnologia NGS_ , isto inclui preparação de dados para a análise.  Você também irá aprender os primeiros passos com _shell LINUX/GNU_.  Vamos também aprender sobre o pipeline _Variant Calling_ e manipular os primeiros dados ligados a _Controle de Qualidade (QC)_ .
 
 ### Apresentação (15 min)
-- Slides [[PDF](Course_Materials/presentation/presentation_mda14.pdf)]
+- Slides [[PDF](Course_Materials/presentation/SummerCourse_Apresentacao.pdf)]
 
 ### Introdução a Tecnologias NGS's (45 min)
 Uma introdução rápida sobre as tecnologias NGS e alguns conceitos.
