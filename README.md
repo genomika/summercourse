@@ -31,6 +31,20 @@ Curso gratuito porém com vagas limitadas. Resultado da seleção será postada 
 PS: *É obrigatório que o interessado tenha um notebook próprio para poder realizar as aulas durante o curso!*
 
 As inscrições foram encerradas. Em breve divulgaremos aqui a lista dos participantes. 
+
+Lista dos selecionados ( Primeira Chamada - deve dar o OK de participação até quinta-feira as 12:00 meio dia).
+
+1.Tulio de Lima Campos
+2.Melissa Barbosa Pontes
+3.Jackson Raniel Florêncio da Silva
+4.Filipe Cesario Villa Verde
+5.Matheus Filgueira Bezerra
+6.Crhisllane Rafaele dos Santos Vasconcelos
+7.George de Vasconcelos Carvalho Neto
+8.Francisco do Nascimento Júnior
+9.Mirella Monteiro Silva
+
+
 Conheça a Genomika Diagnósticos
 -------------------------------
 
