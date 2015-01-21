@@ -37,7 +37,6 @@ Lista dos selecionados ( Primeira Chamada - deve dar o OK de participação até
 + Tulio de Lima Campos
 + Melissa Barbosa Pontes
 + Jackson Raniel Florêncio da Silva
-+ Filipe Cesario Villa Verde
 + Matheus Filgueira Bezerra
 + Crhisllane Rafaele dos Santos Vasconcelos
 + George de Vasconcelos Carvalho Neto
