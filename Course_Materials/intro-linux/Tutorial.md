@@ -20,6 +20,16 @@ ssh é um programa executável que roda em seu computador local e permite que vo
 ##### Acessando servidor remoto via SSH.
     ssh seuusuario@172.16.225.107
 
+- Se você está usando Putty como seu terminal no Windows:
+    -  Double-click the Putty.exe icon
+    -  In the PuTTY Configuration window
+    -  make sure the Connection type is SSH
+    -  enter stampede.tacc.utexas.edu for Host Name
+    -  click Open button
+    -  answer Yes to the SSH security question
+    -  In the PuTTY terminal
+    -  enter your TACC user id after the login as: prompt, then Enter
+
 
 # Preliminaries
 
