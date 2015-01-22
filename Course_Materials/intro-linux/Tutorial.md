@@ -48,6 +48,13 @@ First create a few directories and links we will use (more on these later).
     ln -s -f $WORK work
     ln -s -f /corral-repl/utexas/BioITeam
 
+- $WORK and $SCRATCH are TACC environment variable that refer to your work and scratch file system areas.
+- The ln -s command creates a symbolic link, a shortcut the the linked file or directory.
+- here the link targets are your work and scratch file system areas
+- having these link shortcuts will help when you want to copy files to your work or scratch, and when you navigate the TACC file system using a remote SFTP client
+- always change directory (cd) to the directory where we want the links created before executing ln -s 
+- here we want the links under your home directory (cd with no arguments)
+
 
 
 In this hands-on will learn how to align DNA and RNA-seq data with most widely used software today. Building a whole genome index requires a lot of RAM memory and almost one hour in a typical workstation, for this reason **in this tutorial we will work with chromosome 21** to speed up the exercises. The same steps would be done for a whole genome alignment. Two different datasets, high and low quality have been simulated for DNA, high quality contains 0.1% of mutations and low quality contains 1%. For RNA-seq a 100bp and 150bp datasets have been simulated.
