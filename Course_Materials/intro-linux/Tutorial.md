@@ -43,6 +43,10 @@ First create a few directories and links we will use (more on these later).
 
 **NOTE:** You can copy and paste these lines from the code block below into your Terminal window. Just make sure you hit "Enter" after the last line.
 
+    cd
+    ln -s -f $SCRATCH scratch
+    ln -s -f $WORK work
+    ln -s -f /corral-repl/utexas/BioITeam
 
 
 
