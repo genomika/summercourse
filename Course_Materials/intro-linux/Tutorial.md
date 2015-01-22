@@ -1,19 +1,18 @@
-% [NGS data analysis course](http://ngs-course.github.io/)
-% __DNA and RNA-seq NGS alignment__
-% _(updated 28-09-2014)_
+% [WorkShop de Verão Bioinformática](http://github.com/genomika/summercourse/)
+% __Introdução ao Linux__
+% _(updated 21-01-2014)_
 
 <!-- COMMON LINKS HERE -->
 
-[BWA]: http://bio-bwa.sourceforge.net/ "BWA"
-[HPG Aligner]: https://github.com/opencb/hpg-aligner/wiki/ "HPG Aligner"
-[Bowtie2]: http://bowtie-bio.sourceforge.net/bowtie2/index.shtml "Bowtie2"
-[TopHat]: http://ccb.jhu.edu/software/tophat/index.shtml "TopHat2"
-[STAR]: https://code.google.com/p/rna-star/ "STAR"
-[MapSplice2]: http://www.netlab.uky.edu/p/bioinfo/MapSplice2 "MapSplice2"
-[SAMTools]: http://samtools.sourceforge.net/ "SAMtools"
-[dwgsim]: http://sourceforge.net/apps/mediawiki/dnaa/index.php?title=Whole_Genome_Simulation "dwgsim"
-[BEERS]: http://www.cbil.upenn.edu/BEERS/ "BEERS"
-[Ensembl]: http://www.ensembl.org/index.html "Ensembl"
+#Getting to a remote computer
+
++ The Terminal window
++ Macs and Linux have Terminal programs built-in – find it now on your computer
++ Windows needs help
+[Putty]: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html "Putty"
+[Git-bash]: http://msysgit.github.io/ "GitBash"
+[Cygwin]: http://www.cygwin.com/ "Cygwin"
+
 
 # Preliminaries
 
