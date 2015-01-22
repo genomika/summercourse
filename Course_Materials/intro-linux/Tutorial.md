@@ -55,6 +55,23 @@ First create a few directories and links we will use (more on these later).
 - always change directory (cd) to the directory where we want the links created before executing ln -s 
 - here we want the links under your home directory (cd with no arguments)
 
+##### Want to know where a link points to? Use ls with the -l (long listing) option.
+    ls -l
+
+Set up a $HOME/local/bin directory and link some scripts there that we will use a lot in the class.
+    mkdir -p $HOME/local/bin
+    cd $HOME/local/bin
+    ln -s -f /corral-repl/utexas/BioITeam/bin/launcher_creator.py
+    ln -s -f /work/01063/abattenh/local/bin/cutadapt
+    ln -s -f /work/01063/abattenh/local/bin/samstat
+
+-  The mkdir command creates a new directory. The -p option says to create intermediate directories if needed (like local here).
+-  here we're creating a $HOME/local/bin directory where we'll put some programs used in the course
+-  $HOME is an environment variable set by TACC that refers to your home directory.
+-  The ln -s command creates a symbolic link, a shortcut the the linked file or directory.
+-  here the link targets are programs we want – instead of copying the programs, we just link to them
+-  always change directory (cd) to the directory where we want the links created before executing ln -s
+-  here we want the links in $HOME/local/bin
 
 
 In this hands-on will learn how to align DNA and RNA-seq data with most widely used software today. Building a whole genome index requires a lot of RAM memory and almost one hour in a typical workstation, for this reason **in this tutorial we will work with chromosome 21** to speed up the exercises. The same steps would be done for a whole genome alignment. Two different datasets, high and low quality have been simulated for DNA, high quality contains 0.1% of mutations and low quality contains 1%. For RNA-seq a 100bp and 150bp datasets have been simulated.
