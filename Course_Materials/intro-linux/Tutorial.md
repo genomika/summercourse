@@ -4,14 +4,14 @@
 
 <!-- COMMON LINKS HERE -->
 
-#Getting to a remote computer
+#Acessando servidor remoto
 
-##The Terminal window
-- Macs and Linux have Terminal programs built-in – find it now on your computer
-- Windows needs help
-[Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) "Putty"
-[Git-bash](http://msysgit.github.io/) "GitBash"
-[Cygwin](http://www.cygwin.com/) "Cygwin"
+##A Janela de Terminal
+- Macs e Linux possuem programas de terminal nativos - encontre-os em sua máquina
+- Usuários Windows vão precisar de ajuda, opções a seguir:
+    - [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) "Putty"
+    - [Git-bash](http://msysgit.github.io/) "GitBash"
+    - [Cygwin](http://www.cygwin.com/) "Cygwin"
 
 
 # Preliminaries
