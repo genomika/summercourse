@@ -59,6 +59,7 @@ First create a few directories and links we will use (more on these later).
     ls -l
 
 Set up a $HOME/local/bin directory and link some scripts there that we will use a lot in the class.
+
     mkdir -p $HOME/local/bin
     cd $HOME/local/bin
     ln -s -f /corral-repl/utexas/BioITeam/bin/launcher_creator.py
