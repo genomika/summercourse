@@ -4,14 +4,21 @@
 
 <!-- COMMON LINKS HERE -->
 
-#Acessando servidor remoto
+# Acessando servidor remoto
 
-##A Janela de Terminal
+## A Janela de Terminal
 - Macs e Linux possuem programas de terminal nativos - encontre-os em sua máquina
 - Usuários Windows vão precisar de ajuda, opções a seguir:
     - [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) "Putty"
     - [Git-bash](http://msysgit.github.io/) "GitBash"
     - [Cygwin](http://www.cygwin.com/) "Cygwin"
+
+## SSH
+
+ssh é um programa executável que roda em seu computador local e permite que você se conecte de forma segura a um computador remoto. Em Macs, Linux e Windows (Git-Bash out Cygwin), você pode rodar de uma tela de terminal. Responda yes a questão de segurança do prompt do SSH.
+
+##### Acessando servidor remoto via SSH.
+    ssh seuusuario@172.16.225.107
 
 
 # Preliminaries
