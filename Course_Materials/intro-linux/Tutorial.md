@@ -9,9 +9,9 @@
 + The Terminal window
 + Macs and Linux have Terminal programs built-in – find it now on your computer
 + Windows needs help
-[Putty]: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html "Putty"
-[Git-bash]: http://msysgit.github.io/ "GitBash"
-[Cygwin]: http://www.cygwin.com/ "Cygwin"
+[Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) "Putty"
+[Git-bash](http://msysgit.github.io/) "GitBash"
+[Cygwin](http://www.cygwin.com/) "Cygwin"
 
 
 # Preliminaries
