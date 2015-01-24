@@ -244,6 +244,21 @@ And here's  a set of commands you should know, by category (under construction).
 -   less <file> both display the contents of <file> in nice ways. Read the bit above about man to figure out how to navigate and search when using less
 -   head <file> and tail <file> shows you the top or bottom 10 lines of a file <file>
 
+#### Copying files and directories
+-   cp <source> <destination> copies the file source to the location and/or file name destination}. Using . (period) means "here, with the same name". * cp -r <dirname> <destination> will recursively copy the directory dirname and all its contents to the directory destination.
+-   scp <user>@<host>:<source> <destination> works just like cp but copies source from the user user's directory on remote machine host to the local file destination
+-   wget <url> fetches a file from a valid URL.
+-   rsync
+
+#### Miscellaneous commands
+-   history
+-   which
+#### Advanced commands
+-   cut
+-   sort
+-   uniq
+-   grep
+-   awk
 
 
 
