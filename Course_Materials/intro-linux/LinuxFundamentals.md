@@ -31,7 +31,8 @@ You can use Ctrl-a (holding down the "control" key and "a") to jump the cursor r
 
 The shell has shorthand to refer to groups of files by allowing wildcards in file names.
 * (asterisk) is the most common filename wildcard. It matches "any length of any characters".
-Other useful ones are brackets ( [ ] ) to allow for any character in the list of characters between the brackets. And you can use a hyphen ( - ) to specify a range of characters
+
+* Other useful ones are brackets ( [ ] ) to allow for any character in the list of characters between the brackets. And you can use a hyphen ( - ) to specify a range of characters
 
 For example:
 -   **ls *.bam** – lists all files in the current directory that end in .bam
@@ -44,9 +45,32 @@ Three special file names:
 -   ~ (tilde) means "my home directory".
 
 
+### Environment variables
+
+Environment variables are just like variables in a programming language (in fact bash is a complete programming language), they are "pointers" that reference data assigned to them. In bash, you assign an environment variable as shown below:
+
+    export varname="Some value, here it's a string"
 
 
+**NOTE:** Be careful – do not put spaces around the equals sign when assigning environment variable values. Also, always use double quotes if your value contains (or might contain) spaces.
 
+You set environment variables using the bare name (varname above).
+You then refer to or evaluate an environment variables using a dollar sign ( $ ) before the name:
+
+    echo $varname
+
+The export keyword when you're setting ensures that any sub-processes that are invoked will inherit this value. Without the export only the current shell process will have that variable set.
+
+Use the env command to see all the environment variables you currently have set
+
+## Standard streams
+
+Every command and Linux program has three "built-in" streams: standard input, standard output and standard error.
+
+
+![Terminal Example](https://wikis.utexas.edu/download/attachments/66698131/std_streams.png?version=1&modificationDate=1400467628000&api=v2)
+
+It is easy to not notice the difference between standard output and standard error when you're in an interactive Terminal session – because both outputs are sent to the Terminal. But they are separate streams, with different meanings. When running batch programs and scripts you will want to manipulate standard output and standard error from programs appropriately.
 
 
 ## A Janela de Terminal
