@@ -79,8 +79,6 @@ Every command and Linux program has three "built-in" streams: standard input, st
 -   To see the difference between standard output and standard error try these commands:
 
 
-
-
     #redirect a long listing of your $HOME directory to a file
     ls -la $HOME > cmd.out
     #look at the contents -- you'll see just files
