@@ -72,12 +72,27 @@ Every command and Linux program has three "built-in" streams: standard input, st
 
 ### redirecting output
 -   To take the standard output of a program and save it to a file, you use the ```>``` operator
--   a single > overwrites any existing target; a double ```>>``` appends to it
+-   a single ```>``` overwrites any existing target; a double ```>>``` appends to it
 -   since standard output is stream #1, this is the same as ```>1```
 -   To redirect the standard error of a program you must specify its stream number using```2>```
 -   To redirect standard output and standard error to the same place, use the syntax ```2>&1```
 -   To see the difference between standard output and standard error try these commands:
 
+
+    # redirect a long listing of your $HOME directory to a file
+    ls -la $HOME > cmd.out
+    # look at the contents -- you'll see just files
+    cat cmd.out
+    # this command gives an error because the target does not exist
+    ls -la bad_directory
+    # redirect any errors from ls to a fil
+    ls -la bad_directory 2> cmd.out
+    # look at the contents -- you'll see an error message
+    cat cmd.out
+    # now redirect both error and output streams to the same place
+    ls -la bad_directory $HOME > cmd.out
+    # look at the contents -- you'll see both an error message and files
+    cat cmd.out
 
 
 It is easy to not notice the difference between standard output and standard error when you're in an interactive Terminal session – because both outputs are sent to the Terminal. But they are separate streams, with different meanings. When running batch programs and scripts you will want to manipulate standard output and standard error from programs appropriately.
