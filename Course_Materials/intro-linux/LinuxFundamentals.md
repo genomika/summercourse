@@ -212,6 +212,41 @@ Displays something like this:
 If you don't already know much about a command (or NGS tool), just Google it! Try something like "bwa manual" or "rsync man page". Many tools have websites that combine tool overviews with detailed option help. Even for built-in Linux commands, you're likely to get hits of a tutorial style, which are more useful when you're getting started.
 And it's so much easier to read things in a nice web browser!
 
+#### man pages
+Linux has had built-in help files since the mid-1500's, way before Macs or PCs thought of such things. They're called man pages (short for manual).
+For example, man intro will give you an introduction to all user commands.
+
+man pages will detail all options available – in excruciating detail (unless there's no man page (smile)), so the manual system has its own built-in pager. The pager is sort of like less, but not quite the same (why make it easy?). We recommend man pages only for advanced users.
+
+### Basic linux commands you need to know
+Here's a copy of the cheat sheet we passed out.
+
+And here's  a set of commands you should know, by category (under construction).
+
+#### File system navigation
+-   ls - list the contents of the current directory
+-   cd <whereto> - change the present working directory to <whereto>. Some special <wheretos>:
+-   .. (period, period) means "up one level"
+-   ~ (tilde) means "my home directory"
+-   file <file> tells you what kind of file <file> is
+-   df shows you the top level of the directory structure of the system you're working on, along with how much disk space is available
+-   pwd - display the present working directory. The format is something like /home/myID - just like on most computer systems, this represents leaves on the tree of the file system structure, also called a "path".
+
+#### Create and delete files
+-   mkdir -p <dirname> create directory <dirname>.
+-   rm <file> deletes a file. This is permanent - not a "trash can" deletion.
+-   ln -s create a symbolic link
+-   touch - create an empty file
+
+#### Displaying file contents
+-   cat <file> outputs all the contents of <file> - CAUTION - only use on small files.
+-   more <file> and
+-   less <file> both display the contents of <file> in nice ways. Read the bit above about man to figure out how to navigate and search when using less
+-   head <file> and tail <file> shows you the top or bottom 10 lines of a file <file>
+
+
+
+
 It is easy to not notice the difference between standard output and standard error when you're in an interactive Terminal session – because both outputs are sent to the Terminal. But they are separate streams, with different meanings. When running batch programs and scripts you will want to manipulate standard output and standard error from programs appropriately.
 
 
