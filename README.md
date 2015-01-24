@@ -23,7 +23,7 @@ Uma introdução rápida sobre as tecnologias NGS e alguns conceitos.
 - [Slides](Course_Materials/intro-ngs/SummerCourse_NGSTechnologies.pdf)
 
 ### Introdução ao Linux/SHELL (50 min)
-- Presentation [[PDF](Course_Materials/intro-linux/intro_Linux_mda14.pdf) | [OpenOffice](Course_Materials/intro-linux/intro_Linux_mda14.odp)]
+- Linux Fundamentos [[Parte 1](Course_Materials/intro-linux/Tutorial.md) | [Parte2](Course_Materials/intro-linux/LinuxFundamentals.md)]
 
 ### Controle de Qualidade para dados brutos de NGS (FASTQ) (30 min)
 - [Slides](Course_Materials/quality_control/presentation/quality_control_presentation.pdf) - [Tutorial](Course_Materials/quality_control/tutorial/quality_control.html) - [Dados](https://www.dropbox.com/sh/4qkqch7gyt888h7/AAAqebBSC6JgDGq4emwNORCaa/quality_control)
