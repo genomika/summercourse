@@ -103,7 +103,108 @@ Then log back in to stampede.tacc.utexas.edu. This time your .profile_user will 
 
 The great thing about this prompt is that it always tells you where you are, which avoids having to issue the pwd (present working directory) command all the time. Execute these commands to see how the prompt reflects your current directory. (Don't just copy-and-paste here because we've included the prompt.)
 
+    stamp:~$ mkdir -p tmp/a/b/c
+    stamp:~$ cd tmp/a/b/c
+    stamp:~/tmp/a/b/c$
+
+The prompt now tells you you are in the c sub-directory of the b sub-directory of the a sub-directory of the tmp sub-directory of your home directory ( ~ ).
+
+**NOTE:**  The tilde character ( ~ ) is a shortcut that means "home directory". We'll see more of it later.
+
+Your profile has also installed nice directory colors, which you see when you list your home directory:
+
+    cd  
+    ls
+
+So why don't you see the .profile_user file you copied to your home directory? Because all files starting with a period ("dot files") are hidden by default. To see them add the -a (all) option to ls:
+
+    ls -a
+
+To see even more detail, including file type and permissions and symbolic link targets, add the -l (long listing) switch:
+
+    ls -la
+
+### Details about your login profile
+
+We list its content to the Terminal with the cat (concatenate files) command that simply reads a file and writes each line of content to standard output (here, your Terminal):
+
+    cat .profile_user
     
+
+**NOTE:**   The cat command just echos the entire file's content, line by line, without pausing, so should not be used to display large files. Instead, use a "pager" (like more or less) or look at parts of the file with **head** or **tail**.
+
+You'll see the following (you may need to scroll up a bit to see the beginning):
+
+    #!/bin/basH
+    # Change the command line prompt to contain the current directory path
+    if [ "$TACC_SYSTEM" == "stampede" ]; then
+        PS1='stamp:\w$ '
+    else
+        PS1='lstar:\w$ '
+    fi
+    # Try to ensure all created files can be read/writtin by group members
+    umask 002
+    # Make common, useful software always available
+    module load python; module load launcher
+    # Set the default project allocation for launcher_creator.py
+    export ALLOCATION=genomeAnalysis
+    # Environment variables for useful locations
+    export BI=/corral-repl/utexas/BioITeam
+    export CLASSDIR="$BI/core_ngs_tools"
+    # Add current directory and $HOME/local/bin to PATH
+    export PATH=.:$HOME/local/bin:$PATH
+    # Use yellow for directories, not that horrible blue
+    dircolors .dircolors > /dev/null
+
+
+So what does the common profile file do? Several things. Let's look at a few of them.
+
+#### she-bang
+
+The first line is the "she-bang". It tells the shell what program should execute this file – in this case, bash itself – even though the expression is inside a shell comment (denoted by the # character).
+
+    #!/bin/bash
+
+#### environment variables
+
+The profile also sets an environment variable named BI to point to the shared directory: **/corral-repl/utexas/BioITeam**, and another environment variable named **CLASSDIR** to point to the specific sub-directory for our class.
+
+    # Environment variables for useful locations
+    export BI=/corral-repl/utexas/BioITeam
+    export CLASSDIR="$BI/core_ngs_tools"
+
+Environment variables are like variables in a programming language like python or perl (in fact bash is a complete programming language). They have a name (like BI above) and a value (the value for BI is the pathname **/corral-repl/utexas/BioITeam**).
+
+#### shell completion
+
+You can use these environment variables to shorten typing, for example, to look at the contents of the shared BioITeam directory as shown below, using the magic Tab key to perform shell completion.
+
+    # hit Tab once after typing $BI/ to expand the environment variable
+    ls $BI/
+    # now hit Tab twice to see the contents of the directory
+    ls /corral-repl/utexas/BioITeam/
+    # now type "co" and hit Tab again
+    ls /corral-repl/utexas/BioITeam/co
+    # your command line should now look like this
+    ls /corral-repl/utexas/BioITeam/core_nge_tools/
+    # now type "m" and one Tab
+    ls /corral-repl/utexas/BioITeam/core_nge_tools/m
+    # now just type one Tab
+    ls /corral-repl/utexas/BioITeam/core_nge_tools/misc/
+    # the shell expands as far as it can unambiguously, so your command line should look like thi
+    ls /corral-repl/utexas/BioITeam/core_nge_tools/misc/small
+    # type a period (".") then hit Tab twice again -- you're narrowing down the choices
+    ls /corral-repl/utexas/BioITeam/core_nge_tools/misc/small.
+    # finally, hit Tab twice to see possible completions now -- you should see two filenames
+
+#### Important Tip -- the Tab key is your BFF!
+-   The Tab key is one of your best friends in Linux. Hitting it invokes "shell completion", which is as close to magic as it gets!
+-   Tab once will expand the current command line contents as far as it can unambiguously. 
+-   if nothing shows up, there is no unambiguous match
+-   Tab twice will give you a list of everything the shell finds matching the current command line.
+-   you then decide where to go next
+
+
 
 In this hands-on will learn how to align DNA and RNA-seq data with most widely used software today. Building a whole genome index requires a lot of RAM memory and almost one hour in a typical workstation, for this reason **in this tutorial we will work with chromosome 21** to speed up the exercises. The same steps would be done for a whole genome alignment. Two different datasets, high and low quality have been simulated for DNA, high quality contains 0.1% of mutations and low quality contains 1%. For RNA-seq a 100bp and 150bp datasets have been simulated.
 
