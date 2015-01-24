@@ -205,6 +205,143 @@ You can use these environment variables to shorten typing, for example, to look 
 -   you then decide where to go next
 
 
+#### extending the $PATH
+
+When you type a command name the shell has to have some way of finding what program to run. The list of places (directories) where the shell looks is stored in the $PATH environment variable. You can see the entire list of locations by doing this:
+
+    echo $PATH
+
+As you can see, there are a lot of locations on the **$PATH**. That's because when you load modules at TACC (such as the module load lines in the common profile), that mechanism makes the programs available to you by putting their installation directories on your $PATH. We'll learn more about modules shortly.
+
+Here's how the shared profile adds your **$HOME/local/bin** directory to the location list – recall that's where we linked some programs we'll use – along with a special dot character ( . ) that means "here", or "whatever the current directory is".
+
+    # Add current directory and $HOME/local/bin to PATH 
+    export PATH=.:$HOME/local/bin:$PATH
+
+#### setting up the friendly command prompt
+
+The complicated looking if statement near the top of your profile is checking whether you're on stampede or lonestar (this .profile_user works on both), and setting up your friendly shell prompt so that it includes the current working directory. This is done by setting the special PS1 environment variable and including a special \w directive that the shell knows means "current directory".
+
+    # Change the command line prompt to contain the current directory path
+    if [ "$TACC_SYSTEM" == "stampede" ]; then
+        PS1='stamp:\w$ '
+    else
+        PS1='lstar:\w$ '
+    fi
+
+
+### Download from a link – wget
+
+Well, you don't have a desktop at TACC to "Save as" to, so what to do with a link? The wget program knows how to access web URLs such as http, https and ftp.
+
+#### wget
+
+Get ready to run wget from the directory where you want to put the data. Don't press Enter after the wget command – just put a space after it.
+
+    cd $WORK/archive/original/2014_05.core_ngs
+    wget
+
+Here are two web links:
+-   [http://web.corral.tacc.utexas.edu/BioITeam/yeast_stuff/Sample_Yeast_L005_R1.cat.fastq.gz] (http://web.corral.tacc.utexas.edu/BioITeam/yeast_stuff/Sample_Yeast_L005_R1.cat.fastq.gz)
+-   [http://web.corral.tacc.utexas.edu/BioITeam/yeast_stuff/Sample_Yeast_L005_R2.cat.fastq.gz] (http://web.corral.tacc.utexas.edu/BioITeam/yeast_stuff/Sample_Yeast_L005_R2.cat.fastq.gz)
+
+Right click on the 1st link in your browser, then select "Copy link location" from the menu. Now go back to your Terminal. Put your cursor after the space following the wget command then either right-click, or Paste. The command line to be executed should look like this:
+
+    wget http://web.corral.tacc.utexas.edu/BioITeam/yeast_stuff/Sample_Yeast_L005_R1.cat.fastq.gz
+
+Now press Enter to get the command going. Repeat for the 2nd link. Check that you now see the two files (ls).
+
+
+#### Copy from a corral location - cp or rsync
+
+Suppose you have a corral allocation where your organization keeps its data, and that the sequencing data has been downloaded there. You can use various Linux commands to copy the data locally from there to your $SCRATCH area.
+
+#### cp
+
+The cp command copies one or more files from a local source to a local destination. It has the most common form:
+
+    cp [options] <source file 1> <source file 2> ... <destination directory>
+
+Make a directory in your scratch area and copy a single file to it. The trailing slash ( / ) on the destination says it is a directory.
+
+    mkdir -p $SCRATCH/data/test1
+    cp  /corral-repl/utexas/BioITeam/web/tacc.genomics.modules  $SCRATCH/data/test1/
+    ls $SCRATCH/data/test1
+
+Copy a directory to your scratch area. The -r argument says "recursive".
+
+    cds
+    cd data
+    cp -r /corral-repl/utexas/BioITeam/web/general/ general/
+
+
+#### local rsync
+
+The rsync command is typically used to copy whole directories. What's great about rsync is that it only copies what has changed in the source directory. So if you regularly rsync a large directory to TACC, it may take a long time the 1st time, but the 2nd time (say after downloading more sequencing data to the source), only the new files will be copied.
+
+rsync is a very complicated program, with many options (http://rsync.samba.org/ftp/rsync/rsync.html). However, if you use it like this for directories, it's hard to go wrong:
+
+    rsync -avrP local/path/to/source_directory/ local/path/to/destination_directory/
+
+The -avrP options say "archive mode" (preserve file modification date/time), verbose, recursive and show Progress. Since these are all single-character options, they can be combined after one option prefix dash ( - ).
+
+The trailing slash ( / ) on the source and destination directories are very important! rsync will create the last directory level for you, but earlier levels must already exist.
+
+    rsync -avrP /corral-repl/utexas/BioITeam/web/ucsc_custom_tracks/ data/custom_tracks/
+
+Now repeat the rsync and see the difference:
+
+    rsync -avrP /corral-repl/utexas/BioITeam/web/ucsc_custom_tracks/ $SCRATCH/data/custom_tracks/
+
+#### Copy from a remote computer - scp or rsync
+
+Provided that the remote computer is running Linux and you have ssh access to it, you can use various Linux commands to copy data over a secure connection.
+
+The good news is that once you have learned cp and local rsync, remote secure copy (scp) and remote rsync are very similar!
+
+
+#### scp
+
+The scp command copies one or more files from a source to a destination, where either source or destination can be a remote path.
+Remote paths are similar to local paths, but have user and host information first:
+
+    user_name@full.host.name:/full/path/to/directory/or/file
+    -- or –
+    user_name@host.name:~/path/relative/to/home/directory
+
+Copy a single file your $SCRATCH/data/test1 directory. We don't really need to access corral remotely, of course, but this shows the remote syntax needed. Be sure to change userid below to your TACC user id!
+
+    scp  userid@stampede.tacc.utexas.edu:/corral-repl/utexas/BioITeam/web/README.txt  $SCRATCH/data/test1
+    ls $SCRATCH/data/test1
+
+**NOTE:** The 1st time you access a new host the SSH security prompt will appear, You will always be prompted for your remote host password. The  -r recursive argument works for scp also, just like for cp
+
+#### remote rsync
+
+rsync can be run just like before, but using the remote-host syntax. Here we use two tricks:
+-   The tilde ( ~ ) at the start of the path means "relative to my home directory"
+-   We traverse through the BioITeam symbolic link created in your home directory earlier.
+-   We use the same tilde ( ~ ) in the destination to traverse the scratch symbolic link in your home directory.
+
+Don't forget to change userid below.
+
+    rsync -avrP userid@stampede.tacc.utexas.edu:~/BioITeam/web/ucsc_custom_tracks/ ~/scratch/data/custom_tracks/
+    
+## EXERCISE
+
+Hit Tab Tab as much as possible to save typing!
+
+    cd
+    cp -r /corral-repl/utexas/BioITeam/linuxpractice .
+    cd linuxpractice
+    cd what
+    cat readme
+
+## stamp:~/linuxpractice/what/starts/here/changes/the/world
+
+
+
+
 
 In this hands-on will learn how to align DNA and RNA-seq data with most widely used software today. Building a whole genome index requires a lot of RAM memory and almost one hour in a typical workstation, for this reason **in this tutorial we will work with chromosome 21** to speed up the exercises. The same steps would be done for a whole genome alignment. Two different datasets, high and low quality have been simulated for DNA, high quality contains 0.1% of mutations and low quality contains 1%. For RNA-seq a 100bp and 150bp datasets have been simulated.
 
@@ -379,7 +516,8 @@ Now you can create the index by executing:
 
 Some files will be created in the ```index``` folder, those files constitute the index that BWA uses.
 
-**NOTE:** The index must created only once, it will be used for all the different alignments with BWA.
+ **NOTE:**
+ The index must created only once, it will be used for all the different alignments with BWA.
 
 
 ##### Aligning with new BWA-MEM in both single-end (SE) and paired-end (PE) modes
