@@ -77,6 +77,7 @@ Every command and Linux program has three "built-in" streams: standard input, st
 -   To redirect the standard error of a program you must specify its stream number using```2>```
 -   To redirect standard output and standard error to the same place, use the syntax ```2>&1```
 -   To see the difference between standard output and standard error try these commands:
+    
 
 
     # redirect a long listing of your $HOME directory to a file
