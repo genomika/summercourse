@@ -260,6 +260,19 @@ And here's  a set of commands you should know, by category (under construction).
 -   grep
 -   awk
 
+### Editing files
+There are several options for editing files at TACC. These fall into three categories:
+- Linux text editors installed at TACC (nano, vi, emacs). These run in your Terminal window. nano is extremely simple and is the best choice as a first local text editor. vi and emacs are extremely powerful but also quite complex
+- Text editors or IDEs that run on your local computer but have an SFTP (secure FTP) interface that lets you connect to a remote computer (Notepad++ or Komodo Edit). 
+
+Once you connect to the remote host, you can navigate its directory structure and edit files.
+When you open a file, its contents are brought over the network into the text editor's edit window, then saved back when you save the file.
+
+Software that will allow you to mount your home directory on TACC as if it were a normal disk (e.g. ExpanDrive for Windows or Mac – costs $$, but has a free trial). 
+
+Then, you can use any text editor or IDE on your local computer to open/edit/save files (although it will be slower than local file editing)
+
+We'll use nano in class, but you may find options #2 or #3 more useful for day-to-day work.
 
 
 It is easy to not notice the difference between standard output and standard error when you're in an interactive Terminal session – because both outputs are sent to the Terminal. But they are separate streams, with different meanings. When running batch programs and scripts you will want to manipulate standard output and standard error from programs appropriately.
