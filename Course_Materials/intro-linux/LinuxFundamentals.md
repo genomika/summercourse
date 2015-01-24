@@ -6,6 +6,49 @@
 
 # Getting around in the shell
 
+## Important keyboard shortcuts
+
+Type as little and as accurately as possible by using keyboard shortcuts!
+
+### Tab key completion
+
+The Tab key is your best friend! Hit the Tab key once or twice - it's almost always magic! Hitting Tab invokes "shell completion", instructing the shell to try to guess what you're doing and finish the typing for you. On most modern Linux shells, Tab completion will:
+-   complete file or directory names up to any ambiguous part (single Tab)
+-   if nothing shows up, there is no unambiguous match
+-   display all possible completions (Tab twice)
+-   you then decide where to go next
+-   work for shell commands too (like rsync or chmod)
+
+
+### Up arrow
+Use "up arrow" to retrieve any of the last 500 commands you've typed, going backwards through your history. You can then edit them and hit Enter (even in the middle of the command) and the shell will use that command. The down arrow "scrolls" forward from where you are in the command history.
+
+
+### Ctrl-a, Ctrl-e
+You can use Ctrl-a (holding down the "control" key and "a") to jump the cursor right to the beginning of the line. The omega to that alpha is Ctrl-e, which jumps the cursor to the end of the line. Arrow keys work, and Ctrl-arrow will skip by word forward and backward.
+
+### Wildcards and special file names
+
+The shell has shorthand to refer to groups of files by allowing wildcards in file names.
+* (asterisk) is the most common filename wildcard. It matches "any length of any characters".
+Other useful ones are brackets ( [ ] ) to allow for any character in the list of characters between the brackets. And you can use a hyphen ( - ) to specify a range of characters
+
+For example:
+-   **ls *.bam** – lists all files in the current directory that end in .bam
+-   **ls [A-Z]*.bam** – does the same, but only if the first character of the file is a capital letter
+-   **ls [ABab]*.bam** – lists all .bam files whose 1st letter is A, B, a or b.
+
+Three special file names:
+-   . (single period) means "this directory".
+-   .. (two periods) means "directory above current." So ls -l .. means "list contents of the parent directory."
+-   ~ (tilde) means "my home directory".
+
+
+
+
+
+
+
 ## A Janela de Terminal
 - Macs e Linux possuem programas de terminal nativos - encontre-os em sua máquina
 - Usuários Windows vão precisar de ajuda, opções a seguir:
