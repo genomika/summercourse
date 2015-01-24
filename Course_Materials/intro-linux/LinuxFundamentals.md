@@ -150,6 +150,67 @@ Like dialects in a language, there are at least three basic schemes commands/pro
 
 ### Getting help
 
+So you've noticed that options can be complicated – not to mention program arguments. Some options have values and others don't. Some are short, others long. How do you figure out what kinds of functions a command (or NGS tool) offers? You need help!
+
+**--help option**
+
+Many (but not all) built-in shell commands will give you some help if you provide the long --help option. This can often be many pages, so you'll probably want to pipe the output to a pager like more. This is most useful to remind yourself what the name of that dang option was, assuming you know something about it.
+
+**-h or -? options**
+
+The -h and -? options are similar to --help. If --help doesn't work, try -h. or -?. Again, output can be lengthy and best used if you already have an idea what the program does.
+
+Many 3rd party tools will provide extensive usage information if you just type the program name then hit Enter.
+
+For example:
+
+    bwa
+    
+Produces something like this:
+
+    Program: bwa (alignment via Burrows-Wheeler transformation)
+    Version: 0.7.7-r441
+    Contact: Heng Li <lh3@sanger.ac.uk>
+    Usage:   bwa <command> [options]
+    Command: index         index sequences in the FASTA format
+         mem           BWA-MEM algorithm
+         fastmap       identify super-maximal exact matches
+         pemerge       merge overlapping paired ends (EXPERIMENTAL)
+         aln           gapped/ungapped alignment
+         samse         generate alignment (single ended)
+         sampe         generate alignment (paired ended)
+         bwasw         BWA-SW for long queries
+         fa2pac        convert FASTA to PAC format
+         pac2bwt       generate BWT from PAC
+         pac2bwtgen    alternative algorithm for generating BWT
+         bwtupdate     update .bwt to the new format
+         bwt2sa        generate SA from BWT and Occ
+    Note: To use BWA, you need to first index the genome with `bwa index'.
+        There are three alignment algorithms in BWA: `mem', `bwasw', and
+      `aln/samse/sampe'. If you are not sure which to use, try `bwa mem'
+      first. Please `man ./bwa.1' for the manual.
+
+Notice that bwa, like many NGS programs, is written as a set of sub-commands. This top-level help displays the sub-commands available. You then type bwa <command> to see help for the sub-command:
+
+    bwa index
+    
+Displays something like this:
+
+
+
+    Usage:  bwa index [-a bwtsw|is] [-c] <in.fasta>    
+    Options: -a STR    BWT construction algorithm: bwtsw or is [auto]
+         -p STR    prefix of the index [same as fasta name]
+         -6        index files named as <in.fasta>.64.* instead of <in.fasta>.*
+    Warning: `-a bwtsw' does not work for short genomes, while `-a is' and
+         `-a div' do not work not for long genomes. Please choose `-a'
+         according to the length of the genome.
+
+
+####Google
+
+If you don't already know much about a command (or NGS tool), just Google it! Try something like "bwa manual" or "rsync man page". Many tools have websites that combine tool overviews with detailed option help. Even for built-in Linux commands, you're likely to get hits of a tutorial style, which are more useful when you're getting started.
+And it's so much easier to read things in a nice web browser!
 
 It is easy to not notice the difference between standard output and standard error when you're in an interactive Terminal session – because both outputs are sent to the Terminal. But they are separate streams, with different meanings. When running batch programs and scripts you will want to manipulate standard output and standard error from programs appropriately.
 
