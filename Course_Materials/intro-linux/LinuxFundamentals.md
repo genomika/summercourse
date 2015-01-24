@@ -111,6 +111,41 @@ But the real power comes when you stitch together a string of commands with pipe
 
 ## Using Commands
 
+### Command options
+
+Sitting at the computer, you should have some idea what you need to do. There's probably a command to do it. If you have some idea what it starts with, you can type a few characters and hit Tab twice to get some help. If you have no idea, you Google it or ask someone else.
+
+Once you know a basic command, you'll soon want it to do a bit more - like seeing the sizes of files in addition to their names.
+Most built-in commands in Linux use a common syntax to ask more of a command. They usually add a dash ( - ) followed by a code letter that names the added function. These "command line switches" are called options.
+
+Options are, well, optional – you only add them when you need them. The part of the command line after the options, like filenames, are called arguments. Arguments can also be optional, but you can tell them from options because they don't start with a dash.
+
+    # long listing option (-l)
+    ls -l
+    # long listing (-l), all files (-a) and human readable file sizes (-h) options. $HOME is an argument (directory name)
+    ls -l -a -h $HOME
+    # sort by modification time (-t) displaying a long listing (-l) that includes the date and time
+    ls -lt
+
+Almost all commands, and especially NGS tools, use options heavily.
+
+Like dialects in a language, there are at least three basic schemes commands/programs accept options in:
+
+
+1.  Single-letter short options, which start with a single dash ( - ) and can often be combined, like:
+
+
+    head -20 # show 1st 20 lines            
+    ls -lhtS (equivalent to ls -l -h -t -S)
+    
+2.  Long options use the convention that double dashes ( -- ) precede the multi-character option name, and they can never be combined. Strictly speaking, long options should be separated from their values by the equals sign ( = ) according to the Posix standard. But most programs let you use a space as separator also. Here's an example using the mira genome assembler:
+
+    mira --project=ct --job=denovo,genome,accurate,454 -SK:not=8
+
+3.  Word options, illustrated in the GATK command line to call SNPs below. Word options combine aspects of short and long options – they usually start with a single dash ( - ), but can be multiple letters and are never combined. Sometimes the option (e.g. java's -Xms initial memory heap size option), and its value (512m which means 512 megabytes) may be smashed together. Other times a multi-letter switch and its value are separated by a space (e.g. -glm BOTH).
+
+    java -d64 -Xms512m -Xmx4g -jar /work/01866/phr254/gshare/Tools_And_Programs/bin/GenomeAnalysisTK.jar -glm BOTH -R $reference -T UnifiedGenotyper -I $outprefix.realigned.recal.bam --dbsnp $dbsnp -o $outprefix.snps.vcf -metrics snps.metrics -stand_call_conf 50.0 -stand_emit_conf 10.0 -dcov 1000 -A DepthOfCoverage -A AlleleBalance
+
 
 It is easy to not notice the difference between standard output and standard error when you're in an interactive Terminal session – because both outputs are sent to the Terminal. But they are separate streams, with different meanings. When running batch programs and scripts you will want to manipulate standard output and standard error from programs appropriately.
 
