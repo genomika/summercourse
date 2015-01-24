@@ -4,7 +4,7 @@
 
 <!-- COMMON LINKS HERE -->
 
-# Acessando servidor remoto
+# Getting around in the shell
 
 ## A Janela de Terminal
 - Macs e Linux possuem programas de terminal nativos - encontre-os em sua máquina
