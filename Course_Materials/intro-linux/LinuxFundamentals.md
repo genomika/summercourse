@@ -76,22 +76,22 @@ Every command and Linux program has three "built-in" streams: standard input, st
 -   since standard output is stream #1, this is the same as ```>1```
 -   To redirect the standard error of a program you must specify its stream number using```2>```
 -   To redirect standard output and standard error to the same place, use the syntax ```2>&1```
--   To see the difference between standard output and standard error try these commands:
 
+To see the difference between standard output and standard error try these commands:
 
-    #redirect a long listing of your $HOME directory to a file
+    # redirect a long listing of your $HOME directory to a file
     ls -la $HOME > cmd.out
-    #look at the contents -- you'll see just files
+    # look at the contents -- you'll see just files
     cat cmd.out
-    #this command gives an error because the target does not exist
+    # this command gives an error because the target does not exist
     ls -la bad_directory
-    #redirect any errors from ls to a fil
+    # redirect any errors from ls to a fil
     ls -la bad_directory 2> cmd.out
-    #look at the contents -- you'll see an error message
+    # look at the contents -- you'll see an error message
     cat cmd.out
-    #now redirect both error and output streams to the same place
+    # now redirect both error and output streams to the same place
     ls -la bad_directory $HOME > cmd.out
-    #look at the contents -- you'll see both an error message and files
+    # look at the contents -- you'll see both an error message and files
     cat cmd.out
 
 
