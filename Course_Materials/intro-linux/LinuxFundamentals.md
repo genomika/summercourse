@@ -94,6 +94,23 @@ To see the difference between standard output and standard error try these comma
     # look at the contents -- you'll see both an error message and files
     cat cmd.out
 
+## piping
+The power of the Linux command line is due in no small part to the power of piping. The pipe symbol ( | ) connects one program's standard output to the next program's standard input.
+
+![Terminal Example](https://wikis.utexas.edu/download/attachments/66698131/piping.png?version=1&modificationDate=1400467637000&api=v2)
+
+A simple example is piping uncompressed data "on the fly" to a pager like more:
+
+    # the -c option says to write decompressed data to the console (stdout)
+    gunzip -c big.fq.gz | more
+
+But the real power comes when you stitch together a string of commands with pipes – it's incredibly flexible, and fun once you get the hang.
+
+    # create a histogram of mapping quality scores for the 1st 1000 mapped bam records
+    samtools view -F 0x4 small.bam | head -1000 | cut -f 5 | sort -n | uniq -c
+
+## Using Commands
+
 
 It is easy to not notice the difference between standard output and standard error when you're in an interactive Terminal session – because both outputs are sent to the Terminal. But they are separate streams, with different meanings. When running batch programs and scripts you will want to manipulate standard output and standard error from programs appropriately.
 
