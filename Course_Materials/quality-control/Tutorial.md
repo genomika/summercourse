@@ -18,14 +18,24 @@
 [mirbase]:http://www.mirbase.org/ "miRBase: a searchable database of published miRNA"
 
 
-Preliminaries
+Preliminares
 ================================================================================
 
-Software used in this practical:
+Softwares usados neste tutorial
 ----------------------------------------
 
 - [FastQC] : A quality control tool for high-throughput sequence data.
 - [cutadapt] : A tool to remove adapter sequences from high-throughput sequencing data.
+
+
+### Setup
+##### Special stampede login
+Before we start, log into stampede like you did yesterday, but use this special hostname:
+
+     login8.stampede.tacc.utexas.edu
+
+Remember how we emphasized yesterday that you should not perform significant computation on login nodes? Well, there are a  few exceptions, and login8.stampede.tacc.utexas.edu is one of them. Is it a dedicated login node owned by an organization our lab belongs to, so we have given you access to it for the duration of this course. This will let us do a few things at the command line that would normally set off alarm bells from the TACC folks if we all did them on a standard login node.
+
 
 File formats explored in this practical:
 ----------------------------------------
