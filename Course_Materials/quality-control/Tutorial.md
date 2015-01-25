@@ -378,6 +378,17 @@ A common application of cutadapt is to remove adapter contamination from small R
 
 When you run cutadapt you give it the adapter sequence to trim, and this is different for R1 and R2 reads. Here's what the options look like (without running it on our files yet).
 
+    cutadapt -m 22 -O 4 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+    cutadapt -m 22 -O 4 -a TGATCGTCGGACTGTAGAACTCTGAACGTGTAGA
+
+ The -m 22 option says to discard any sequence that is smaller than 22 bases (minimum) after trimming. This avoids problems trying to map very short, highly ambiguous sequences.
+
+the -O 4 (Overlap) option says not to trim 3' adapter sequences unless at least the first  bases of the adapter are seen at the 3' end of the read. This prevents trimming short 3' sequences that just happen by chance to match the first few adapter sequence bases.
+
+The -a argument to cutadapt is documented as the "sequence of adapter that was ligated to the 3' end". So we care about the <Read 2 primer> for R1 reads, and the <Read 1 primer> for R2 reads.
+
+     cutadapt -a GATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+
 There are 2 known adapters used in this experiment: 
 
     CTGGGAAATCACCATAAACGTGAAATGTCTTTGGATTTGGGAATCTTATAAGTTCTGTATGAGACCACTCTAAAAA
@@ -529,6 +540,30 @@ Now you can `grep` again searching for the adapters
     #grep CGAATGGCATTGAACTTTCATAAAGCTAAAGAACCGAAATATATAGAACACCTTTCCTGCTTTTTTTC f030_mirna_trim4.fastq | wc -l 
 
 
+The log file will look something like this:
+
+    Command line parameters: -m 20 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC Sample_H54_miRNA_L004_R1.cat.fastq.gz
+    Maximum error rate: 10.00%
+       No. of adapters: 1
+    Processed reads:      2001337
+    Processed bases:    202135037 bp (202.1 Mbp)
+    Trimmed reads:      1991662 (99.5%)
+    Trimmed bases:    156404705 bp (156.4 Mbp) (77.38% of total)
+    Too short reads:       246782 (12.3% of processed reads)
+     Too long reads:            0 (0.0% of processed reads)
+        Total time:     55.87 s
+     Time per read:      0.028 ms
+
+**Notes:**
+- The Processed reads line tells you how many sequences were in the original FASTQ file.
+- The Too short reads line tells you how may sequences were filtered out because they were shorter than our minimum length (20) after adapter removal (these may have ben primer dimers). 
+- Here ~12% of the original sequences were removed, which is reasonable.
+- Trimmed reads tells you how many of the reads you gave it had at least part of an adapter sequence that was trimmed.
+- Here adapter was found in nearly all (99.5%) of the reads. This makes sense given this is a short (15-25 bp) RNA library.
+- Trimmed bases tells you the total number of adapter bases that were removed, and its proportion of the total number of bases.
+= Here > 3/4 of bases were trimmed. Again, this makes sense since the reads were 100 bm long.
+
+
 
 Explore the quality of the trimmed file using FastQC
 --------------------------------------------------------------------------------
@@ -571,3 +606,18 @@ Count how many reads are left for the analysis (divide by 4)
     wc -l f010_raw_mirna.fastq
 	
     wc -l f040_mirna_cut.fastq
+
+### FASTQ or BAM statistics with samstat
+
+The samstat program can also produce a quality report for FASTQ files, and it can also report on aligned sequences in a BAM file.
+
+Again, this program is not available through the TACC module system but is available in Anna's work directory and has been linked into your $HOME/local/bin. You should be able just to type samstat and see some documentation.
+
+Here's how you run samstat on a compressed FASTQ files. Let's only run it on a few sequences to avoid overloading the system:
+
+    gunzip -c Sample_Yeast_L005_R1.cat.fastq.gz | head -100000 | samstat -f fastq -n samstat.fastq
+
+This would produce a file named samstat.fastq.html which you need to view in a web browser. Here's some example output from bacterial sequences:
+
+    http://web.corral.tacc.utexas.edu/BioITeam/SRR030257_1.fastq.html
+
