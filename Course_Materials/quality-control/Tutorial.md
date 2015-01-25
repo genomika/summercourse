@@ -50,6 +50,18 @@ Data used in this practical:
 
 - __f010_raw_mirna.fastq__: RNA-Seq of a [microRNA](http://en.wikipedia.org/wiki/MicroRNA) sample.
 
+#### Data staging
+Get the mirna data if you haven't already
+
+Let's now set ourselves up to process this data in $SCRATCH, using some of best practices for organizing our workflow.
+
+    # Create a $SCRATCH area to work on data for this course,
+    # with a sub-directory for pre-processing raw fastq files
+    mkdir -p $SCRATCH/core_ngs/fastq_prep
+    # Make a symbolic links to the original yeast data in $WORK.
+    cd $SCRATCH/core_ngs/fastq_prep
+    ln -s -f $WORK/archive/original/2014_05.core_ngs/Sample_Yeast_L005_R1.cat.fastq.gz
+    ln -s -f $WORK/archive/original/2014_05.core_ngs/Sample_Yeast_L005_R2.cat.fastq.gz
 
 
 Overview
@@ -78,6 +90,17 @@ Create an empty directory to work in the exercise and copy or download the raw d
 Explore the raw data using some Linux shell commands
 --------------------------------------------------------------------------------
 
+##### Illumina sequence data format (FASTQ)
+
+GSAF gives you paired end sequencing data in two matching fastq format files, containing reads for each end sequenced. See where your data really is and how big it is.
+
+    # the -l options says "long listing" which shows where the link goes,
+    # but doesn't show details of the real file
+    ls -l
+    # the -L option says to follow the link to the real file, -l = long listing (includes size)
+    # and -h says "human readable" (e.g. MB, GB)
+    ls -lLh
+
 The file __f010_raw_mirna.fastq__ contains reads form a microRNA sequencing experiment.
 Use the command `head` to have a view of the first lines of the file:
 
@@ -87,6 +110,32 @@ Use the command `wc` to count how many reads are there in the file (remember you
 
     wc -l f010_raw_mirna.fastq
 
+#### 4-line FASTQ format
+
+Each read end sequenced is represented by a 4-line entry in the fastq file that looks like this:
+
+    @HWI-ST1097:127:C0W5VACXX:5:1101:4820:2124 1:N:0:CTCAGA
+    TCTCTAGTTTCGATAGATTGCTGATTTGTTTCCTGGTCATTAGTCTCCGTATTTATATTATTATCCTGAGCATCATTGATGGCTGCAGGAGGAGCATTCTC
+    +
+    CCCFFFFDHHHHHGGGHIJIJJIHHJJJHHIGHHIJFHGICA91CGIGB?9EF9DDBFCGIGGIIIID>DCHGCEDH@C@DC?3AB?@B;AB??;=A>3;; 
+
+**Line 1** is the unique read name. The format is as follows, using the read name above:
+
+     machine_id:lane:flowcell_grid_coordinates  end_number:failed_qc:0:barcode
+     @HWI-ST1097:127:C0W5VACXX:5:1101:4820:2124 1:N:0:CTCAGA
+
+The line as a whole will be unique for this read fragment. However, the corresponding R1 and R2 reads will have identical machine_id:lane:flowcell_grid_coordinates information. This common part of the name ties the two read ends together.
+
+Most sequencing facilities will not give you qc-failed reads (failed_qc = Y) unless you ask for them.
+
+**Line 2** is the sequence reported by the machine, starting with the first base of the insert (the 5' adapter has been removed by the sequencing facility). These are ACGT or N uppercase characters.
+
+**Line 3** is always '+' from GSAF (it can optionally include a sequence description)
+
+**Line 4** is a string of Ascii-encoded base quality scores, one character per base in the sequence.
+For each base, an integer Phred-type quality score is calculated as integer score = -10 log(probabilty base is wrong) then added to 33 to make a number in the Ascii printable character range. As you can see from the table below, alphabetical letters - good, numbers – ok, most special characters – bad (except :;<=>?@).
+
+https://wikis.utexas.edu/download/attachments/66696890/ascii_qualities.png?version=1&modificationDate=1400197837000&api=v2
 
 Explore the raw data quality using FastQC
 --------------------------------------------------------------------------------
