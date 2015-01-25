@@ -309,6 +309,7 @@ but remember that different experiment types are expected to have vastly differe
 
 #### Running FastQC
 
+It has a number of options (see fastqc --help | more) but can be run very simply with just a FASTQ file as its argument.
 
 First create a directory to store the results of the fastqc analysis:
 
@@ -320,12 +321,62 @@ Then execute `fastqc` storing the results in the created directory (option `-o`)
 
 Find the results in the __fastqc_report.html__ file and discus them.
 
+
 There are many _Overrepresented sequences_. 
 Explore whether some of them correspond to miRNAs using the [miRBase search](http://www.mirbase.org/search.shtml) __By sequence__ utility.
+
+### Exercise: What did FastQC create?
+
+#### Looking at FastQC output
+You can't run a web browser directly from your "dumb terminal" command line environment. The FastQC results have to be placed where a web browser can access them. We put a copy at this URL:
+
+http://web.corral.tacc.utexas.edu/BioITeam/yeast_stuff/Sample_Yeast_L005_R1.cat_fastqc/fastqc_report.html
+
+### Exercise: Based on this FastQC output, should we trim this data?
 
 
 Handling adapters
 --------------------------------------------------------------------------------
+
+####Trimming sequences
+
+There are two main reasons you may want to trim your sequences:
+- As a quick way to remove 3' adapter contamination, when extra bases provide little additional information 
+	- For example, 75+ bp ChIP-seq reads – 50 bases are more than enough for a good mapping, and trimming to 50 is easier than adapter removal, especially for paired end data.
+	- You would not choose this approach for RNA-seq data, where 3' bases may map to a different exon, and that is valuable information. Instead you would specifically remove adapter sequences.
+- Low quality base reads from the sequencer can cause an otherwise mappable sequence not to align
+- This is more of an issue with sequencing for genome assembly – both bwa and bowtie2 seem to do fine with a few low quality bases, soft clipping them if necessary.
+
+There are a number of open source tools that can trim off 3' bases and produce a FASTQ file of the trimmed reads to use as input to the alignment program.
+
+#### FASTX Toolkit
+
+The FASTX Toolkit provides a set of command line tools for manipulating both FASTA and FASTQ files. The available modules are described on their website. They include a fast fastx_trimmer utility for trimming FASTQ sequences (and quality score strings) before alignment.
+
+Here's an example of how to run fastx_trimmer to trim all input sequences down to 50 bases. By default the program reads its input data from standard input and writes trimmed sequences to standard output:
+
+    gunzip -c Sample_Yeast_L005_R1.cat.fastq.gz | fastx_trimmer -l 50 -Q 33 > trim50_R1.fq
+
+- The -l 50 option says that base 50 should be the last base (i.e., trim down to 50 bases)
+
+- The -Q 33 option specifies how base qualities on the 4th line of each FASTQ entry are encoded. The FASTX Toolkit is an older program written in the time when Illumina base qualities were encoded differently, so its default does not work for modern FASTQ files. These days Illumina base qualities follow the Sanger FASTQ standard (Phred score + 33 to make an ASCII character).
+
+#### Exercise: How would you tell fastx_trimmer to compress (gzip) its output file?
+
+
+#### Adapter trimming with cutadapt
+
+Data from RNA-seq or other library prep methods that result in short fragments can cause problems with moderately long (50-100bp) reads, since the 3' end of sequence can be read through to the 3' adapter at a variable position. This 3' adapter contamination can cause the "real" insert sequence not to align because the adapter sequence does not correspond to the bases at the 3' end of the reference genome sequence.
+
+Unlike general fixed-length trimming (e.g. trimming 100 bp sequences to 50 bp), adapter trimming removes differing numbers of 3' bases depending on where the adapter sequence is found.
+
+You must tell an adapter trimming program what your R1 and R2 adapters look like. The GSAF website describes the flavaors of Illumina adapter and barcode sequence in more detail https://wikis.utexas.edu/display/GSAF/Illumina+-+all+flavors.
+
+The cutadapt program is an excellent tool for removing adapter contamination. The program is not available through TACC's module system but we linked a copy into your $HOME/local/bin directory.
+
+A common application of cutadapt is to remove adapter contamination from small RNA library sequence data, so that's what we'll show here, assuming GSAF-format small RNA library adapters.
+
+When you run cutadapt you give it the adapter sequence to trim, and this is different for R1 and R2 reads. Here's what the options look like (without running it on our files yet).
 
 There are 2 known adapters used in this experiment: 
 
