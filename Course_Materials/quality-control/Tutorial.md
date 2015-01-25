@@ -174,10 +174,141 @@ With no options, gzip compresses the file you give it in-place. Once all the con
 
 One of the challenges of dealing with large data files, whether compressed or not, is finding your way around the data – finding and looking at relevant pieces of it. Except for the smallest of files, you can't open them up in a text editor because those programs read the whole file into memory, so will choke on sequencing data files! Instead we use various techniques to look at pieces of the files at a time.
 
+The first technique is the use of "pagers" – we've already seen this with the more command. Review its use now on our small uncompressed file:
+
+    # Use spacebar to advance a page; Ctrl-c to exit
+    more small.fq
+
+Another pager, with additional features, is less. The most useful feature of less is the ability to search – but it still doesn't load the whole file into memory, so searching a really big file can be slow.
+
+Here's a summary of the most common less navigation commands, once the less pager is active. It has tons of other options (try less --help).
+- q – quit
+- Ctrl-f or space – page forward
+- Ctrl-b – page backward
+- /<pattern> – search for <pattern> in forward direction
+- n – next match
+- N – previous match
+- ?<pattern> – search for <pattern> in backward direction
+- n – previous match going back
+- N – next match going forward
+- If you start less with the -N option, it will display line numbers.
+
+### Exercise: What line of small.fq contains the read name with grid coordinates 2316:10009:100563?
+
+For a really quick peak at the first few lines of your data, there's nothing like the head command. By default it displays the first 10 lines of data from the file you give it or from its standard input. With an argument -NNN (that is a dash followed by some number), it will show that many lines of data.
+
+    # shows 1st 10 lines
+    head small.fq
+    # shows 1st 100 lines -- might want to pipe this to more to see a bit at a time
+    head -100 small.fq | more
+
+The yang to head's ying is tail, which by default it displays the last 10 lines of its data, and also uses the -NNN syntax to show the last NNN lines. (Note that with very large files it may take a while for tail to start producing output because it has to read through the file sequentially to get to the end.)
+
+See piping for a diagram of what the piping operator ( | ) is doing.
+
+But what's really cool about tail is its -n +NNN syntax. This displays all the lines starting at line NNN. Note this syntax: the -n option switch follows by a plus sign ( + ) in front of a number – the plus sign is what says "starting at this line"! Try these examples:
+
+    # shows the last 10 lines
+    tail small.fq
+    # shows the last 100 lines -- might want to pipe this to more to see a bit at a time
+    tail -100 small.fq | more
+    # shows all the lines starting at line 900 -- better pipe it to a pager!
+    tail -n +900 small.fq | more
+    # shows 15 lines starting at line 900 because we pipe to head -15
+    tail -n +900 small.fq | head -15
+
+#### gunzip -c tricks
+
+Ok, now you know how to navigate an uncompressed file using head and tail, more or less. But what if your FASTQ file has been compressed by gzip? You don't want to uncompress the file, remember? So you use the gunzip -c trick. This uncompresses the file, but instead of writing the uncompressed data to another file (without the .gz extension) it write it to its standard output where it can be piped to programs like your friends head and tail, more or less.
+
+Let's illustrate this using one of the compressed files in your fq subdirectory:
+
+    gunzip -c Sample_Yeast_L005_R1.cat.fastq.gz | more
+    gunzip -c Sample_Yeast_L005_R1.cat.fastq.gz | head
+    gunzip -c Sample_Yeast_L005_R1.cat.fastq.gz | tail
+    gunzip -c Sample_Yeast_L005_R1.cat.fastq.gz | tail -n +900 | head -15
+    # Note that less will display .gz file contents automatically
+    less Sample_Yeast_L005_R1.cat.fastq.gz
+
+**NOTE** There will be times when you forget to pipe your gunzip -c output somewhere – even the experienced among us still make this mistake! This leads to pages and pages of data spewing across your terminal. If you're lucky you can kill the output with Ctrl-c. But if that doesn't work (and often it doesn't) just close your Terminal window. This terminates the process on the server (like hanging up the phone), then you can log back in.
+
+### Counting your sequences
+
+One of the first thing to check is that your FASTQ files are the same length, and that length is evenly divisible by 4. The wc command (word count) using the -l switch to tell it to count lines, not words, is perfect for this. It's so handy that you'll end up using wc -l a lot to count things. It's especially powerful when used with filename wildcarding.
+
+    wc -l small.fq
+    head -100 small.fq > small2.fq
+    wc -l small*.fq
+
+You can also pipe the output of gunzip -c to wc -l to count lines in your compressed FASTQ file.
+
+### Exercise: How many lines are in the Sample_Yeast_L005_R1.cat.fastq.gz file? How many sequences is this?
+
+#### How to do math on the command line
+
+The bash shell has a really strange syntax for arithmetic: it uses a double-parenthesis operator after the $ sign (which means evaluate this expression). Go figure.
+
+    echo $((2368720 / 4))
+
+Remember how the backticks evaluate the enclosed expression and substitute its output into a string? Here's how you would combine this math expression with gunzip -c line counting on your file using the magic of backtick evaluation:
+
+    gunzip -c Sample_Yeast_L005_R1.cat.fastq.gz | echo "$((`wc -l` / 4))"
+
+
+### Processing multiple compressed files
+
+You've probably figured out by now that you can't easily use filename wildcarding along with gunzip -c and piping to process multiple files. For this, you need to code a for loop in bash. Fortunately, this is pretty easy. Try this:
+
+    for fname in *.gz; do
+       echo "$fname has $((`gunzip -c $fname | wc -l` / 4)) sequences"
+    done
+
+Here fname is the name I gave the variable that is assigned a different file generated by the filename wildcarding list, each time through the loop. The actual file is then referenced as $file inside the loop.
+
+Note the general structure of the for loop. Different portions of the structure can be separated on different lines (like <something> and <something else> below) or put on one line separated with a semicolon ( ; ) like before the do keyword below.
+
+    for <variable name> in <expression>; do
+       <something>
+     <something else>
+    done
+
+### E em linguagens de alto nível ?  (Mostrar o script python para isto!!!)
+
+
 
 
 Explore the raw data quality using FastQC
 --------------------------------------------------------------------------------
+
+The first order of business after receiving sequencing data should be to check your data quality. This often-overlooked step helps guide the manner in which you process the data, and can prevent many headaches.
+
+FastQC is a tool that produces a quality analysis report on FASTQ files.
+
+Useful links:
+- FastQC report for a Good Illumina dataset
+- FastQC report for a Bad Illumina dataset
+- Online documentation for each FastQC report
+
+First and foremost, the FastQC "Summary" should generally be ignored. Its "grading scale" (green - good, yellow - warning, red - failed) incorporates assumptions for a particular kind of experiment, and is not applicable to most real-world data. Instead, look through the individual reports and evaluate them according to your experiment type.
+
+The FastQC reports I find most useful, and why:
+- Should I trim low quality bases?
+	-  consult the Per base sequence quality report
+- based on all sequences
+	- Do I need to remove adapter sequences?
+- consult the Overrepresented Sequences report
+	- based on the 1st 200,000 sequences
+- How complex is my library?
+	- consult the Sequence Duplication Levels report
+
+but remember that different experiment types are expected to have vastly different duplication profiles
+
+**NOTE** For many of its reports, FastQC analyzes only the first 200,000 sequences in order to keep processing and memory requirements down. Consult the Online documentation for each FastQC report for full details.
+
+**NOTE** Some of FastQC's graphs have a 1-100 vertical scale that is tricky to interpret. The 100 is a relative marker for the rest of the graph. For example, sequence duplication levels are relative to the number of unique sequences,
+
+#### Running FastQC
+
 
 First create a directory to store the results of the fastqc analysis:
 
