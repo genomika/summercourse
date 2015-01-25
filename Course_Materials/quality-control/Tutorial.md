@@ -1,6 +1,6 @@
-% [Workshop de Bioinformática](http://ngs-course.github.io/)
-% __Quality control & Adapter trimming__
-% _(updated 2014-09-29)_
+% [WorkShop de Verão Bioinformática](http://github.com/genomika/summercourse/)
+% __Controle de Qualidade__
+% _(updated 23-01-2014)_
 
 
 <!-- Common URLs: Tools -->
