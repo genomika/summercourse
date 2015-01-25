@@ -264,6 +264,20 @@ And here's  a set of commands you should know, by category (under construction).
 There are several options for editing files at TACC. These fall into three categories:
 - Linux text editors installed at TACC (nano, vi, emacs). These run in your Terminal window. nano is extremely simple and is the best choice as a first local text editor. vi and emacs are extremely powerful but also quite complex
 - Text editors or IDEs that run on your local computer but have an SFTP (secure FTP) interface that lets you connect to a remote computer (Notepad++ or Komodo Edit). 
+    -  Once you connect to the remote host, you can navigate its directory structure and edit files.
+    -   When you open a file, its contents are brought over the network into the text editor's edit window, then saved back when you save the file.
+-   Software that will allow you to mount your home directory on TACC as if it were a normal disk (e.g. ExpanDrive for Windows or Mac – costs $$, but has a free trial).  Then, you can use any text editor or IDE on your local computer to open/edit/save files (although it will be slower than local file editing)
+
+
+#### Line ending nightmares
+The dirty little secret of the computer world is that the three main "families" of computers – Macs, Windows and Linux/Unix – use different, mutually incompatible line endings.
+-   Linux/Unix uses linefeed ( \n )
+-   Windows uses carriage return followed by linefeed ( \r\n )
+-   some Mac programs use carriage return only ( \r )
+And guess what? Most Linux programs don't work with files that have Windows or Mac line endings, and what's worse they give you bizarre error messages that don't give you a clue what's going on.
+
+So whatever non-Linux text editor you use, be sure to adjust its "line endings" setting – and it better have one somewhere!
+
 
 Once you connect to the remote host, you can navigate its directory structure and edit files.
 When you open a file, its contents are brought over the network into the text editor's edit window, then saved back when you save the file.
@@ -272,102 +286,28 @@ Software that will allow you to mount your home directory on TACC as if it were 
 
 Then, you can use any text editor or IDE on your local computer to open/edit/save files (although it will be slower than local file editing)
 
-We'll use nano in class, but you may find options #2 or #3 more useful for day-to-day work.
+#### nano
+nano is a very simple editor available on most Linux systems. If you are able to ssh into a remote system, you can use nano there.
+-   To invoke it, creating a new file, just type:
+-   Start the nano text editor on a new (un-named) file
+        
+    
 
 
-It is easy to not notice the difference between standard output and standard error when you're in an interactive Terminal session – because both outputs are sent to the Terminal. But they are separate streams, with different meanings. When running batch programs and scripts you will want to manipulate standard output and standard error from programs appropriately.
+        nano
+
+-   You'll see a short menu of operations at the bottom of the terminal window. The most important are:
+    -   ctl-o - write out the file
+    -   ctl-x - exit nano
+
+-   You can just type in text, and navigate around using arrow keys. A couple of other navigation shortcuts:
+    -   ctl-a - go to start of line
+    -   ctl-e - go to end of line
 
 
-## A Janela de Terminal
-- Macs e Linux possuem programas de terminal nativos - encontre-os em sua máquina
-- Usuários Windows vão precisar de ajuda, opções a seguir:
-    - [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) "Putty"
-    - [Git-bash](http://msysgit.github.io/) "GitBash"
-    - [Cygwin](http://www.cygwin.com/) "Cygwin"
-
-## SSH
-
-ssh é um programa executável que roda em seu computador local e permite que você se conecte de forma segura a um computador remoto. Em Macs, Linux e Windows (Git-Bash out Cygwin), você pode rodar de uma tela de terminal. Responda yes a questão de segurança do prompt do SSH.
-
-##### Acessando servidor remoto via SSH.
-    ssh seuusuario@172.16.225.107
-
-- Se você está usando Putty como seu terminal no Windows:
-    -  Double-click the Putty.exe icon
-    -  In the PuTTY Configuration window
-    -  make sure the Connection type is SSH
-    -  enter stampede.tacc.utexas.edu for Host Name
-    -  click Open button
-    -  answer Yes to the SSH security question
-    -  In the PuTTY terminal
-    -  enter your TACC user id after the login as: prompt, then Enter
 
 
-## Shell Bash
 
-You're now at a command line! It looks as if you're running directly on the remote computer, but really there are two programs communicating: your local Terminal and the remote Shell. There are many shell programs available in Linux, but the default is bash (Bourne-again shell). The Terminal is pretty "dumb" – just sending your typing over its secure sockets layer (SSL) connection to TACC, then displaying the text sent back by the shell. The real work is being done on the remote computer, by programs called by the bash shell.
-
-![Terminal Example](https://wikis.utexas.edu/download/attachments/66696867/terminal.png?version=1&modificationDate=1400007439000&api=v2)
-
-##### Preparando seu ambiente de trabalho.
-
-First create a few directories and links we will use (more on these later).
-
-**NOTE:** You can copy and paste these lines from the code block below into your Terminal window. Just make sure you hit "Enter" after the last line.
-
-    cd
-    ln -s -f $SCRATCH scratch
-    ln -s -f $WORK work
-    ln -s -f /corral-repl/utexas/BioITeam
-
-- $WORK and $SCRATCH are TACC environment variable that refer to your work and scratch file system areas.
-- The ln -s command creates a symbolic link, a shortcut the the linked file or directory.
-- here the link targets are your work and scratch file system areas
-- having these link shortcuts will help when you want to copy files to your work or scratch, and when you navigate the TACC file system using a remote SFTP client
-- always change directory (cd) to the directory where we want the links created before executing ln -s 
-- here we want the links under your home directory (cd with no arguments)
-
-##### Want to know where a link points to? Use ls with the -l (long listing) option.
-    ls -l
-
-Set up a $HOME/local/bin directory and link some scripts there that we will use a lot in the class.
-
-    mkdir -p $HOME/local/bin
-    cd $HOME/local/bin
-    ln -s -f /corral-repl/utexas/BioITeam/bin/launcher_creator.py
-    ln -s -f /work/01063/abattenh/local/bin/cutadapt
-    ln -s -f /work/01063/abattenh/local/bin/samstat
-
--  The mkdir command creates a new directory. The -p option says to create intermediate directories if needed (like local here).
--  here we're creating a $HOME/local/bin directory where we'll put some programs used in the course
--  $HOME is an environment variable set by TACC that refers to your home directory.
--  The ln -s command creates a symbolic link, a shortcut the the linked file or directory.
--  here the link targets are programs we want – instead of copying the programs, we just link to them
--  always change directory (cd) to the directory where we want the links created before executing ln -s
--  here we want the links in $HOME/local/bin
-
-Want to know more about a Linux command? Type the command name then the --help option. For example, with mkdir:
-
-    mkdir --help
-
-This won't work all the time, but it's your best 1st choice for help.
-
-Now execute the lines below to set up a login script, called .profile_user.
-
-Whenever you login via an interactive shell as you did above, a well-known script is executed by the shell to establish your favorite environment settings. We've set up a common profile for you to start with that will help you know where you are in the file system and make it easier to access some of our shared resources. To set up this profile, do the steps below:
-
-    cd
-    cp /corral-repl/utexas/BioITeam/core_ngs_tools/common/stampede_dircolors .dircolors
-    cp /corral-repl/utexas/BioITeam/core_ngs_tools/common/core_ngs_profile .profile_user
-    chmod 600 .profile_user
-
-
--  The chmod 600 .profile_user command marks the file as readable and writable only by you. The .profile_user script file will not be executed unless it has these exact permissions settings.
--  The well-known filename is .profile_user (or .profile on some systems), which is specific to the bash shell.
-
-Since .profile_user is executed when you login, to ensure it is set up properly you should first log off stampede like this:
-
-    exit
     
 Then log back in to stampede.tacc.utexas.edu. This time your .profile_user will be executed and you should see a new shell prompt:
     
