@@ -339,3 +339,29 @@ Once installed, start Komodo Edit and follow these steps to configure it:
     -   Navigate to where you want the put the file and save it
     -   Often you will use the work or scratch directory links to help you here
     -   Rather than having to navigate around TACC's complex file system tree, it helps to use the symbolic links to those areas that we created in your home directory.
+
+
+#### Notepad++ for Windows
+Notepad++ is an open source, full-featured text editor for Windows PCs (not Macs). It has syntax coloring for many programming languages (python, perl, shell), and a remote file editing interface.
+
+If you're on a Windows PC download the installer here.
+
+Once it has been installed, start Notepad++ and follow these steps to configure it:
+
+-   Configure the default line separator for Unix
+-   In the Settings menu, select Preferences
+-   In the Preferences dialog, select the New Document/Default Directory tab.
+-   Select Unix in the Format section
+-   Close
+-   Configure a connection to TACC
+-   In the Plugins menu, select NppFTP, then select Focus NppFTP Window. The top bar of the NppFTP panel should become blue.
+-   Click the Settings icon (looks like a gear), then select Profile Settings
+-   In the Profile settings dialog click Add new
+-   Call the new profile stampede
+-   Fill in Hostname (lonestar.tacc.utexas.edu) and your TACC user ID
+-   Connection type must be SFTP
+-   Close
+
+To open the connection, click the blue (Dis)connect icon then select your stampede connection. It should prompt for your password. Once you've authenticated, a directory tree ending in your home directory will be visible in the NppFTP window. You can click the the (Dis)connect icon again to Disconnect when you're done.
+
+Rather than having to navigate around TACC's complex file system tree, it helps to use the symbolic links to those areas that we created in your home directory.
