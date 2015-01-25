@@ -607,7 +607,7 @@ Count how many reads are left for the analysis (divide by 4)
 	
     wc -l f040_mirna_cut.fastq
 
-### FASTQ or BAM statistics with samstat
+### FASTQ statistics with samstat
 
 The samstat program can also produce a quality report for FASTQ files, and it can also report on aligned sequences in a BAM file.
 
