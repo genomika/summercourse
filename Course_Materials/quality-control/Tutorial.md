@@ -137,6 +137,45 @@ For each base, an integer Phred-type quality score is calculated as integer scor
 
 ![Terminal Example](https://wikis.utexas.edu/download/attachments/66696890/ascii_qualities.png?version=1&modificationDate=1400197837000&api=v2)
 
+See the Wikipedia FASTQ format page for more information.
+
+#### Exercise: What character in the quality score string in the fastq entry above represents the best base quality?
+
+### About compressed files
+
+Sequencing data files can be very large - from a few megabytes to gigabytes. And with NGS giving us longer reads and deeper sequencing at decreasing price points, it's not hard to run out of storage space. As a result, most sequencing facilities will give you compressed sequencing data files. The most common compression program used for individual files is gzip and its counterpart gunzip whose compressed files have the .gz extension. The tar and zip programs are most commonly used for compressing directories.
+
+Let's take a look at the size difference between uncompressed and compressed files. We use the -l option of ls to get a long listing that includes the file size, and -h to have that size displayed in "human readable" form rather than in raw byte sizes.
+
+    ls -lh $BI/web/yeast_stuff/*.fastq
+    ls -lh $BI/web/yeast_stuff/*.fastq.gz
+
+#### Exercise: About how big are the compressed files? The uncompressed files? About what is the compression factor?
+
+You may be tempted to want to uncompress your sequencing files in order to manipulate them more directly – but resist that temptation. Nearly all modern bioinformatics tools are able to work on .gz files, and there are tools and techniques for working with the contents of compressed files without ever uncompressing them.
+
+
+#### gzip and gunzip
+
+With no options, gzip compresses the file you give it in-place. Once all the content has been compressed, the original uncompressed file is removed, leaving only the compressed version (the original file name plus a .gz extension). The gzunzip function works in a similar manner, except that its input is a compressed file with a .gz file and produces an uncompressed file without the .gz extension.
+
+    # make sure you're in your $SCRATCH/core_ngs/fastq_prep directory
+    cp $CLASSDIR/misc/small.fq .
+    # check the size, then compress it in-place
+    ls -lh
+    gzip small.fq
+    # check the compressed file size, then uncompress it
+    ls -lh 
+    gunzip small.fq.gz
+
+**NOTE** Both gzip and gunzip are extremely I/O intensive when run on large files. While TACC has tremendous compte resources and the Lustre parallel file system is great, it has its limitations. It is not difficult to overwhelm the Lustre file system if you gzip or gunzip more than a few files at a time (~4) in a batch job. The intensity of compression/decompression operations is another reason you should compress your sequencing files once (if they aren't already) then leave them that way.
+
+#### head and tail, more or less
+
+One of the challenges of dealing with large data files, whether compressed or not, is finding your way around the data – finding and looking at relevant pieces of it. Except for the smallest of files, you can't open them up in a text editor because those programs read the whole file into memory, so will choke on sequencing data files! Instead we use various techniques to look at pieces of the files at a time.
+
+
+
 Explore the raw data quality using FastQC
 --------------------------------------------------------------------------------
 
