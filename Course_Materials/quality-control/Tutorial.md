@@ -135,7 +135,7 @@ Most sequencing facilities will not give you qc-failed reads (failed_qc = Y) unl
 **Line 4** is a string of Ascii-encoded base quality scores, one character per base in the sequence.
 For each base, an integer Phred-type quality score is calculated as integer score = -10 log(probabilty base is wrong) then added to 33 to make a number in the Ascii printable character range. As you can see from the table below, alphabetical letters - good, numbers – ok, most special characters – bad (except :;<=>?@).
 
-https://wikis.utexas.edu/download/attachments/66696890/ascii_qualities.png?version=1&modificationDate=1400197837000&api=v2
+![Terminal Example](https://wikis.utexas.edu/download/attachments/66696890/ascii_qualities.png?version=1&modificationDate=1400197837000&api=v2)
 
 Explore the raw data quality using FastQC
 --------------------------------------------------------------------------------
