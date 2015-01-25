@@ -20,7 +20,7 @@ Neste primeiro dia iremos aprender o básico com uma _introdução a Genética e
 
 ### Introdução a Tecnologias NGS's (45 min)
 Uma introdução rápida sobre as tecnologias NGS e alguns conceitos.
-- [Slides](Course_Materials/intro-ngs/SummerCourse_NGSTechnologies.pdf)
+- Slides [PDF](Course_Materials/intro-ngs/SummerCourse_NGSTechnologies.pdf)
 
 ### Introdução ao Linux/SHELL (50 min)
 - Linux Fundamentos [[Parte 1](Course_Materials/intro-linux/Tutorial.md) | [Parte2](Course_Materials/intro-linux/LinuxFundamentals.md)]
