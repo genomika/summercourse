@@ -18,13 +18,13 @@
 ssh é um programa executável que roda em seu computador local e permite que você se conecte de forma segura a um computador remoto. Em Macs, Linux e Windows (Git-Bash out Cygwin), você pode rodar de uma tela de terminal. Responda yes a questão de segurança do prompt do SSH.
 
 ##### Acessando servidor remoto via SSH.
-    ssh seuusuario@172.16.225.167
+    ssh seuusuario@172.16.225.177
 
 - Se você está usando Putty como seu terminal no Windows:
     -  Clique Duplo no icone Putty.exe 
     -  Na janela de configuração do PuTTy 
     -  Garanta que o tipo de conexão é SSH
-    -  Digite o ip do servidor 172.16.225.167 (host name)
+    -  Digite o ip do servidor 172.16.225.177 (host name)
     -  Clique no botão Open 
     -  Responda  Yes na pergunta de segurança do SSh
     -  No terminal putty
