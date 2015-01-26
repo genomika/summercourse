@@ -302,5 +302,3 @@ Hit Tab Tab as much as possible to save typing!
     cd linuxpractice
     cd what
     cat readme
-
-## stamp:~/linuxpractice/what/starts/here/changes/the/world
