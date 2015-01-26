@@ -39,19 +39,16 @@ Você está agora na linha de comando! É como se você estivesse executando com
 
 ##### Preparando seu ambiente de trabalho.
 
-First create a few directories and links we will use (more on these later).
+Primeiro crie alguns diretórios e links símbolicos que nós iremos usar (falaremos sobre isto depois).
 
-**NOTE:** You can copy and paste these lines from the code block below into your Terminal window. Just make sure you hit "Enter" after the last line.
+**NOTE:** Você pode copiar e colar estas linhas abaixo de código na janela do seu terminal. Apenas lembre de pressionar 'Enter' após a última linha.
 
     cd
-    ln -s -f $SCRATCH scratch
-    ln -s -f $WORK work
-    ln -s -f /corral-repl/utexas/BioITeam
+    ln -s -f /home/usuario/work work
 
-- $WORK and $SCRATCH are TACC environment variable that refer to your work and scratch file system areas.
 - The ln -s command creates a symbolic link, a shortcut the the linked file or directory.
-- here the link targets are your work and scratch file system areas
-- having these link shortcuts will help when you want to copy files to your work or scratch, and when you navigate the TACC file system using a remote SFTP client
+- here the link targets are your work file system areas
+- having this link shortcut will help when you want to copy files to your work, and when you navigate the file system using a remote SFTP client
 - always change directory (cd) to the directory where we want the links created before executing ln -s 
 - here we want the links under your home directory (cd with no arguments)
 
