@@ -60,13 +60,12 @@ Set up a $HOME/local/bin directory and link some scripts there that we will use 
 
     mkdir -p $HOME/local/bin
     cd $HOME/local/bin
-    ln -s -f /corral-repl/utexas/BioITeam/bin/launcher_creator.py
-    ln -s -f /work/01063/abattenh/local/bin/cutadapt
-    ln -s -f /work/01063/abattenh/local/bin/samstat
+    ln -s -f /usr/local/share/tools/bin/cutadapt
+    ln -s -f /usr/local/share/tools/bin/samstat
 
 -  The mkdir command creates a new directory. The -p option says to create intermediate directories if needed (like local here).
 -  here we're creating a $HOME/local/bin directory where we'll put some programs used in the course
--  $HOME is an environment variable set by TACC that refers to your home directory.
+-  $HOME is an environment variable set by Unix that refers to your home directory.
 -  The ln -s command creates a symbolic link, a shortcut the the linked file or directory.
 -  here the link targets are programs we want – instead of copying the programs, we just link to them
 -  always change directory (cd) to the directory where we want the links created before executing ln -s
