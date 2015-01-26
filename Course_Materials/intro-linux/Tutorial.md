@@ -134,20 +134,9 @@ You'll see the following (you may need to scroll up a bit to see the beginning):
 
     #!/bin/basH
     # Change the command line prompt to contain the current directory path
-    if [ "$TACC_SYSTEM" == "stampede" ]; then
-        PS1='stamp:\w$ '
-    else
-        PS1='lstar:\w$ '
-    fi
+    PS1='workshop:\w$ '
     # Try to ensure all created files can be read/writtin by group members
     umask 002
-    # Make common, useful software always available
-    module load python; module load launcher
-    # Set the default project allocation for launcher_creator.py
-    export ALLOCATION=genomeAnalysis
-    # Environment variables for useful locations
-    export BI=/corral-repl/utexas/BioITeam
-    export CLASSDIR="$BI/core_ngs_tools"
     # Add current directory and $HOME/local/bin to PATH
     export PATH=.:$HOME/local/bin:$PATH
     # Use yellow for directories, not that horrible blue
@@ -164,17 +153,14 @@ The first line is the "she-bang". It tells the shell what program should execute
 
 #### environment variables
 
-The profile also sets an environment variable named BI to point to the shared directory: **/corral-repl/utexas/BioITeam**, and another environment variable named **CLASSDIR** to point to the specific sub-directory for our class.
-
     # Environment variables for useful locations
-    export BI=/corral-repl/utexas/BioITeam
-    export CLASSDIR="$BI/core_ngs_tools"
+    export PATH=.:$HOME/local/bin:$PATH
 
-Environment variables are like variables in a programming language like python or perl (in fact bash is a complete programming language). They have a name (like BI above) and a value (the value for BI is the pathname **/corral-repl/utexas/BioITeam**).
+Environment variables are like variables in a programming language like python or perl (in fact bash is a complete programming language). They have a name (like PATH above) and a value (the value for PATH is the pathname **$HOME/local/bin:$PATH**).
 
 #### shell completion
 
-You can use these environment variables to shorten typing, for example, to look at the contents of the shared BioITeam directory as shown below, using the magic Tab key to perform shell completion.
+You can use these environment variables to shorten typing, for example, to look at the contents of the shared  directory as shown below, using the magic Tab key to perform shell completion.
 
     # hit Tab once after typing $BI/ to expand the environment variable
     ls $BI/
