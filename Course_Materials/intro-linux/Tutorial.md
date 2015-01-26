@@ -85,7 +85,7 @@ Whenever you login via an interactive shell as you did above, a well-known scrip
 
     cd
     cp /usr/local/common/unix_dircolors .dircolors
-    cp /usr/local/common/core_ngs_profile .profile
+    cp /usr/local/common/ngs_profile .profile
     chmod 600 .profile
 
 
