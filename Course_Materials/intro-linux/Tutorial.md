@@ -45,6 +45,7 @@ Primeiro crie alguns diretórios e links símbolicos que nós iremos usar (falar
 
     cd
     ln -s -f /home/usuario/work work
+    ln -s -f /usr/local/share/tools/ tools
 
 - The ln -s command creates a symbolic link, a shortcut the the linked file or directory.
 - here the link targets are your work file system areas
