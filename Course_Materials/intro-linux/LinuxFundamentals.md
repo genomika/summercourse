@@ -102,7 +102,7 @@ The power of the Linux command line is due in no small part to the power of pipi
 A simple example is piping uncompressed data "on the fly" to a pager like more:
 
     # the -c option says to write decompressed data to the console (stdout)
-    gunzip -c big.fq.gz | more
+    gunzip -c Sample_Yeast_L005_R1.cat.fastq.gz | more
 
 But the real power comes when you stitch together a string of commands with pipes – it's incredibly flexible, and fun once you get the hang.
 
@@ -261,12 +261,12 @@ And here's  a set of commands you should know, by category (under construction).
 -   awk
 
 ### Editing files
-There are several options for editing files at TACC. These fall into three categories:
-- Linux text editors installed at TACC (nano, vi, emacs). These run in your Terminal window. nano is extremely simple and is the best choice as a first local text editor. vi and emacs are extremely powerful but also quite complex
+There are several options for editing files at remote servers. These fall into three categories:
+- Linux text editors installed at servers (nano, vi, emacs). These run in your Terminal window. nano is extremely simple and is the best choice as a first local text editor. vi and emacs are extremely powerful but also quite complex
 - Text editors or IDEs that run on your local computer but have an SFTP (secure FTP) interface that lets you connect to a remote computer (Notepad++ or Komodo Edit). 
     -  Once you connect to the remote host, you can navigate its directory structure and edit files.
     -   When you open a file, its contents are brought over the network into the text editor's edit window, then saved back when you save the file.
--   Software that will allow you to mount your home directory on TACC as if it were a normal disk (e.g. ExpanDrive for Windows or Mac – costs $$, but has a free trial).  Then, you can use any text editor or IDE on your local computer to open/edit/save files (although it will be slower than local file editing)
+-   Software that will allow you to mount your home directory on servers as if it were a normal disk (e.g. ExpanDrive for Windows or Mac – costs $$, but has a free trial).  Then, you can use any text editor or IDE on your local computer to open/edit/save files (although it will be slower than local file editing)
 
 
 #### Line ending nightmares
@@ -286,7 +286,7 @@ Software that will allow you to mount your home directory on TACC as if it were 
 
 Then, you can use any text editor or IDE on your local computer to open/edit/save files (although it will be slower than local file editing)
 
-#### nano
+#### vi
 nano is a very simple editor available on most Linux systems. If you are able to ssh into a remote system, you can use nano there.
 -   To invoke it, creating a new file, just type:
 -   Start the nano text editor on a new (un-named) file
@@ -294,15 +294,14 @@ nano is a very simple editor available on most Linux systems. If you are able to
     
 
 
-        nano
+        vi
 
 -   You'll see a short menu of operations at the bottom of the terminal window. The most important are:
-    -   ctl-o - write out the file
-    -   ctl-x - exit nano
+    -   :wq! - write out the file
+    -   :q! - exit nano
 
 -   You can just type in text, and navigate around using arrow keys. A couple of other navigation shortcuts:
-    -   ctl-a - go to start of line
-    -   ctl-e - go to end of line
+    -   shift+$ - go to end of line
 
 
 #### Komodo Edit for Mac and Windows
@@ -314,7 +313,7 @@ Once installed, start Komodo Edit and follow these steps to configure it:
 -   Select the New Files Category
 -   For Specify the end-of-line (EOL) indicator for newly created files select UNIX (\n)
 -   Select OK
--   Configure a connection to TACC
+-   Configure a connection to server
 -   On the Edit menu select Preferences
 -   Select the Servers Category
 -   For Server type select SFTP
@@ -338,7 +337,6 @@ Once installed, start Komodo Edit and follow these steps to configure it:
     -   Once you log in, it should show you all the files and directories in your stampede $HOME directory
     -   Navigate to where you want the put the file and save it
     -   Often you will use the work or scratch directory links to help you here
-    -   Rather than having to navigate around TACC's complex file system tree, it helps to use the symbolic links to those areas that we created in your home directory.
 
 
 #### Notepad++ for Windows
@@ -358,10 +356,8 @@ Once it has been installed, start Notepad++ and follow these steps to configure 
 -   Click the Settings icon (looks like a gear), then select Profile Settings
 -   In the Profile settings dialog click Add new
 -   Call the new profile stampede
--   Fill in Hostname (lonestar.tacc.utexas.edu) and your TACC user ID
+-   Fill in Hostname (172.16.225.177) and your user ID
 -   Connection type must be SFTP
 -   Close
 
 To open the connection, click the blue (Dis)connect icon then select your stampede connection. It should prompt for your password. Once you've authenticated, a directory tree ending in your home directory will be visible in the NppFTP window. You can click the the (Dis)connect icon again to Disconnect when you're done.
-
-Rather than having to navigate around TACC's complex file system tree, it helps to use the symbolic links to those areas that we created in your home directory.
