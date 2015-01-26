@@ -85,18 +85,18 @@ Whenever you login via an interactive shell as you did above, a well-known scrip
 
     cd
     cp /usr/local/common/unix_dircolors .dircolors
-    cp /usr/local/common/core_ngs_profile .profile_user
-    chmod 600 .profile_user
+    cp /usr/local/common/core_ngs_profile .profile
+    chmod 600 .profile
 
 
--  The chmod 600 .profile_user command marks the file as readable and writable only by you. The .profile_user script file will not be executed unless it has these exact permissions settings.
--  The well-known filename is .profile_user (or .profile on some systems), which is specific to the bash shell.
+-  The chmod 600 .profile_user command marks the file as readable and writable only by you. The .profile script file will not be executed unless it has these exact permissions settings.
+-  The well-known filename is .profile (or .profile on some systems), which is specific to the bash shell.
 
-Since .profile_user is executed when you login, to ensure it is set up properly you should first log off  like this:
+Since .profile is executed when you login, to ensure it is set up properly you should first log off  like this:
 
     exit
     
-Then log back in to 172.16.225.107. This time your .profile_user will be executed and you should see a new shell prompt:
+Then log back in to 172.16.225.177. This time your .profile_user will be executed and you should see a new shell prompt:
     
     ~$
 
