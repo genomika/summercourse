@@ -25,13 +25,14 @@ Uma introdução rápida sobre as tecnologias NGS e alguns conceitos.
 ### Introdução ao Linux/SHELL (50 min)
 - Linux Fundamentos [[Parte 1](Course_Materials/intro-linux/Tutorial.md) | [Parte2](Course_Materials/intro-linux/LinuxFundamentals.md)]
 
-### Controle de Qualidade para dados brutos de NGS (FASTQ) (30 min)
-- [Slides](Course_Materials/quality-control/SummerCourse_PreProcessing.pdf) - [Tutorial](Course_Materials/quality-control/Tutorial.md) - [Dados](https://www.dropbox.com/sh/4qkqch7gyt888h7/AAAqebBSC6JgDGq4emwNORCaa/quality_control)
 
 
 ## Dia 2
 
 Neste segundo dia vamos focar em _Variant Calling_ e _Visualização dos dados_ com  alinhamento dos dados e análise das sequências.
+
+### Controle de Qualidade para dados brutos de NGS (FASTQ) (30 min)
+- [Slides](Course_Materials/quality-control/SummerCourse_PreProcessing.pdf) - [Tutorial](Course_Materials/quality-control/Tutorial.md) - 
 
 
 ### Alinhamento dos dados
