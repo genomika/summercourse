@@ -194,34 +194,23 @@ When you type a command name the shell has to have some way of finding what prog
 
     echo $PATH
 
-As you can see, there are a lot of locations on the **$PATH**. That's because when you load modules at TACC (such as the module load lines in the common profile), that mechanism makes the programs available to you by putting their installation directories on your $PATH. We'll learn more about modules shortly.
+As you can see, there are a lot of locations on the **$PATH**. That's because when you load modules at the server (such as the module load lines in the common profile), that mechanism makes the programs available to you by putting their installation directories on your $PATH. We'll learn more about modules shortly.
 
 Here's how the shared profile adds your **$HOME/local/bin** directory to the location list – recall that's where we linked some programs we'll use – along with a special dot character ( . ) that means "here", or "whatever the current directory is".
 
     # Add current directory and $HOME/local/bin to PATH 
     export PATH=.:$HOME/local/bin:$PATH
 
-#### setting up the friendly command prompt
-
-The complicated looking if statement near the top of your profile is checking whether you're on stampede or lonestar (this .profile_user works on both), and setting up your friendly shell prompt so that it includes the current working directory. This is done by setting the special PS1 environment variable and including a special \w directive that the shell knows means "current directory".
-
-    # Change the command line prompt to contain the current directory path
-    if [ "$TACC_SYSTEM" == "stampede" ]; then
-        PS1='stamp:\w$ '
-    else
-        PS1='lstar:\w$ '
-    fi
-
 
 ### Download from a link – wget
 
-Well, you don't have a desktop at TACC to "Save as" to, so what to do with a link? The wget program knows how to access web URLs such as http, https and ftp.
+Well, you don't have a desktop at the server to "Save as" to, so what to do with a link? The wget program knows how to access web URLs such as http, https and ftp.
 
 #### wget
 
 Get ready to run wget from the directory where you want to put the data. Don't press Enter after the wget command – just put a space after it.
 
-    cd $WORK/archive/original/2014_05.core_ngs
+    cd $WORK
     wget
 
 Here are two web links:
@@ -247,20 +236,20 @@ The cp command copies one or more files from a local source to a local destinati
 
 Make a directory in your scratch area and copy a single file to it. The trailing slash ( / ) on the destination says it is a directory.
 
-    mkdir -p $SCRATCH/data/test1
-    cp  /corral-repl/utexas/BioITeam/web/tacc.genomics.modules  $SCRATCH/data/test1/
-    ls $SCRATCH/data/test1
+    mkdir -p $work/data/test1
+    cp  //172.16.225.20/ngscourse/data  $work/data/test1/
+    ls $work/data/test1
 
-Copy a directory to your scratch area. The -r argument says "recursive".
+Copy a directory to your work area. The -r argument says "recursive".
 
     cds
     cd data
-    cp -r /corral-repl/utexas/BioITeam/web/general/ general/
+    cp -r  //172.16.225.20/ngscourse/data/general/ general/
 
 
 #### local rsync
 
-The rsync command is typically used to copy whole directories. What's great about rsync is that it only copies what has changed in the source directory. So if you regularly rsync a large directory to TACC, it may take a long time the 1st time, but the 2nd time (say after downloading more sequencing data to the source), only the new files will be copied.
+The rsync command is typically used to copy whole directories. What's great about rsync is that it only copies what has changed in the source directory. So if you regularly rsync a large directory to the server, it may take a long time the 1st time, but the 2nd time (say after downloading more sequencing data to the source), only the new files will be copied.
 
 rsync is a very complicated program, with many options (http://rsync.samba.org/ftp/rsync/rsync.html). However, if you use it like this for directories, it's hard to go wrong:
 
@@ -274,7 +263,7 @@ The trailing slash ( / ) on the source and destination directories are very impo
 
 Now repeat the rsync and see the difference:
 
-    rsync -avrP /corral-repl/utexas/BioITeam/web/ucsc_custom_tracks/ $SCRATCH/data/custom_tracks/
+    rsync -avrP /corral-repl/utexas/BioITeam/web/ucsc_custom_tracks/ $work/data/custom_tracks/
 
 #### Copy from a remote computer - scp or rsync
 
