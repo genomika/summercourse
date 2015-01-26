@@ -298,7 +298,7 @@ Copy a directory to your work area. The -r argument says "recursive".
 Hit Tab Tab as much as possible to save typing!
 
     cd
-    cp -r /corral-repl/utexas/BioITeam/linuxpractice .
+    cp -r /mnt/data/linuxpractice .
     cd linuxpractice
     cd what
     cat readme
