@@ -84,7 +84,6 @@ Now execute the lines below to set up a login script, called .profile_user.
 Whenever you login via an interactive shell as you did above, a well-known script is executed by the shell to establish your favorite environment settings. We've set up a common profile for you to start with that will help you know where you are in the file system and make it easier to access some of our shared resources. To set up this profile, do the steps below:
 
     cd
-    cp /usr/local/common/unix_dircolors .dircolors
     cp /usr/local/common/ngs_profile .profile
     chmod 600 .profile
 
