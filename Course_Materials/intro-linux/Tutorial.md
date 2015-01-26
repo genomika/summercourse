@@ -236,14 +236,13 @@ The cp command copies one or more files from a local source to a local destinati
 Make a directory in your scratch area and copy a single file to it. The trailing slash ( / ) on the destination says it is a directory.
 
     mkdir -p $work/data/test1
-    cp  //172.16.225.20/ngscourse/data  $work/data/test1/
+    cp  //172.16.225.20/genomikalab/ngscourse/data/ $work/data/test1/
     ls $work/data/test1
 
 Copy a directory to your work area. The -r argument says "recursive".
 
-    cds
     cd data
-    cp -r  //172.16.225.20/ngscourse/data/general/ general/
+    cp -r  //172.16.225.20/genomikalab/ngscourse/data/ sample1/
 
 
 #### local rsync
@@ -258,11 +257,11 @@ The -avrP options say "archive mode" (preserve file modification date/time), ver
 
 The trailing slash ( / ) on the source and destination directories are very important! rsync will create the last directory level for you, but earlier levels must already exist.
 
-    rsync -avrP /corral-repl/utexas/BioITeam/web/ucsc_custom_tracks/ data/custom_tracks/
+    rsync -avrP //172.16.225.20/genomikalab/ngscourse/data/ sample2/
 
 Now repeat the rsync and see the difference:
 
-    rsync -avrP /corral-repl/utexas/BioITeam/web/ucsc_custom_tracks/ $work/data/custom_tracks/
+    rsync -avrP //172.16.225.20/genomikalab/ngscourse/data/ $work/sample2/
 
 #### Copy from a remote computer - scp or rsync
 
