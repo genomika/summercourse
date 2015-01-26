@@ -21,19 +21,19 @@ ssh é um programa executável que roda em seu computador local e permite que vo
     ssh seuusuario@172.16.225.107
 
 - Se você está usando Putty como seu terminal no Windows:
-    -  Double-click the Putty.exe icon
-    -  In the PuTTY Configuration window
-    -  make sure the Connection type is SSH
-    -  enter stampede.tacc.utexas.edu for Host Name
-    -  click Open button
-    -  answer Yes to the SSH security question
-    -  In the PuTTY terminal
-    -  enter your TACC user id after the login as: prompt, then Enter
+    -  Clique Duplo no icone Putty.exe 
+    -  Na janela de configuração do PuTTy 
+    -  Garanta que o tipo de conexão é SSH
+    -  Digite o ip do servidor 172.16.225.107 (host name)
+    -  Clique no botão Open 
+    -  Responda  Yes na pergunta de segurança do SSh
+    -  No terminal putty
+    -  Digite seu nome de usuario quando solicitado e enter
 
 
 ## Shell Bash
 
-You're now at a command line! It looks as if you're running directly on the remote computer, but really there are two programs communicating: your local Terminal and the remote Shell. There are many shell programs available in Linux, but the default is bash (Bourne-again shell). The Terminal is pretty "dumb" – just sending your typing over its secure sockets layer (SSL) connection to TACC, then displaying the text sent back by the shell. The real work is being done on the remote computer, by programs called by the bash shell.
+Você está agora na linha de comando! É como se você estivesse executando comandos direto no computador remoto, mas na verdade há 2 programas se comunicando: seu terminal local e o shell remoto. Há vários programas shell disponíveis em linux, mas o padrão é o bash (Bourne-again shell). O Terminal é bastante "básico" – apenas envia o que você digita através de uma conexão por SSL (secure sockets layer) ao servidor, e finalmente exibindo o texto de volta ao shell.  O trabalho real é feito no computador remoto, por programas chamados no shell bash.
 
 ![Terminal Example](https://wikis.utexas.edu/download/attachments/66696867/terminal.png?version=1&modificationDate=1400007439000&api=v2)
 
