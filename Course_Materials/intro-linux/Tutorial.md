@@ -126,7 +126,7 @@ To see even more detail, including file type and permissions and symbolic link t
 
 We list its content to the Terminal with the cat (concatenate files) command that simply reads a file and writes each line of content to standard output (here, your Terminal):
 
-    cat .profile_user
+    cat .profile
     
 
 **NOTE:**   The cat command just echos the entire file's content, line by line, without pausing, so should not be used to display large files. Instead, use a "pager" (like more or less) or look at parts of the file with **head** or **tail**.
