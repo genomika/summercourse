@@ -30,11 +30,9 @@ Softwares usados neste tutorial
 
 ### Setup
 ##### Special stampede login
-Before we start, log into stampede like you did yesterday, but use this special hostname:
+Before we start, log into server like you did yesterday, but use this special hostname:
 
-     login8.stampede.tacc.utexas.edu
-
-Remember how we emphasized yesterday that you should not perform significant computation on login nodes? Well, there are a  few exceptions, and login8.stampede.tacc.utexas.edu is one of them. Is it a dedicated login node owned by an organization our lab belongs to, so we have given you access to it for the duration of this course. This will let us do a few things at the command line that would normally set off alarm bells from the TACC folks if we all did them on a standard login node.
+     172.16.225.177
 
 
 File formats explored in this practical:
