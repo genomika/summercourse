@@ -223,26 +223,26 @@ Right click on the 1st link in your browser, then select "Copy link location" fr
 Now press Enter to get the command going. Repeat for the 2nd link. Check that you now see the two files (ls).
 
 
-#### Copy from a corral location - cp or rsync
+#### Copy from a remote location - scp or rsync
 
-Suppose you have a corral allocation where your organization keeps its data, and that the sequencing data has been downloaded there. You can use various Linux commands to copy the data locally from there to your $SCRATCH area.
+Suppose you have a  allocation where your organization keeps its data, and that the sequencing data has been downloaded there. You can use various Linux commands to copy the data locally from there to your work area.
 
-#### cp
+#### scp
 
-The cp command copies one or more files from a local source to a local destination. It has the most common form:
+The scp command copies one or more files from a local source to a local destination. It has the most common form:
 
     cp [options] <source file 1> <source file 2> ... <destination directory>
 
 Make a directory in your scratch area and copy a single file to it. The trailing slash ( / ) on the destination says it is a directory.
 
-    mkdir -p $work/data/test1
-    cp  //172.16.225.20/genomikalab/ngscourse/data/ $work/data/test1/
-    ls $work/data/test1
+    mkdir -p work/data/sample1
+    cp 
+    ls work/data/sample1
 
 Copy a directory to your work area. The -r argument says "recursive".
 
-    cd data
-    cp -r  //172.16.225.20/genomikalab/ngscourse/data/ sample1/
+    cd work/data
+    cp -r  /mnt/data/ ./
 
 
 #### local rsync
@@ -257,11 +257,11 @@ The -avrP options say "archive mode" (preserve file modification date/time), ver
 
 The trailing slash ( / ) on the source and destination directories are very important! rsync will create the last directory level for you, but earlier levels must already exist.
 
-    rsync -avrP //172.16.225.20/genomikalab/ngscourse/data/ sample2/
+    rsync -avrP  workshop@172.16.225.11:/home/workshop/ngscourse/data/sample2/ sample2/
 
 Now repeat the rsync and see the difference:
 
-    rsync -avrP //172.16.225.20/genomikalab/ngscourse/data/ $work/sample2/
+    rsync -avrP  workshop@172.16.225.11:/home/workshop/ngscourse/data/sample2/ sample2/
 
 #### Copy from a remote computer - scp or rsync
 
@@ -279,24 +279,20 @@ Remote paths are similar to local paths, but have user and host information firs
     -- or –
     user_name@host.name:~/path/relative/to/home/directory
 
-Copy a single file your $SCRATCH/data/test1 directory. We don't really need to access corral remotely, of course, but this shows the remote syntax needed. Be sure to change userid below to your TACC user id!
+Copy a single file your work/data/sample1 directory. We don't really need to access the server remotely, of course, but this shows the remote syntax needed.
 
-    scp  userid@stampede.tacc.utexas.edu:/corral-repl/utexas/BioITeam/web/README.txt  $SCRATCH/data/test1
-    ls $SCRATCH/data/test1
+    mkdir -p work/data/sample1
+    scp workshop@172.16.225.11:/home/workshop/ngscourse/data/sample1/CQ.bed work/data/sample1/
+    ls work/data/sample1
+
+Copy a directory to your work area. The -r argument says "recursive".
+
+    cd work/data
+    scp -r  workshop@172.16.225.11:/home/workshop/ngscourse/data/sample1/ sample1/
 
 **NOTE:** The 1st time you access a new host the SSH security prompt will appear, You will always be prompted for your remote host password. The  -r recursive argument works for scp also, just like for cp
 
-#### remote rsync
 
-rsync can be run just like before, but using the remote-host syntax. Here we use two tricks:
--   The tilde ( ~ ) at the start of the path means "relative to my home directory"
--   We traverse through the BioITeam symbolic link created in your home directory earlier.
--   We use the same tilde ( ~ ) in the destination to traverse the scratch symbolic link in your home directory.
-
-Don't forget to change userid below.
-
-    rsync -avrP userid@stampede.tacc.utexas.edu:~/BioITeam/web/ucsc_custom_tracks/ ~/scratch/data/custom_tracks/
-    
 ## EXERCISE
 
 Hit Tab Tab as much as possible to save typing!
