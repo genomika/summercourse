@@ -82,27 +82,27 @@ Now execute the lines below to set up a login script, called .profile_user.
 Whenever you login via an interactive shell as you did above, a well-known script is executed by the shell to establish your favorite environment settings. We've set up a common profile for you to start with that will help you know where you are in the file system and make it easier to access some of our shared resources. To set up this profile, do the steps below:
 
     cd
-    cp /corral-repl/utexas/BioITeam/core_ngs_tools/common/stampede_dircolors .dircolors
-    cp /corral-repl/utexas/BioITeam/core_ngs_tools/common/core_ngs_profile .profile_user
+    cp /usr/local/common/unix_dircolors .dircolors
+    cp /usr/local/common/core_ngs_profile .profile_user
     chmod 600 .profile_user
 
 
 -  The chmod 600 .profile_user command marks the file as readable and writable only by you. The .profile_user script file will not be executed unless it has these exact permissions settings.
 -  The well-known filename is .profile_user (or .profile on some systems), which is specific to the bash shell.
 
-Since .profile_user is executed when you login, to ensure it is set up properly you should first log off stampede like this:
+Since .profile_user is executed when you login, to ensure it is set up properly you should first log off  like this:
 
     exit
     
-Then log back in to stampede.tacc.utexas.edu. This time your .profile_user will be executed and you should see a new shell prompt:
+Then log back in to 172.16.225.107. This time your .profile_user will be executed and you should see a new shell prompt:
     
-    stamp:~$
+    ~$
 
 The great thing about this prompt is that it always tells you where you are, which avoids having to issue the pwd (present working directory) command all the time. Execute these commands to see how the prompt reflects your current directory. (Don't just copy-and-paste here because we've included the prompt.)
 
-    stamp:~$ mkdir -p tmp/a/b/c
-    stamp:~$ cd tmp/a/b/c
-    stamp:~/tmp/a/b/c$
+    $ mkdir -p tmp/a/b/c
+    $ cd tmp/a/b/c
+    $ ~/tmp/a/b/c$
 
 The prompt now tells you you are in the c sub-directory of the b sub-directory of the a sub-directory of the tmp sub-directory of your home directory ( ~ ).
 
