@@ -163,22 +163,20 @@ Environment variables are like variables in a programming language like python o
 
 You can use these environment variables to shorten typing, for example, to look at the contents of the shared  directory as shown below, using the magic Tab key to perform shell completion.
 
-    # hit Tab once after typing $BI/ to expand the environment variable
-    ls $BI/
     # now hit Tab twice to see the contents of the directory
-    ls /corral-repl/utexas/BioITeam/
+    ls /genomika/bioinformatics/
     # now type "co" and hit Tab again
-    ls /corral-repl/utexas/BioITeam/co
+    ls /genomika/bioinformatics/co
     # your command line should now look like this
-    ls /corral-repl/utexas/BioITeam/core_nge_tools/
+    ls /genomika/bioinformatics/core_ngs_tools/
     # now type "m" and one Tab
-    ls /corral-repl/utexas/BioITeam/core_nge_tools/m
+    ls /genomika/bioinformatics/core_ngs_tools/m
     # now just type one Tab
-    ls /corral-repl/utexas/BioITeam/core_nge_tools/misc/
+    ls /genomika/bioinformatics/core_ngs_tools/misc/
     # the shell expands as far as it can unambiguously, so your command line should look like thi
-    ls /corral-repl/utexas/BioITeam/core_nge_tools/misc/small
+    ls  /genomika/bioinformatics/core_ngs_tools/misc/smallExample
     # type a period (".") then hit Tab twice again -- you're narrowing down the choices
-    ls /corral-repl/utexas/BioITeam/core_nge_tools/misc/small.
+    ls  /genomika/bioinformatics/core_ngs_tools/misc/smallExample
     # finally, hit Tab twice to see possible completions now -- you should see two filenames
 
 #### Important Tip -- the Tab key is your BFF!
