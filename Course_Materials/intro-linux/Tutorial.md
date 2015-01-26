@@ -1,6 +1,6 @@
 % [WorkShop de Verão Bioinformática](http://github.com/genomika/summercourse/)
 % __Introdução ao Linux__
-% _(updated 21-01-2014)_
+% _(updated 25-01-2014)_
 
 <!-- COMMON LINKS HERE -->
 
@@ -18,13 +18,13 @@
 ssh é um programa executável que roda em seu computador local e permite que você se conecte de forma segura a um computador remoto. Em Macs, Linux e Windows (Git-Bash out Cygwin), você pode rodar de uma tela de terminal. Responda yes a questão de segurança do prompt do SSH.
 
 ##### Acessando servidor remoto via SSH.
-    ssh seuusuario@172.16.225.107
+    ssh seuusuario@172.16.225.167
 
 - Se você está usando Putty como seu terminal no Windows:
     -  Clique Duplo no icone Putty.exe 
     -  Na janela de configuração do PuTTy 
     -  Garanta que o tipo de conexão é SSH
-    -  Digite o ip do servidor 172.16.225.107 (host name)
+    -  Digite o ip do servidor 172.16.225.167 (host name)
     -  Clique no botão Open 
     -  Responda  Yes na pergunta de segurança do SSh
     -  No terminal putty
@@ -44,9 +44,11 @@ Primeiro crie alguns diretórios e links símbolicos que nós iremos usar (falar
 **NOTE:** Você pode copiar e colar estas linhas abaixo de código na janela do seu terminal. Apenas lembre de pressionar 'Enter' após a última linha.
 
     cd
-    ln -s -f /home/usuario/work work
+    mkdir work
     ln -s -f /usr/local/share/tools/ tools
+    ln -s -f /mnt/data/ data
 
+- The mkdir command creates a new directory.
 - The ln -s command creates a symbolic link, a shortcut the the linked file or directory.
 - here the link targets are your work file system areas
 - having this link shortcut will help when you want to copy files to your work, and when you navigate the file system using a remote SFTP client
