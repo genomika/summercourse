@@ -112,26 +112,13 @@ See the Wikipedia FASTQ format page for more information.
 
 #### Exercise: What character in the quality score string in the fastq entry above represents the best base quality?
 
-### About compressed files
-
-Sequencing data files can be very large - from a few megabytes to gigabytes. And with NGS giving us longer reads and deeper sequencing at decreasing price points, it's not hard to run out of storage space. As a result, most sequencing facilities will give you compressed sequencing data files. The most common compression program used for individual files is gzip and its counterpart gunzip whose compressed files have the .gz extension. The tar and zip programs are most commonly used for compressing directories.
-
-Let's take a look at the size difference between uncompressed and compressed files. We use the -l option of ls to get a long listing that includes the file size, and -h to have that size displayed in "human readable" form rather than in raw byte sizes.
-
-    ls -lh $BI/web/yeast_stuff/*.fastq
-    ls -lh $BI/web/yeast_stuff/*.fastq.gz
-
-#### Exercise: About how big are the compressed files? The uncompressed files? About what is the compression factor?
-
-You may be tempted to want to uncompress your sequencing files in order to manipulate them more directly – but resist that temptation. Nearly all modern bioinformatics tools are able to work on .gz files, and there are tools and techniques for working with the contents of compressed files without ever uncompressing them.
-
 
 #### gzip and gunzip
 
 With no options, gzip compresses the file you give it in-place. Once all the content has been compressed, the original uncompressed file is removed, leaving only the compressed version (the original file name plus a .gz extension). The gzunzip function works in a similar manner, except that its input is a compressed file with a .gz file and produces an uncompressed file without the .gz extension.
 
-    # make sure you're in your $SCRATCH/core_ngs/fastq_prep directory
-    cp $CLASSDIR/misc/small.fq .
+    # make sure you're in your $HOME/core_ngs/fastq_prep directory
+    cp $HOME/data/small.fq .
     # check the size, then compress it in-place
     ls -lh
     gzip small.fq
@@ -139,18 +126,31 @@ With no options, gzip compresses the file you give it in-place. Once all the con
     ls -lh 
     gunzip small.fq.gz
 
-**NOTE** Both gzip and gunzip are extremely I/O intensive when run on large files. While TACC has tremendous compte resources and the Lustre parallel file system is great, it has its limitations. It is not difficult to overwhelm the Lustre file system if you gzip or gunzip more than a few files at a time (~4) in a batch job. The intensity of compression/decompression operations is another reason you should compress your sequencing files once (if they aren't already) then leave them that way.
+**NOTE** Both gzip and gunzip are extremely I/O intensive when run on large files. While bioinformatic servers has tremendous compute resources and  file system is not so great, it has its limitations. The intensity of compression/decompression operations is another reason you should compress your sequencing files once (if they aren't already) then leave them that way.
+
+### About compressed files
+
+Sequencing data files can be very large - from a few megabytes to gigabytes. And with NGS giving us longer reads and deeper sequencing at decreasing price points, it's not hard to run out of storage space. As a result, most sequencing facilities will give you compressed sequencing data files. The most common compression program used for individual files is gzip and its counterpart gunzip whose compressed files have the .gz extension. The tar and zip programs are most commonly used for compressing directories.
+
+Let's take a look at the size difference between uncompressed and compressed files. We use the -l option of ls to get a long listing that includes the file size, and -h to have that size displayed in "human readable" form rather than in raw byte sizes.
+
+    ls -lh $HOME/data/yeast_stuff/*.fastq
+    ls -lh $HOME/data/yeast_stuff/*.fastq.gz
+
+#### Exercise: About how big are the compressed files? The uncompressed files? About what is the compression factor?
+
+You may be tempted to want to uncompress your sequencing files in order to manipulate them more directly – but resist that temptation. Nearly all modern bioinformatics tools are able to work on .gz files, and there are tools and techniques for working with the contents of compressed files without ever uncompressing them.
 
 #### head and tail, more or less
 
 One of the challenges of dealing with large data files, whether compressed or not, is finding your way around the data – finding and looking at relevant pieces of it. Except for the smallest of files, you can't open them up in a text editor because those programs read the whole file into memory, so will choke on sequencing data files! Instead we use various techniques to look at pieces of the files at a time.
 
-The first technique is the use of "pagers" – we've already seen this with the more command. Review its use now on our small uncompressed file:
+The first technique is the use of "pagers" – we've already seen this with the **more** command. Review its use now on our small uncompressed file:
 
     # Use spacebar to advance a page; Ctrl-c to exit
     more small.fq
 
-Another pager, with additional features, is less. The most useful feature of less is the ability to search – but it still doesn't load the whole file into memory, so searching a really big file can be slow.
+Another pager, with additional features, is **less**. The most useful feature of less is the ability to search – but it still doesn't load the whole file into memory, so searching a really big file can be slow.
 
 Here's a summary of the most common less navigation commands, once the less pager is active. It has tons of other options (try less --help).
 - q – quit
@@ -166,16 +166,16 @@ Here's a summary of the most common less navigation commands, once the less page
 
 ### Exercise: What line of small.fq contains the read name with grid coordinates 2316:10009:100563?
 
-For a really quick peak at the first few lines of your data, there's nothing like the head command. By default it displays the first 10 lines of data from the file you give it or from its standard input. With an argument -NNN (that is a dash followed by some number), it will show that many lines of data.
+For a really quick peak at the first few lines of your data, there's nothing like the **head** command. By default it displays the first 10 lines of data from the file you give it or from its standard input. With an argument -NNN (that is a dash followed by some number), it will show that many lines of data.
 
     # shows 1st 10 lines
     head small.fq
     # shows 1st 100 lines -- might want to pipe this to more to see a bit at a time
     head -100 small.fq | more
 
-The yang to head's ying is tail, which by default it displays the last 10 lines of its data, and also uses the -NNN syntax to show the last NNN lines. (Note that with very large files it may take a while for tail to start producing output because it has to read through the file sequentially to get to the end.)
+The yang to head's ying is **tail**, which by default it displays the last 10 lines of its data, and also uses the -NNN syntax to show the last NNN lines. (Note that with very large files it may take a while for tail to start producing output because it has to read through the file sequentially to get to the end.)
 
-See piping for a diagram of what the piping operator ( | ) is doing.
+See **piping** section for a diagram of what the piping operator ( | ) is doing.
 
 But what's really cool about tail is its -n +NNN syntax. This displays all the lines starting at line NNN. Note this syntax: the -n option switch follows by a plus sign ( + ) in front of a number – the plus sign is what says "starting at this line"! Try these examples:
 
@@ -244,9 +244,6 @@ Note the general structure of the for loop. Different portions of the structure 
     done
 
 ### E em linguagens de alto nível ?  (Mostrar o script python para isto!!!)
-
-
-
 
 Explore the raw data quality using FastQC
 --------------------------------------------------------------------------------
