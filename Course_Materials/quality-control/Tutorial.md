@@ -43,23 +43,18 @@ __FastQ__. See:
 - [Wikipedia][fastq-format-wikipedia].
 - [NAR 2010][fastq-format-nar].
 
-Data used in this practical:
--------------------------------
-
-- __f010_raw_mirna.fastq__: RNA-Seq of a [microRNA](http://en.wikipedia.org/wiki/MicroRNA) sample.
 
 #### Data staging
-Get the mirna data if you haven't already
 
-Let's now set ourselves up to process this data in $SCRATCH, using some of best practices for organizing our workflow.
+Let's now set ourselves up to process this data in the server, using some of best practices for organizing our workflow.
 
-    # Create a $SCRATCH area to work on data for this course,
+    # Create a work area to work on data for this course,
     # with a sub-directory for pre-processing raw fastq files
-    mkdir -p $SCRATCH/core_ngs/fastq_prep
+    mkdir -p $HOME/core_ngs/fastq_prep
     # Make a symbolic links to the original yeast data in $WORK.
-    cd $SCRATCH/core_ngs/fastq_prep
-    ln -s -f $WORK/archive/original/2014_05.core_ngs/Sample_Yeast_L005_R1.cat.fastq.gz
-    ln -s -f $WORK/archive/original/2014_05.core_ngs/Sample_Yeast_L005_R2.cat.fastq.gz
+    cd $HOME/core_ngs/fastq_prep
+    ln -s -f $HOME/work/Sample_Yeast_L005_R1.cat.fastq.gz
+    ln -s -f $HOME/work/Sample_Yeast_L005_R2.cat.fastq.gz
 
 
 Overview
@@ -71,26 +66,12 @@ Overview
 1. Use [FastQC] to explore the filtered data.
 
 
-Exercise
-================================================================================
-
-Create an empty directory to work in the exercise and copy or download the raw data to it: 
-
-    cd quality_control_data
-
-<!-- new and clean data directory in the sandbox
-    rm -r                                                   ../../../../sandbox/quality_control/
-	cp -r ../../../../ngs_course_materials/quality_control/ ../../../../sandbox/quality_control/
-    cd    ../../../../sandbox/quality_control/
--->
-
-
 Explore the raw data using some Linux shell commands
 --------------------------------------------------------------------------------
 
 ##### Illumina sequence data format (FASTQ)
 
-GSAF gives you paired end sequencing data in two matching fastq format files, containing reads for each end sequenced. See where your data really is and how big it is.
+Paired-end sequencing gives you paired end sequencing data in two matching fastq format files, containing reads for each end sequenced. See where your data really is and how big it is.
 
     # the -l options says "long listing" which shows where the link goes,
     # but doesn't show details of the real file
@@ -98,15 +79,6 @@ GSAF gives you paired end sequencing data in two matching fastq format files, co
     # the -L option says to follow the link to the real file, -l = long listing (includes size)
     # and -h says "human readable" (e.g. MB, GB)
     ls -lLh
-
-The file __f010_raw_mirna.fastq__ contains reads form a microRNA sequencing experiment.
-Use the command `head` to have a view of the first lines of the file:
-
-    head f010_raw_mirna.fastq
-
-Use the command `wc` to count how many reads are there in the file (remember you have to divide by 4)
-
-    wc -l f010_raw_mirna.fastq
 
 #### 4-line FASTQ format
 
@@ -134,6 +106,7 @@ Most sequencing facilities will not give you qc-failed reads (failed_qc = Y) unl
 For each base, an integer Phred-type quality score is calculated as integer score = -10 log(probabilty base is wrong) then added to 33 to make a number in the Ascii printable character range. As you can see from the table below, alphabetical letters - good, numbers – ok, most special characters – bad (except :;<=>?@).
 
 ![Terminal Example](https://wikis.utexas.edu/download/attachments/66696890/ascii_qualities.png?version=1&modificationDate=1400197837000&api=v2)
+
 
 See the Wikipedia FASTQ format page for more information.
 
