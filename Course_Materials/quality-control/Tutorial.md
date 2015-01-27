@@ -29,7 +29,7 @@ Softwares usados neste tutorial
 
 
 ### Setup
-##### Special stampede login
+##### Special server login
 Before we start, log into server like you did yesterday, but use this special hostname:
 
      172.16.225.177
