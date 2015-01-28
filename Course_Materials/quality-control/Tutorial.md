@@ -257,6 +257,13 @@ This command will execute the code inside the yourscript.py .   So if we wanted 
     for fastq in all_fastqs:
         print '%s has %d sequences' % (fastq, check_output(["gunzip -c %s | wc -l / 4" % fastq]) ) 
 	
+You may experiment by yourserf now:
+
+    cd $HOME/core_ngs/fastq_prep
+    ln -s -f $HOME/tools/preparer.py
+    python preparer.py
+
+
 
 Explore the raw data quality using FastQC
 --------------------------------------------------------------------------------
