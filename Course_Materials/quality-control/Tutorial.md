@@ -299,26 +299,18 @@ but remember that different experiment types are expected to have vastly differe
 
 It has a number of options (see fastqc --help | more) but can be run very simply with just a FASTQ file as its argument.
 
-First create a directory to store the results of the fastqc analysis:
+Then execute `fastqc` storing the results in the current directory:
 
-    mkdir f020_res_fastqc
-
-Then execute `fastqc` storing the results in the created directory (option `-o`):
-
-    fastqc -o f020_res_fastqc f010_raw_mirna.fastq
+    fastqc Sample_Yeast_L005_R1.cat.fastq.gz
 
 Find the results in the __fastqc_report.html__ file and discus them.
-
-
-There are many _Overrepresented sequences_. 
-Explore whether some of them correspond to miRNAs using the [miRBase search](http://www.mirbase.org/search.shtml) __By sequence__ utility.
 
 ### Exercise: What did FastQC create?
 
 #### Looking at FastQC output
 You can't run a web browser directly from your "dumb terminal" command line environment. The FastQC results have to be placed where a web browser can access them. We put a copy at this URL:
 
-http://web.corral.tacc.utexas.edu/BioITeam/yeast_stuff/Sample_Yeast_L005_R1.cat_fastqc/fastqc_report.html
+[http://web.corral.tacc.utexas.edu/BioITeam/yeast_stuff/Sample_Yeast_L005_R1.cat_fastqc/fastqc_report.html](http://web.corral.tacc.utexas.edu/BioITeam/yeast_stuff/Sample_Yeast_L005_R1.cat_fastqc/fastqc_report.html)
 
 ### Exercise: Based on this FastQC output, should we trim this data?
 
