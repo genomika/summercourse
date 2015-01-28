@@ -587,7 +587,7 @@ Count how many reads are left for the analysis (divide by 4)
 
 The samstat program can also produce a quality report for FASTQ files, and it can also report on aligned sequences in a BAM file.
 
-Again, this program is not available through the TACC module system but is available in Anna's work directory and has been linked into your $HOME/local/bin. You should be able just to type samstat and see some documentation.
+Again, this program is  available through the system  and has been linked into your $HOME/local/bin. You should be able just to type samstat and see some documentation.
 
 Here's how you run samstat on a compressed FASTQ files. Let's only run it on a few sequences to avoid overloading the system:
 
