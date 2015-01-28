@@ -273,9 +273,9 @@ The first order of business after receiving sequencing data should be to check y
 **FastQC** is a tool that produces a quality analysis report on FASTQ files.
 
 Useful links:
-- FastQC report for a Good Illumina dataset
-- FastQC report for a Bad Illumina dataset
-- Online documentation for each FastQC report
+- FastQC [report](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc/fastqc_report.html) for a Good Illumina dataset
+- FastQC [report](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc/fastqc_report.html) for a Bad Illumina dataset
+- Online [documentation](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/) for each FastQC report
 
 First and foremost, the FastQC "Summary" should generally be ignored. Its "grading scale" (green - good, yellow - warning, red - failed) incorporates assumptions for a particular kind of experiment, and is not applicable to most real-world data. Instead, look through the individual reports and evaluate them according to your experiment type.
 
