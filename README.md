@@ -31,8 +31,8 @@ Uma introdução rápida sobre as tecnologias NGS e alguns conceitos.
 
 Neste segundo dia vamos focar em _Variant Calling_ e _Visualização dos dados_ com  alinhamento dos dados e análise das sequências.
 
-### Controle de Qualidade para dados brutos de NGS (FASTQ) (30 min)
-- [Slides](Course_Materials/quality-control/SummerCourse_PreProcessing.pdf) - [Tutorial](Course_Materials/quality-control/Tutorial.md) - 
+### Controle de Qualidade para dados brutos de NGS (FASTQ)
+- [Slides](Course_Materials/quality-control/SummerCourse_PreProcessing.pdf) | [Tutorial](Course_Materials/quality-control/Tutorial.md) - 
 
 
 ### Alinhamento dos dados
