@@ -350,11 +350,9 @@ Data from RNA-seq or other library prep methods that result in short fragments c
 
 Unlike general fixed-length trimming (e.g. trimming 100 bp sequences to 50 bp), adapter trimming removes differing numbers of 3' bases depending on where the adapter sequence is found.
 
-You must tell an adapter trimming program what your R1 and R2 adapters look like. The GSAF website describes the flavaors of Illumina adapter and barcode sequence in more detail https://wikis.utexas.edu/display/GSAF/Illumina+-+all+flavors.
+You must tell an adapter trimming program what your R1 and R2 adapters look like. The GSAF website describes the flavaors of Illumina adapter and barcode sequence in more detail [https://wikis.utexas.edu/display/GSAF/Illumina+-+all+flavors](https://wikis.utexas.edu/display/GSAF/Illumina+-+all+flavors).
 
-The cutadapt program is an excellent tool for removing adapter contamination. The program is not available through TACC's module system but we linked a copy into your $HOME/local/bin directory.
-
-A common application of cutadapt is to remove adapter contamination from small RNA library sequence data, so that's what we'll show here, assuming GSAF-format small RNA library adapters.
+The cutadapt program is an excellent tool for removing adapter contamination. The program is not available through server module system but we linked a copy into your $HOME/local/bin directory.
 
 When you run cutadapt you give it the adapter sequence to trim, and this is different for R1 and R2 reads. Here's what the options look like (without running it on our files yet).
 
@@ -380,8 +378,6 @@ Use the command grep to see whether they are still present in your data:
 	grep "CTTTTTTTCGTCCTTTCCACAAGATATATAAAGCCAAGAAATCGAAATACTTTCAAGTTACGGTAAGC" f010_raw_mirna.fastq 
 
 Do the sequences appear systematically at the beginning or at the end of the reads?
-
-
 
 But the adapters could also appear in the _reverse_, _complementary_ or _reverse complementary_ mode.
 
