@@ -243,7 +243,20 @@ Note the general structure of the for loop. Different portions of the structure 
      <something else>
     done
 
-### E em linguagens de alto nível ?  (Mostrar o script python para isto!!!)
+You can also use high-level programming languages which can communicate with your os system. For instance, Python, an open-source language largely used by scientific community including bioinformatics. It is already native in several systems like debian, fedora, mac os, etc.  You can call a python script like the command below:
+
+    python yourscript.py
+    
+This command will execute the code inside the yourscript.py .   So if we wanted to write a code that performs the same action as before, in this case, counting the number of sequences in each fastq.gz in a directory, the piece of code is presented as follows:
+
+    import glob
+    from subprocess import check_output
+
+
+    all_fastqs = glob.glob('$HOME/core_ngs/fastq_prep/*.gz')
+    for fastq in all_fastqs:
+        print '%s has %d sequences' % (fastq, check_output(["gunzip -c %s | wc -l / 4" % fastq]) ) 
+	
 
 Explore the raw data quality using FastQC
 --------------------------------------------------------------------------------
