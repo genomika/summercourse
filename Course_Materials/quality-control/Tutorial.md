@@ -270,7 +270,7 @@ Explore the raw data quality using FastQC
 
 The first order of business after receiving sequencing data should be to check your data quality. This often-overlooked step helps guide the manner in which you process the data, and can prevent many headaches.
 
-FastQC is a tool that produces a quality analysis report on FASTQ files.
+**FastQC** is a tool that produces a quality analysis report on FASTQ files.
 
 Useful links:
 - FastQC report for a Good Illumina dataset
