@@ -36,7 +36,7 @@ Neste segundo dia vamos focar em _Variant Calling_ e _Visualização dos dados_ 
 
 
 ### Alinhamento dos dados
-- Slides [[PDF](Course_Materials/alignment/presentation/ngs-read-mapping-imedina-mda14.pdf) | - [Tutorial](Course_Materials/alignment/tutorial/example.html)
+- Slides [[PDF](Course_Materials/alignment/SummerCourse_Alignment.pdf) | - [Tutorial](Course_Materials/alignment/Tutorial.md)
 
 ### Visualização dos dados NGS PT1
 
