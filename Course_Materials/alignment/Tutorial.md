@@ -14,6 +14,7 @@
 [dwgsim]: http://sourceforge.net/apps/mediawiki/dnaa/index.php?title=Whole_Genome_Simulation "dwgsim"
 [BEERS]: http://www.cbil.upenn.edu/BEERS/ "BEERS"
 [Ensembl]: http://www.ensembl.org/index.html "Ensembl"
+[Picard]: http://broadinstitute.github.io/picard/ "Picard"
 
 # Preliminaries
 
