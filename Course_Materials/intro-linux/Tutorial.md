@@ -63,7 +63,7 @@ Set up a $HOME/local/bin directory and link some scripts there that we will use 
     mkdir -p $HOME/local/bin
     cd $HOME/local/bin
     ln -s -f /usr/local/share/tools/bin/cutadapt
-    ln -s -f /usr/local/share/tools/bin/samstat
+    ln -s -f /usr/local/share/tools/samstat-1.5/src/samstat
 
 -  The mkdir command creates a new directory. The -p option says to create intermediate directories if needed (like local here).
 -  here we're creating a $HOME/local/bin directory where we'll put some programs used in the course
