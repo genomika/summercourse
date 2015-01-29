@@ -20,6 +20,8 @@
 
 In this hands-on will learn how to align DNAseq data with most widely used software today. Building a whole genome index requires a lot of RAM memory and almost one hour in a typical workstation, for this reason **in this tutorial we will work with targeted panel of genes data** to speed up the exercises. The same steps would be done for a whole genome alignment.
 
+Once raw sequence files are generated (in FASTQ format) and quality-checked, the next step in most NGS pipelines is mapping to a reference genome. For individual sequences of interest, it is common to use a tool like BLAST to identify genes or species of origin. However, a typical example NGS dataset may have tens to hundreds of millions of reads, which BLAST and similar tools are not designed to handle.
+Thus, a large set of computational tools have been developed to quickly, and with sufficient (but not absolute) accuracy align each read to its best location, if any, in a reference. Even though many mapping tools exist, a few individual programs have a dominant "market share" of the NGS world. These programs vary widely in their design, inputs, outputs, and applications. In this section, we will primarily focus on two of the most versatile mappers: BWA and Bowtie2 (only comments).
 
 ### NGS aligners discussed:
 
@@ -37,6 +39,15 @@ In this hands-on will learn how to align DNAseq data with most widely used softw
 
 
 ### Data used in this practical
+
+You have already worked with two human data samples, which we will continue to use here.  The paired end data should already be located at:
+
+    $WORK/archive/original/2014_05.core_ngs
+
+- Sample_Yeast_L005_R1.cat.fastq.gz	Paired-end Illumina, First of pair, FASTQ	Yeast ChIP-seq
+- Sample_Yeast_L005_R2.cat.fastq.gz	Paired-end Illumina, Second of pair, FASTQ	Yeast ChIP-seq
+
+
 
 Create a ```data``` folder in your **working directory** and download the **reference genome sequence** to be used (human chromosome 21) and *simulated datasets* from **Dropbox** [data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a).
 For the rest of this tutorial the **working directory** will be **cambridge_mda14** and all the **paths** will be relative to that working directory:
