@@ -1,6 +1,6 @@
-% [NGS data analysis course](http://ngs-course.github.io/)
-% __DNA and RNA-seq NGS alignment__
-% _(updated 28-09-2014)_
+[WorkShop de Verão Bioinformática](http://github.com/genomika/summercourse/)
+% __Alinhamento__
+% _(updated 29-01-2014)_
 
 <!-- COMMON LINKS HERE -->
 
