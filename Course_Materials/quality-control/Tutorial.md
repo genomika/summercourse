@@ -250,17 +250,18 @@ You can also use high-level programming languages which can communicate with you
 This command will execute the code inside the yourscript.py .   So if we wanted to write a code that performs the same action as before, in this case, counting the number of sequences in each fastq.gz in a directory, the piece of code is presented as follows:
 
     import glob
+    import os
     from subprocess import check_output
-
-
-    all_fastqs = glob.glob('$HOME/core_ngs/fastq_prep/*.gz')
+    	
+    all_fastqs = glob.glob('*.gz')
     for fastq in all_fastqs:
-        print '%s has %d sequences' % (fastq, check_output(["gunzip -c %s | wc -l / 4" % fastq]) ) 
+    	print '%s has %s sequences' % (fastq, int(check_output(["gunzip -c %s | wc -l" % fastq], shell=True)) / 4 )
+
 	
 You may experiment by yourserf now:
 
     cd $HOME/core_ngs/fastq_prep
-    ln -s -f $HOME/tools/preparer.py
+    ln -s -f usr/local/share/tools/preparer.py
     python preparer.py
 
 
