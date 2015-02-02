@@ -197,16 +197,18 @@ So what does ^> mean to grep? Well, from our contig name format description abov
 We might be able to get away with just using this literal alone as our regex, specifying '>' as the command line argument. But for grep, the more specific the pattern, the better. So we constrain where the > can appear on the line. The special carat ( ^ ) character represents "beginning of line". So ^> means "beginning of a line followed by a > character, followed by anything. (Aside: the dollar sign ( $ ) character represents "end of line" in a regex. There are many other special characters, including period ( . ), question mark ( ? ), pipe ( | ), parentheses ( ( ) ), and brackets ( [ ] ), to name the most common.)
 
 
-#### Exercise: How many contigs are there in the sacCer3 reference?
+#### Exercise: How many contigs are there in the human genome reference?
+
+    grep -P -c '^>' ucsc.hg19.fasta
 
 
 ### Performing the bwa alignment
 
-Now, we're ready to execute the actual alignment, with the goal of initially producing a SAM file from the input FASTQ files and reference. First go to the align directory, and link to the sacCer3 reference directory (this will make our commands more readable).
+Now, we're ready to execute the actual alignment, with the goal of initially producing a SAM file from the input FASTQ files and reference. First go to the align directory, and link to the human reference directory (this will make our commands more readable).
 
-    cd $SCRATCH/core_ngs/align
-    ln -s $WORK/archive/references/bwa/sacCer3
-    ls sacCer3
+    cd $HOME/core_ngs/align
+    ln -s /mnt/data/
+    ls data/
 
 As our workflow indicated, we first use bwa aln on the R1 and R2 FASTQs, producing a BWA-specific .sai intermediate binary files. Since these alignments are completely independent, we can execute them in parallel in a batch job.
 
@@ -217,26 +219,27 @@ There are lots of options, but here is a summary of the most important ones. BWA
 -n	Controls the number of mismatches (or fraction of bases in a given alignment that can be mismatches) in the entire alignment (including the seed) (default = 0.04)
 -t	Controls the number of threads
 
-The rest of the options control the details of how much a mismatch or gap is penalized, limits on the number of acceptable hits per read, and so on.  Much more information can be accessed at the BWA manual page.
+The rest of the options control the details of how much a mismatch or gap is penalized, limits on the number of acceptable hits per read, and so on.  Much more information can be accessed at the [BWA manual page](http://bio-bwa.sourceforge.net/bwa.shtml).
 
-For a simple alignment like this, we can just go with the default alignment parameters, with one exception. At TACC, we want to optimize our alignment speed by allocating more than one thread (-t) to the alignment. We want to run 2 tasks, and will use a minimum of one 16-core node. So we can assign 8 cores to each alignment by specifying -t 8.
+For a simple alignment like this, we can just go with the default alignment parameters, with one exception. At the server, we want to optimize our alignment speed by allocating more than one thread (-t) to the alignment. We want to run 2 tasks, and will use a minimum of one 2-core node. So we can assign 2 cores to each alignment by specifying -t 2.
 
-Also note that bwa writes its (binary) output to standard output by default, so we need to redirect that to a .sai file. And of course we need to redirect standard error to a log file, one per file.
-Create an aln.cmds file (using nano) with the following lines:
+Also note that bwa writes its (binary) output to standard output by default, so we need to redirect that to a .sai file. And of course we need to redirect standard error to a log file, one per file. The '&' means run in background. It is useful for long jobs to run in background.
 
-    bwa aln -t 8 sacCer3/sacCer3.fa fq/Sample_Yeast_L005_R1.cat.fastq.gz > yeast_R1.sai 2> aln.yeast_R1.log
-    bwa aln -t 8 sacCer3/sacCer3.fa fq/Sample_Yeast_L005_R2.cat.fastq.gz > yeast_R2.sai 2> aln.yeast_R2.log
+Run the following lines:
+
+    bwa aln -t 2 data/ucsc.hg19 fq/510-7-ANGELA-SANTOS-BRCA_S8_L001_R1_001.fastq.gz > BRCA_R1.sai 2> aln.brca_R1.log &
+    bwa aln -t 2 data/ucsc.hg19 fq/510-7-ANGELA-SANTOS-BRCA_S8_L001_R2_001.fastq.gz > BRCA_R2.sai 2> aln.brca_R2.log &
 
 Since you have directed standard error to log files, you can use a neat trick to monitor the progress of the alignment: tail -f. The -f means "follow" the tail, so new lines at the end of the file are displayed as they are added to the file.
 
     # Use Ctrl-c to stop the output any time
-    tail -f aln.yeast_R1.log
+    tail -f aln.brca_R1.log
 
 When it's done you should see two .sai files. Next we use the bwa sampe command to pair the reads and output SAM format data. For this command you provide the same reference prefix as for bwa aln, along with the two .sai files and the two original FASTQ files.
 
-Again bwa writes its output to standard output, so redirect that to a .sam file. (Note that bwa sampe is "single threaded" – it does not have an option to use more than one processor for its work.) We'll just execute this at the command line – not in a batch job.
+Again bwa writes its output to standard output, so redirect that to a .sam file. (Note that bwa sampe is "single threaded" – it does not have an option to use more than one processor for its work.) We'll just execute this at the command line.
 
-    bwa sampe sacCer3/sacCer3.fa yeast_R1.sai yeast_R2.sai fq/Sample_Yeast_L005_R1.cat.fastq.gz fq/Sample_Yeast_L005_R2.cat.fastq.gz > yeast_pairedend.sam
+    bwa sampe data/ucsc.hg19 BRCA_R1.sai BRCA_R2.sai fq/510-7-ANGELA-SANTOS-BRCA_S8_L001_R1_001.fastq.gz  fq/510-7-ANGELA-SANTOS-BRCA_S8_L001_R2_001.fastq.gz > brca_pairedend.sam
 
 You did it!  You should now have a SAM file that contains the alignments. It's just a text file, so take a look with head, more, less, tail, or whatever you feel like. In the next section, with samtools, you'll learn some additional ways to analyze the data once you create a BAM file.
 
