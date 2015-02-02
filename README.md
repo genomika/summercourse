@@ -50,18 +50,19 @@ O terceiro dia será voltado para a limpeza e recalibração dos dados de alinha
 ### Análise de variantes
 
 - [Slides](Course_Materials/variant_calling/presentation/2014-Cambridge_variant_calling.pdf) || [Tutorial 1](Course_Materials/variant_calling/tutorial/010_example.html) || [Tutorial 2](Course_Materials/variant_calling/tutorial/020_example.html) || [Tutorial 3](Course_Materials/variant_calling/tutorial/030_example.html)
-- 
-### Análise de Cobertura
-
-- [Slides](Course_Materials/association_studies/presentation/association_studies_presentation.pdf) - [Tutorial](Course_Materials/association_studies/tutorial/association_studies.html)
-
-### Anotação de variantes
-
-- [Slides](Course_Materials/variant_annotation/presentation/2014-Cambridge_variant_annotation.pdf) || [Annovar](Course_Materials/variant_annotation/tutorial/annovar.html) || [HPG-Variant](Course_Materials/variant_annotation/tutorial/hpg-variant.html)
 
 ## Dia 4
 
 Neste último encontro o foco será na anotação das variantes com alguns bancos de dados e a detecção e filtragem de variantes relevantes ao caso clínico investigado.
+
+### Análise de Cobertura
+
+- [Slides](Course_Materials/association_studies/presentation/association_studies_presentation.pdf) - [Tutorial](Course_Materials/association_studies/tutorial/association_studies.html)
+
+
+### Anotação de variantes
+
+- [Slides](Course_Materials/variant_annotation/presentation/2014-Cambridge_variant_annotation.pdf) || [Annovar](Course_Materials/variant_annotation/tutorial/annovar.html) || [HPG-Variant](Course_Materials/variant_annotation/tutorial/hpg-variant.html)
 
 ### Priorização de variantes
 
