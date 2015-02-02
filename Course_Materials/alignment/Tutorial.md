@@ -339,170 +339,8 @@ After bowtie2 came out with a local alignment option, it wasn't long before bwa 
 
   -t	Controls the number of threads to use
 
-    cds
-    cd core_ngs/align/
-    ls fq
-    gunzip -c fq/human_rnaseq.fastq.gz | echo $((`wc -l`/4))
 
-
-
-
-
-
-
-
-
-Create a ```data``` folder in your **working directory** and download the **reference genome sequence** to be used (human chromosome 21) and *simulated datasets* from **Dropbox** [data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a).
-For the rest of this tutorial the **working directory** will be **cambridge_mda14** and all the **paths** will be relative to that working directory:
-    
-    cd cambridge_mda14
-    mkdir data
-
-##### Download reference genome from [Ensembl]
-
-Working with NGS data requires a high-end workstations and time for building the reference genome indexes and alignment. During this tutorial we will work only with chromosome 21 to speed up the runtimes. You can download it from **Dropbox** [data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a) or from the *Download* link at the top of [Ensembl] website and then to *Download data via FTP*, you get it in only one step by going to:
-
-[http://www.ensembl.org/info/data/ftp/index.html](http://www.ensembl.org/info/data/ftp/index.html)
-
-You should see a species table with a Human (*Homo sapiens*) row and a *DNA (FASTA)* column or click at [ftp://ftp.ensembl.org/pub/release-75/fasta/homo_sapiens/dna/](ftp://ftp.ensembl.org/pub/release-75/fasta/homo_sapiens/dna/), download the chromosome 21 file (*Homo_sapiens.GRCh37.75.dna.chromosome.21.fa.gz*) and move it from your browser download folder to your ```data``` folder:
-
-    mv Homo_sapiens.GRCh37.75.dna.chromosome.21.fa.gz path_to_local_data
-
-**NOTE:** For working with the whole reference genome the file to be downloaded is *Homo_sapiens.GRCh37.75.dna.toplevel.fa.gz*
-
-
-##### Copy simulated datasets
-
-For this hands-on we are going to use small DNA and RNA-seq datasets simulated from chromosome 21. Data has been already simulated using _dwgsim_ software from SAMtools for DNA and _BEERS_ for RNA-seq. You can copy from the shared resources from **Dropbox** [data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a) into your ``data`` directory for this practical session. Preparing the data directory:
-
-    cp path_to_course_materials/alignment/* your_local_data/
-
-Notice that the name of the folders and files describe the dataset, ie. ```dna_chr21_100_hq``` stands for: _DNA_ type of data from _chromosome 21_ with _100_nt read lengths of _high_ quality. Where _hq_ quality means 0.1% mutations and _lq_ quality 1% mutations. Take a few minutes to understand the different files.
-
-**NOTE:** If you want to learn how to simulate DNA and RNA-seq for other conditions go down to the end of this tutorial.
-
-##### Real datasets
-
-For those with access to high-end nodes clusters you can index and simulated whole genome datasets or download real datasets from this sources:
-- [1000genomes project](http://www.1000genomes.org/)
-- [European Nucleotide Archive (ENA)](https://www.ebi.ac.uk/ena/)
-- [Sequence Read Archive (SRA)](http://www.ncbi.nlm.nih.gov/sra)
-
-
-### Installing SAMtools (Optional, already installed)
-
-Check that it is not installed by executing
-
-    samtools
-
-A list of commands should be printed. If not then proceed with the installation.
-
-Download [SAMtools] from *SF Download Page* link and move to the working directory, then uncompress it.
-
-    mv samtools-0.1.19.tar.bz2 working_directory
-    cd working_directory
-    tar -jxvf samtools-0.1.19.tar.bz2 
-    cd samtools-0.1.19
-    make
-
-Check that is correct by executing it with no arguments, the different commands available should be printed. You can also copy it to your ```bin``` folder in your home directory, if bin folder exist, to make it available to the PATH:
-
-    samtools
-    cp samtools ~/bin
-
-
-# Exercise 1: NGS Genomic DNA aligment
-
-In this exercise we'll learn how to download, install, build the reference genome index and align in single-end and paired-end mode with the two most widely DNA aligners: *BWA* and *Bowtie2*. But first, create an ```aligners``` folder to store the software, and an ```alignments``` folder to store the results, create those folders in your *working directory* next to ```data```, you can create both folders by executing:
-
-    mkdir aligners
-    mkdir alignments
-
-Now go to ```aligners``` and  ```alignments``` folders and create subfolders for *bwa* and *bowtie* to store the indexes and alignments results:
-
-    cd aligners
-    mkdir bwa hpg-aligner bowtie
-
-and
-
-    cd alignments
-    mkdir bwa hpg-aligner bowtie
-    
-**NOTE:** Now your working directory must contain 3 folders: data (with the reference genome of chrom. 21 and simulated datasets), aligners and alignments. Your working directory should be similar to this (notice that aligners have not been downloaded):
-
-```
-.
-├── aligners
-│   ├── bowtie
-│   ├── bwa
-│   ├── hpg-aligner
-├── alignments
-│   ├── bowtie
-│   ├── bwa
-│   ├── hpg-aligner
-├── data
-│   ├── dna_chr21_100_hq_read1.fastq
-│   ├── dna_chr21_100_hq_read2.fastq
-│   ├── dna_chr21_100_lq_read1.fastq
-│   ├── dna_chr21_100_lq_read2.fastq
-│   ├── Homo_sapiens_cDNAs_chr21.fa
-│   ├── Homo_sapiens.GRCh37.75.dna.chromosome.21.fa
-│   ├── rna_chr21_100_hq_read1.fastq
-│   └── rna_chr21_100_hq_read2.fastq
-│   ├── rna_chr21_150_lq_read1.fastq
-│   └── rna_chr21_150_lq_read2.fastq
-
-
-```
-
-
-### BWA
-[BWA] is probably the most used aligner for DNA. AS the documentation states it consists of three different algorithms: *BWA*, *BWA-SW* and *BWA-MEM*. The first algorithm, which is the oldest, is designed for Illumina sequence reads up to 100bp, while the rest two for longer sequences. BWA-MEM and BWA-SW share similar features such as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it is faster and more accurate. BWA-MEM also has better performance than BWA for 70-100bp Illumina reads.
-
-All these three algorithms come in the same binary so only one download and installation is needed.
-
-##### Download and install (Optional, already installed)
-
-First check that bwa is not currently installed by executing:
-
-    bwa
-
-A list of commands will be printed if already installed. If not you can continue with the installation.
-
-You can click on ```SF download page``` link in the [BWA] page or click directly to:
-
-[http://sourceforge.net/projects/bio-bwa/files](http://sourceforge.net/projects/bio-bwa/files)
-
-Click in the last version of BWA and wait for a few seconds, as the time of this tutorial last version is **bwa-0.7.10.tar.bz2**, the download will start. When downloaded go to your browser download folder and move it to aligners folder, uncompress it and compile it:
-
-    mv bwa-0.7.10.tar.bz2 working_directory/aligners/bwa
-    tar -jxvf bwa-0.7.10.tar.bz2
-    cd bwa-0.7.10
-    make
-    cp bwa ~/bin
-
-You can check that everything is allright by executing:
-
-    bwa
-
-Some information about the software and commands should be listed.
-
-
-##### Build the index
-
-Create a folder inside ```aligners/bwa``` folder called ```index``` to store the BWA index and copy the reference genome into it:
-    
-    mkdir index
-    cp  data/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa  aligners/bwa/index/   (this path can be different!)
-    
-Now you can create the index by executing:
-
-    bwa index aligners/bwa/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa
-
-Some files will be created in the ```index``` folder, those files constitute the index that BWA uses.
-
-**NOTE:** The index must created only once, it will be used for all the different alignments with BWA.
-
+AS the documentation states it consists of three different algorithms: *BWA*, *BWA-SW* and *BWA-MEM*. The first algorithm, which is the oldest, is designed for Illumina sequence reads up to 100bp, while the rest two for longer sequences. BWA-MEM and BWA-SW share similar features such as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it is faster and more accurate. BWA-MEM also has better performance than BWA for 70-100bp Illumina reads.
 
 ##### Aligning with new BWA-MEM in both single-end (SE) and paired-end (PE) modes
 
@@ -510,70 +348,10 @@ BWA-MEM is the recommended algorithm to use now. You can check the options by ex
 
     bwa mem
 
-To align **SE** with BWA-MEM execute:
-
-    bwa mem -t 4 -R "@RG\tID:foo\tSM:bar\tPL:Illumina\tPU:unit1\tLB:lib1" aligners/bwa/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa data/dna_chr21_100_hq_read1.fastq > alignments/bwa/dna_chr21_100_hq_se.sam
-
-Now you can use SAMtools to create the BAM file from the *alignment/bwa* folder:
-    cd alignments/bwa
-    samtools view -S -b dna_chr21_100_hq_se.sam -o dna_chr21_100_hq_se.bam
-
-
 To align **PE** with BWA-MEM just execute the same command line with the two FASTQ files:
 
-    bwa mem -t 4 -R "@RG\tID:foo\tSM:bar\tPL:Illumina\tPU:unit1\tLB:lib1" aligners/bwa/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa data/dna_chr21_100_hq_read1.fastq data/dna_chr21_100_hq_read2.fastq > alignments/bwa/dna_chr21_100_hq_pe.sam
+    bwa mem -t 2 -R "@RG\tID:foo\tSM:bar\tPL:Illumina\tPU:unit1\tLB:lib1"  data/ucsc.hg19 fq/510-7-ANGELA-SANTOS-BRCA_S8_L001_R1_001.fastq.gz  fq/510-7-ANGELA-SANTOS-BRCA_S8_L001_R2_001.fastq.gz > brca_pairedend_mem.sam 2> aln.brca_mem.log &
     
-Now you can use SAMtools to create the BAM file from the *alignment/bwa* folder:
-
-    cd alignments/bwa
-    samtools view -S -b dna_chr21_100_hq_pe.sam -o dna_chr21_100_hq_pe.bam
-
-
-Now you can do the same for the **low** quality datasets.
-
-
-##### Aligning with old BWA algorithm, two command lines: ALN and SAMSE/SAMPE in SE and PE modes (Optional exercise)
-
-Now we are going to align SE and PE the **high** quality dataset. Single-end alignment with BWA requires 2 executions. The first uses ```aln``` command and takes the ```fastq``` file and creates a ```sai``` file; the second execution uses ```samse``` and the ```sai``` file and create the ```sam``` file. Results are stored in ```alignments``` folder:
-
-    bwa aln aligners/bwa/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa -t 4 data/dna_chr21_100_hq_read1.fastq -f alignments/bwa/dna_chr21_100_hq_se.sai
-    bwa samse aligners/bwa/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa alignments/bwa/dna_chr21_100_hq_se.sai data/dna_chr21_100_hq_read1.fastq -f alignments/bwa/dna_chr21_100_hq_se.sam
-
-
-For paired-end alignments with BWA 3 executions are needed: 2 for ```aln``` command and 1 for ```sampe``` command:
-
-    bwa aln aligners/bwa/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa -t 4 data/dna_chr21_100_hq_read1.fastq -f alignments/bwa/dna_chr21_100_hq_pe1.sai
-    bwa aln aligners/bwa/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa -t 4 data/dna_chr21_100_hq_read2.fastq -f alignments/bwa/dna_chr21_100_hq_pe2.sai
-    bwa sampe aligners/bwa/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa alignments/bwa/dna_chr21_100_hq_pe1.sai alignments/bwa/dna_chr21_100_hq_pe2.sai data/dna_chr21_100_hq_read1.fastq data/dna_chr21_100_hq_read2.fastq -f alignments/bwa/dna_chr21_100_hq_pe.sam
-
-Now you can use SAMtools to create the BAM file from the *alignment/bwa* folder:
-
-    cd alignments/bwa
-    samtools view -S -b dna_chr21_100_hq_se.sam -o dna_chr21_100_hq_se.bam
-    samtools view -S -b dna_chr21_100_hq_pe.sam -o dna_chr21_100_hq_pe.bam
-
-Now you can do the same for the **low** quality datasets.
-
-
-### HPG Aligner
-[HPG Aligner] is an ultrafast and high sensitivity tool for aligning sequencing reads to long reference sequences. It is particularly good at aligning reads of any size. HPG Aligner 2.0 indexes the genome using a Suffix Arrays. HPG Aligner 2 supports gapped, local, and paired-end alignment modes, together with INDEL realignment and recalibration.
-
-##### Build the index
-
-Create a folder inside HPG Aligner program called ```index``` to store the HPG Aligner index and copy the reference genome into it:
-    
-    cd hpg-aligner   (_inside aligners folder_)
-    mkdir index
-    cp data/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa aligners/bwa/index/
-    
-Now you can create the index by executing:
-
-    hpg-aligner build-sa-index -g aligners/hpg-aligner/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa -i aligners/hpg-aligner/index/
-
-Some files will be created in the ```index``` folder, those files constitute the index that HPG Aligner uses.
-
-**NOTE:** The index must created only once, it will be used for all the different alignments with HPG Aligner.
-
 ### Bowtie2
 
 [Bowtie2] as documentation states is an ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences. It is particularly good at aligning reads of about 50 up to few 100s. Bowtie 2 indexes the genome with an FM Index to keep its memory footprint small: for the human genome, its memory footprint is typically around 3.2 GB. Bowtie 2 supports gapped, local, and paired-end alignment modes.
@@ -605,47 +383,23 @@ Big information about the software and commands should be listed.
 
 ##### Build the index
 
-Create a folder inside Bowtie2 program called ```index``` to store the Bowtie2 index and copy the reference genome into it:
-    
-    cd bowtie   (_inside aligners folder_)
-    mkdir index
-    cp data/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa aligners/bowtie/index/
-    
 Now you can create the index by executing:
 
-    bowtie2-build aligners/bowtie/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa aligners/bowtie/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa
+    bowtie2-build ucsc.hg19.fasta
 
-Some files will be created in the ```index``` folder, those files constitute the index that Bowtie2 uses.
+Some files will be created in the ```ucsc.hg19``` folder, those files constitute the index that Bowtie2 uses.
 
 **NOTE:** The index must created only once, it will be used for all the different alignments with Bowtie2.
 
 
-##### Aligning in SE and PE modes
-
-Mapping **SE** with Bowtie2 requires only 1 execution, for aligning the **high** in SE mode execute:
-
-    bowtie2 -q -p 4 -x aligners/bowtie/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa -U data/dna_chr21_100_hq_read1.fastq -S alignments/bowtie/dna_chr21_100_hq_se.sam
-
-And create the BAM file using SAMtools;
-
-    cd alignments/bowtie
-    samtools view -S -b dna_chr21_100_hq_se.sam -o dna_chr21_100_hq_se.bam
-
+##### Aligning in PE modes
 
 Mapping in **PE** also requires only one execution:
 
-    bowtie2 -q -p 4 -x aligners/bowtie/index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa -1 data/dna_chr21_100_hq_read1.fastq -2 data/dna_chr21_100_hq_read2.fastq -S alignments/bowtie/dna_chr21_100_hq_pe.sam
-
-And create the BAM file using SAMtools;
-
-    cd alignments/bowtie
-    samtools view -S -b dna_chr21_100_hq_pe.sam -o dna_chr21_100_hq_pe.bam
-    
-Repeat the same steps for the **low** quality dataset.
+    bowtie2 -q -p 4 -x ucsc.hg19.fasta -1 fq/510-7-ANGELA-SANTOS-BRCA_S8_L001_R1_001.fastq.gz -2  fq/510-7-ANGELA-SANTOS-BRCA_S8_L001_R2_001.fastq.gz -S brca_pairedend_bowtie.sam
 
 
 ### More exercises
 
-- Try to simulate datasets with longer reads and more mutations to study which aligner behaves better
-- Test the aligner sensitivity to INDELS
-- Try BWA-MEM algorithm and compare sensitivity. The same index is valid, only one execution for the SAM file ```./bwa mem index/Homo_sapiens.GRCh37.75.dna.chromosome.21.fa ../../data/dna_chr21_100_low/dna_chr21_100_low.bwa.read1.fastq```
+- Work with your own data at home , CQ16.
+- Try BWA-MEM algorithm and compare sensitivity.
