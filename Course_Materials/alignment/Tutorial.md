@@ -51,10 +51,11 @@ The files you will be working with:
 - 510-7-BRCA_S8_L001_R1.fastq.gz Paired-end Illumina, First of pair, FASTQ Human Sample-seq
 - 510-7-BRCA_S8_L001_R2.fastq.gz Paired-end Illumina, Second of pair, FASTQ Human Sample-seq
 
-First copy the two human datasets to your $SCRATCH/core_ngs/fastq_prep directory.
+First copy the two human dataset to your $HOME/core_ngs/fastq_prep directory.
 
     cd $SCRATCH/core_ngs/fastq_prep
-    cp $CLASSDIR/human_stuff/*rnaseq.fastq.gz .
+    cp $HOME/work/data/sample1/sample1/*.fastq.gz .
+    cp $HOME/work/data/sample2/*.fastq.gz .
 
 Create a $SCRATCH/core_ngs/align directory and make a link to the fastq_prep directory.
 
