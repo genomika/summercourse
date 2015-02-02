@@ -9,10 +9,15 @@
 
 # Preliminaries
 
-In this hands-on will learn how to align DNAseq data with most widely used software today. Building a whole genome index requires a lot of RAM memory and almost one hour in a typical workstation, for this reason **in this tutorial we will work with targeted panel of genes data** to speed up the exercises. The same steps would be done for a whole genome alignment.
+- Output files of mapping
+- Mappers spit out SAM/BAM files as output files. BAM is just a binary format of SAM.
+- Here is a specification of SAM format SAM specification.
+- Commonly, SAM files are processed in this order:
+- SAM files are converted into BAM files (samstools view)
+- BAM files are sorted by reference coordinates (samtools sort)
+- Sorted BAM files are indexed (samtools index)
+- Each step above can be done with commands below
 
-Once raw sequence files are generated (in FASTQ format) and quality-checked, the next step in most NGS pipelines is mapping to a reference genome. For individual sequences of interest, it is common to use a tool like BLAST to identify genes or species of origin. However, a typical example NGS dataset may have tens to hundreds of millions of reads, which BLAST and similar tools are not designed to handle.
-Thus, a large set of computational tools have been developed to quickly, and with sufficient (but not absolute) accuracy align each read to its best location, if any, in a reference. Even though many mapping tools exist, a few individual programs have a dominant "market share" of the NGS world. These programs vary widely in their design, inputs, outputs, and applications. In this section, we will primarily focus on two of the most versatile mappers: BWA and Bowtie2 (only comments).
 
 ### NGS aligners discussed:
 
