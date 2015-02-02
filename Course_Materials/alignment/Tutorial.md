@@ -53,7 +53,7 @@ The files you will be working with:
 
 First copy the two human dataset to your $HOME/core_ngs/fastq_prep directory.
 
-    cd $SCRATCH/core_ngs/fastq_prep
+    cd $HOME/core_ngs/fastq_prep
     cp $HOME/work/data/sample1/sample1/*.fastq.gz .
     cp $HOME/work/data/sample2/*.fastq.gz .
 
