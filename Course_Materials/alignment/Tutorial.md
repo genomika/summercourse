@@ -47,6 +47,40 @@ You have already worked with two human data samples, which we will continue to u
 - Sample_Yeast_L005_R1.cat.fastq.gz	Paired-end Illumina, First of pair, FASTQ	Yeast ChIP-seq
 - Sample_Yeast_L005_R2.cat.fastq.gz	Paired-end Illumina, Second of pair, FASTQ	Yeast ChIP-seq
 
+First copy the two human datasets to your $SCRATCH/core_ngs/fastq_prep directory.
+
+    cd $SCRATCH/core_ngs/fastq_prep
+    cp $CLASSDIR/human_stuff/*rnaseq.fastq.gz .
+
+Create a $SCRATCH/core_ngs/align directory and make a link to the fastq_prep directory.
+
+    mkdir -p $SCRATCH/core_ngs/align
+    cd $SCRATCH/core_ngs/align
+    ln -s -f ../fastq_prep fq
+    ls -l
+    ls fq
+
+#### Reference Genomes
+
+Before we get to alignment, we need a genome to align to.  We will use the human genome (hg19) here.
+
+    hg19	Human	3.1 Gbp	25 (really 93)	UCSC	UCSC GoldenPath
+
+Searching genomes is hard work and takes a long time if done on an un-indexed, linear genomic sequence.  So aligners require that references first be indexed for quick access  The aligners we are using each require a different index, but use the same method (the Burrows-Wheeler Transform) to get the job done. This requires taking a FASTA file as input, with each chromosome (or contig) as a separate entry, and producing some aligner-specific set of files as output. Those index files are then used by the aligner when performing the sequence alignment. 
+
+**hg19** is way too big for us to index here, so we're not going to do it. Instead, all hg19 index files are located at:
+
+    /scratch/01063/abattenh/ref_genome/bwa/bwtsw/hg19
+
+
+First stage the yeast and mirbase reference FASTA files in your work archive area in a directory called references.
+
+    mkdir -p $WORK/archive/references/fasta
+    cp $CLASSDIR/references/*.fa $WORK/archive/references/fasta/
+
+ With that, we're ready to get started on the first exercise.
+
+
 
 
 Create a ```data``` folder in your **working directory** and download the **reference genome sequence** to be used (human chromosome 21) and *simulated datasets* from **Dropbox** [data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a).
