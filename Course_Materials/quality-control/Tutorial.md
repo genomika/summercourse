@@ -598,6 +598,15 @@ This would produce a file named samstat.fastq.html which you need to view in a w
 
     http://web.corral.tacc.utexas.edu/BioITeam/SRR030257_1.fastq.html
 
+###Exercise for Now
+
+Now, you can do by yourself! The best part for ones that have Illumina machines, their system already performs the adapter trimming for you.  For further information you can see the [reference guide from Illumina](http://support.illumina.com/content/dam/illumina-support/documents/documentation/software_documentation/miseqreporter/miseq-reporter-generatefastq-workflow-guide-15042322-b.pdf)
+
+     cd /home/genomika/work/data/sample2
+     ls -l
+     #There will be two fastq's. gzipped to work with it.
+
+
 ###Exercise for Home
 
 From human sample [CQ_S16](https://dl.dropboxusercontent.com/u/1977573/sample1.zip), perform the fastqc analysis.
