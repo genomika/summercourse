@@ -274,20 +274,72 @@ Or use the -v (invert) option to tell grep to print all lines that don't match a
    -   this ordering is called read name ordering
 
 
+### Using cut to isolate fields
+
+Suppose you wanted to look only at field 3 (contig name) values in the SAM file. You can do this with the handy cut command. Below is a simple example where you're asking cut to display the 3rd of the last 10 alignments.
+
+    tail brca_pairedend.sam | cut -f 3
+
+By default cut assumes the field delimiter is Tab, which is the delimiter used in the majority of NGS file formats. You can, of course, specify a different delimiter with the -d option.
+
+You can also specify a range of fields, and mix adjacent and non-adjacent fields. This displays fields 2 through 6, field 9, and all fields starting with 12 (SAM tag fields).
+
+    tail brca_pairedend.sam | cut -f 2-6,9,12-
+
+You may have noticed that some alignment records contain contig names (e.g. chrV) in field 3 while others contain an asterisk ( * ). Usually the * means the record didn't align. (This isn't always true – later you'll see how to properly distinguish between mapped and unmapped reads using samtools.) We're going to use this heuristic along with cut to see about how many records represent aligned sequences.
+
+First we need to make sure that we don't look at fields in the SAM header lines. We're going to end up with a series of pipe operations, and the best way to make sure you're on track is to enter them one at a time piping to head:
+
+     # the ^M00538 pattern matches lines starting with HWI (the start of all read names in column 1)
+    grep -P '^M00538' brca_pairedend.sam | head
+
+Ok, it looks like we're seeing only alignment records. Now let's pull out only field 3 using cut:
+
+    grep -P '^M00538' brca_pairedend.sam | cut -f 3 | head
+
+Cool, we're only seeing the contig name info now. Next we use grep again, piping it our contig info and using the -v (invert) switch to say print lines that don't match the pattern:
+
+    grep -P '^M00538' brca_pairedend.sam | cut -f 3 | grep -v '*' | head
+
+Perfect! We're only seeing real contig names that (usually) represent aligned reads. Let's count them by piping to wc -l (and omitting omit head of course – we want to count everything).
+
+    grep -P '^M00538' brca_pairedend.sam | cut -f 3 | grep -v '*' | wc -l
+
+
+#### Exercise: About how many records represent aligned sequences? What alignment rate does this represent?
+
+
+### Use sort and uniq to create a histogram of mapping qualities
+
+The mapping quality score is in field 5 of the brca_pairedend.sam file. We can do this to pull out only that field:
+
+    grep -P '^M00538' brca_pairedend.sam | cut -f 5 | head
+ 
+
+We will use the uniq create a histogram of these values. To create a histogram, we want to organize all equal mapping quality score lines into an adjacent block, then use uniq -c option to count them. The sort -n command does the sorting into blocks (-n means numerical sort). So putting it all together, and piping the output to a pager just in case, we get:
+
+    grep -P '^M00538' brca_pairedend.sam | cut -f 5 | sort -n | uniq -c | more
+
+We are looking at mapping quality values for both aligned and un-aligned records, but mapping quality only makes sense for aligned reads. This expression does not distinguish between mapping quality = 0 because the read mapped to multiple locations, and mapping quality = 0 because the sequence did not align. The proper solution will await the use of samtools to filter out unmapped reads.
+
 
 After bowtie2 came out with a local alignment option, it wasn't long before bwa developed its own local alignment algorithm called **BWA-MEM (for Maximal Exact Matches)**, implemented by the bwa mem command. bwa mem has the following advantages:
 
 - It incorporates a lot of the simplicity of using bwa with the complexities of local alignment, enabling straightforward alignment of datasets like the mirbase data we just examined
 - It can align different portions of a read to different locations on the genome
-- In a long RNA-seq experiment, reads will (at some frequency) span a splice junction themselves, or a pair of reads in a paired-end library will fall on either side of a splice junction. We want to be able to align reads that do this for many reasons, from accurate transcript quantification to novel fusion transcript discovery.
-- Thus, our last exercise will be the alignment of a human long RNA-seq dataset composed (by design) almost exclusively of reads that cross splice junctions.
 - bwa mem was made available when we loaded the bwa module, so take a look at its usage information. The most important parameters, similar to those we've manipulated in the past two sections, are the following:
 
--k	Controls the minimum seed length (default = 19)
--w	Controls the "gap bandwidth", or the length of a maximum gap. This is particularly relevant for MEM, since it can determine whether a read is split into two separate alignments or is reported as one long alignment with a long gap in the middle (default = 100)
--r	Controls how long an alignment must be relative to its seed before it is re-seeded to try to find a best-fit local match (default = 1.5, e.g. the value of -k multiplied by 1.5)
--c	Controls how many matches a MEM must have in the genome before it is discarded (default = 10000)
--t	Controls the number of threads to use
+- k	Controls the minimum seed length (default = 19)
+
+- w	Controls the "gap bandwidth", or the length of a maximum gap. This is particularly relevant for MEM, since it can determine whether a read is split into two separate alignments or is reported as one long alignment with a long gap in the middle (default = 100)
+
+- r	Controls how long an alignment must be relative to its seed before it is re-seeded to try to find a best-fit local match (default = 1.5, e.g. the value of -k multiplied by 1.5)
+
+- c	Controls how many matches a MEM must have in the genome before it is discarded (default = 10000)
+
+- t	Controls the number of threads to use
+
+
 
     cds
     cd core_ngs/align/
