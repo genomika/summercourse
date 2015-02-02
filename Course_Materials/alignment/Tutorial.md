@@ -259,6 +259,22 @@ Or use the -v (invert) option to tell grep to print all lines that don't match a
      grep -P -v -c '^@' brca_pairedend.sam
 
 
+#### Exercise: How many sequences were in the R1 and R2 FASTQ files combined?
+#### Do both R1 and R2 reads have separate alignment records?
+#### Does the SAM file contain both aligned and un-aligned reads?
+#### What is the order of the alignment records in this SAM file?
+
+**Answers**
+
+- 128552 + 128552 sequences
+- yes, it must, because there were 128552 + 128552 R1+R2 reads and an equal number of alignment records
+- yes, it must, because there were 128552 + 128552 R1+R2 reads and an equal number of alignment records
+- the names occur in the exact same order as they did in the FASTQ, except that they come in pairs
+   -   the R1 read comes first, then its corresponding R2
+   -   this ordering is called read name ordering
+
+
+
 After bowtie2 came out with a local alignment option, it wasn't long before bwa developed its own local alignment algorithm called BWA-MEM (for Maximal Exact Matches), implemented by the bwa mem command. bwa mem has the following advantages:
 
 - It incorporates a lot of the simplicity of using bwa with the complexities of local alignment, enabling straightforward alignment of datasets like the mirbase data we just examined
