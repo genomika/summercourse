@@ -55,7 +55,7 @@ Let's now set ourselves up to process this data in the server, using some of bes
     cd $HOME/core_ngs/fastq_prep
     ln -s -f $HOME/work/Sample_Yeast_L005_R1.cat.fastq.gz
     ln -s -f $HOME/work/Sample_Yeast_L005_R2.cat.fastq.gz
-
+    cp /mnt/data/f010_raw_mirna.fastq . 
 
 Overview
 ================================================================================
