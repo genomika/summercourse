@@ -38,13 +38,14 @@ Neste segundo dia vamos focar em _Variant Calling_ e _Visualização dos dados_ 
 ### Alinhamento dos dados
 - Slides [[PDF](Course_Materials/alignment/SummerCourse_Alignment.pdf) | - [Tutorial](Course_Materials/alignment/Tutorial.md)
 
-### Visualização dos dados NGS PT1
-
-- [Slides](Course_Materials/visualization/presentation/2014-Cambridge_visualisation.pdf) || [Guia de Exemplo](Course_Materials/visualization/tutorial/000_example.html) || [Tutorial 1](Course_Materials/visualization/tutorial/010_example.html) || [Tutorial 2](Course_Materials/visualization/tutorial/020_example.html)
 
 ## Dia 3
 
 O terceiro dia será voltado para a limpeza e recalibração dos dados de alinhamento e para a chamada de variantes gerando os arquivos VCF.
+
+### Visualização dos dados NGS PT1
+
+- [Slides](Course_Materials/visualization/presentation/2014-Cambridge_visualisation.pdf) || [Guia de Exemplo](Course_Materials/visualization/tutorial/000_example.html) || [Tutorial 1](Course_Materials/visualization/tutorial/010_example.html) || [Tutorial 2](Course_Materials/visualization/tutorial/020_example.html)
 
 ### Análise de variantes
 
