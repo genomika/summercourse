@@ -401,5 +401,5 @@ Mapping in **PE** also requires only one execution:
 
 ### More exercises
 
-- Work with your own data at home , CQ16.
-- Try BWA-MEM algorithm and compare sensitivity.
+- Work with your own data at home , [CQ_S16](https://dl.dropboxusercontent.com/u/1977573/sample1.zip).
+- Try BWA-MEM algorithm vs Bowtie2 vs BWA-ALN
