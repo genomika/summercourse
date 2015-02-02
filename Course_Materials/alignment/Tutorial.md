@@ -46,8 +46,6 @@ You have already worked with two human data samples, which we will continue to u
 
 The files you will be working with:
 
-- Sample_Yeast_L005_R1.cat.fastq.gz	Paired-end Illumina, First of pair, FASTQ	Yeast ChIP-seq
-- Sample_Yeast_L005_R2.cat.fastq.gz	Paired-end Illumina, Second of pair, FASTQ	Yeast ChIP-seq
 - 510-7-BRCA_S8_L001_R1.fastq.gz Paired-end Illumina, First of pair, FASTQ Human Sample-seq
 - 510-7-BRCA_S8_L001_R2.fastq.gz Paired-end Illumina, Second of pair, FASTQ Human Sample-seq
 
@@ -75,13 +73,8 @@ Searching genomes is hard work and takes a long time if done on an un-indexed, l
 
 **hg19** is way too big for us to index here, so we're not going to do it. Instead, all hg19 index files are located at:
 
-    /scratch/01063/abattenh/ref_genome/bwa/bwtsw/hg19
+    $HOME/data
 
-
-First stage the yeast and mirbase reference FASTA files in your work archive area in a directory called references.
-
-    mkdir -p $WORK/archive/references/fasta
-    cp $CLASSDIR/references/*.fa $WORK/archive/references/fasta/
 
  With that, we're ready to get started on the first exercise.
 
