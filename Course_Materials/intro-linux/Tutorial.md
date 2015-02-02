@@ -227,9 +227,9 @@ Now press Enter to get the command going. Repeat for the 2nd link. Check that yo
 
 Suppose you have a  allocation where your organization keeps its data, and that the sequencing data has been downloaded there. You can use various Linux commands to copy the data locally from there to your work area.
 
-#### scp
+#### cp
 
-The scp command copies one or more files from a local source to a local destination. It has the most common form:
+The cp command copies one or more files from a local source to a local destination. It has the most common form:
 
     cp [options] <source file 1> <source file 2> ... <destination directory>
 
