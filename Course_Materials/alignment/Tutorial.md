@@ -59,8 +59,8 @@ First copy the two human dataset to your $HOME/core_ngs/fastq_prep directory.
 
 Create a $SCRATCH/core_ngs/align directory and make a link to the fastq_prep directory.
 
-    mkdir -p $SCRATCH/core_ngs/align
-    cd $SCRATCH/core_ngs/align
+    mkdir -p $HOME/core_ngs/align
+    cd $HOME/core_ngs/align
     ln -s -f ../fastq_prep fq
     ls -l
     ls fq
