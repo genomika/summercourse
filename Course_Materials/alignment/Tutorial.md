@@ -329,17 +329,15 @@ After bowtie2 came out with a local alignment option, it wasn't long before bwa 
 - It can align different portions of a read to different locations on the genome
 - bwa mem was made available when we loaded the bwa module, so take a look at its usage information. The most important parameters, similar to those we've manipulated in the past two sections, are the following:
 
-- k	Controls the minimum seed length (default = 19)
+   -k	Controls the minimum seed length (default = 19)
 
-- w	Controls the "gap bandwidth", or the length of a maximum gap. This is particularly relevant for MEM, since it can determine whether a read is split into two separate alignments or is reported as one long alignment with a long gap in the middle (default = 100)
+   -w	Controls the "gap bandwidth", or the length of a maximum gap. This is particularly relevant for MEM, since it can determine whether a read is split into two separate alignments or is reported as one long alignment with a long gap in the middle (default = 100)
 
-- r	Controls how long an alignment must be relative to its seed before it is re-seeded to try to find a best-fit local match (default = 1.5, e.g. the value of -k multiplied by 1.5)
+  -r	Controls how long an alignment must be relative to its seed before it is re-seeded to try to find a best-fit local match (default = 1.5, e.g. the value of -k multiplied by 1.5)
 
-- c	Controls how many matches a MEM must have in the genome before it is discarded (default = 10000)
+  -c	Controls how many matches a MEM must have in the genome before it is discarded (default = 10000)
 
-- t	Controls the number of threads to use
-
-
+  -t	Controls the number of threads to use
 
     cds
     cd core_ngs/align/
