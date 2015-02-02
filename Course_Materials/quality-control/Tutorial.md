@@ -598,3 +598,6 @@ This would produce a file named samstat.fastq.html which you need to view in a w
 
     http://web.corral.tacc.utexas.edu/BioITeam/SRR030257_1.fastq.html
 
+###Exercise for Home
+
+From human sample [CQ_S16](https://dl.dropboxusercontent.com/u/1977573/sample1.zip), perform the fastqc analysis.
