@@ -275,7 +275,7 @@ Or use the -v (invert) option to tell grep to print all lines that don't match a
 
 
 
-After bowtie2 came out with a local alignment option, it wasn't long before bwa developed its own local alignment algorithm called BWA-MEM (for Maximal Exact Matches), implemented by the bwa mem command. bwa mem has the following advantages:
+After bowtie2 came out with a local alignment option, it wasn't long before bwa developed its own local alignment algorithm called **BWA-MEM (for Maximal Exact Matches)**, implemented by the bwa mem command. bwa mem has the following advantages:
 
 - It incorporates a lot of the simplicity of using bwa with the complexities of local alignment, enabling straightforward alignment of datasets like the mirbase data we just examined
 - It can align different portions of a read to different locations on the genome
