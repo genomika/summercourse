@@ -36,7 +36,7 @@ Neste segundo dia vamos focar em _Variant Calling_ e _Visualização dos dados_ 
 
 
 ### Alinhamento dos dados
-- Slides [[PDF](Course_Materials/alignment/SummerCourse_Alignment.pdf) | - [Tutorial](Course_Materials/alignment/Tutorial.md)
+- Slides [[PDF](Course_Materials/alignment/SummerCourse_Alignment.pdf) | - [Tutorial P1](Course_Materials/alignment/Tutorial.md) | - [Tutorial P2](Course_Materials/alignment/TutorialP2.md)
 
 
 ## Dia 3
