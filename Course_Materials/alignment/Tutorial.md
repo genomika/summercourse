@@ -78,26 +78,25 @@ Searching genomes is hard work and takes a long time if done on an un-indexed, l
 
  With that, we're ready to get started on the first exercise.
 
-Exercise #1: BWA – Yeast ChIP-seq
+Exercise #1: BWA aln 
 
-We will perform a global alignment of the paired-end Yeast ChIP-seq sequences using bwa. This workflow generally has the following steps:
+We will perform a global alignment of the paired-end Human sequences using bwa. This workflow generally has the following steps:
 
 
 - Trim the FASTQ sequences down to 50 with fastx_clipper
    - this removes most of any 5' adapter contamination without the fuss of specific adapter trimming w/cutadapt
-- Prepare the sacCer3 reference index for bwa (one time) using bwa index
+- Prepare the reference index for bwa (one time) using bwa index
 - Perform a global bwa alignment on the R1 reads (bwa aln) producing a BWA-specific binary .sai intermediate file
 - Perform a global bwa alignment on the R2 reads (bwa aln) producing a BWA-specific binary .sai intermediate file
 - Perform pairing of the separately aligned reads and report the alignments in SAM format using bwa sampe
 - Convert the SAM file to a BAM file (samtools view)
-- Sort the BAM file by genomic location (samtools sort)
+- Sort the BAM file by genomic location (samtools sort or use Picard tool to generate the bam)
 - Index the BAM file (samtools index)
 - Gather simple alignment statistics (samtools flagstat and samtools idxstat)
 
 We're going to skip the trimming step for now and see how it goes. We'll perform steps 2 - 5 now and leave samtools for the next course section, since those steps (6 - 10) are common to nearly all post-alignment workflows.
 
 ### Introducing BWA
-
 
 Like other tools you've worked with so far, you first need to load bwa using the module system.  Go ahead and do that now, and then enter bwa with no arguments to view the top-level help page (many NGS tools will provide some help when called with no arguments).
 
@@ -131,7 +130,7 @@ Like other tools you've worked with so far, you first need to load bwa using the
 
 As you can see, bwa offers a number of sub-commands one can use with to do different things.
 
-#### Building the BWA sacCer3 index
+#### Building the BWA  hg19 index
 
 We're going to index the genome with the index command. To learn what this sub-command needs in the way of options and arguments, enter bwa index with no arguments.
 
@@ -148,27 +147,22 @@ Here, we only need to specify two things:
 -   the name of the FASTA file  
 -   whether to use the  bwtsw or is algorithm for indexing
 
-Since sacCer3 is relative large (~12 Mbp) we will specify bwtsw as the indexing option, and the name of the FASTA file is sacCer3.fa.
+Since the genome is relative large (~ 3.1 Gb) we will specify bwtsw as the indexing option, and the name of the FASTA file is ucsc.hg19.fasta.
 
-Importantly, the output of this command is a group of files that are all required together as the index. So, within the references directory, we will create another directory called bwa/sacCer3, make a symbolic link to the yeast FASTA there, and run the index command in that directory.
-
-    mkdir -p $WORK/archive/references/bwa/sacCer3
-    cd $WORK/archive/references/bwa/sacCer3
-    ln -s ../../fasta/sacCer3.fa
-    ls -la
+Importantly, the output of this command is a group of files that are all required together as the index.
 
 Now execute the bwa index command.
 
-    bwa index -a bwtsw sacCer3.fa
+    bwa index -a bwtsw ucsc.hg19.fasta
 
-Since the yeast genome is not large when compared to human, this should not take long to execute (otherwise we would do it as a batch job). When it is comple you should see a set of index files like this:
+Since the human genome is quite large, this should  take long to execute.  We already provide for you the genome indexed. When it is complete you should see a set of index files like this:
 
-    sacCer3.fa
-    sacCer3.fa.amb
-    sacCer3.fa.ann
-    sacCer3.fa.bwt
-    sacCer3.fa.pac
-    sacCer3.fa.sa
+    ucsc.hg19.fasta
+    ucsc.hg19.amb
+    ucsc.hg19.ann
+    ucsc.hg19.bwt
+    ucsc.hg19.pac
+    ucsc.hg19.sa
 
 
 A common question is what contigs are in a given FASTA file. You'll usually want to know this before you start the alignment so that you're familiar with the contig naming convention – and to verify that it's the one you expect.
@@ -180,23 +174,23 @@ We saw that a FASTA consists of a number of contig entries, each one starting wi
 How do we dig out just the lines that have the contig names and ignore all the sequences? Well, the contig name lines all follow the pattern above, and since the > character is not a valid base, it will never appear on a sequence line.
 We've discovered a pattern (also known as a regular expression) to use in searching, and the command line tool that does regular expression matching is **grep**.
 
-Regular expressions are so powerful that nearly every modern computer language includes a "regex" module of some sort. There are many online tutorials for regular expressions (and a few different flavors of them). But the most common is the Perl style (http://perldoc.perl.org/perlretut.html). We're only going to use the most simple of regular expressions here, but learning more about them will pay handsome dividends for you in the future.
+Regular expressions are so powerful that nearly every modern computer language includes a "regex" module of some sort. There are many online tutorials for regular expressions (and a few different flavors of them). But the most common is the [Perl style](http://perldoc.perl.org/perlretut.html). We're only going to use the most simple of regular expressions here, but learning more about them will pay handsome dividends for you in the future.
 
 Here's how to execute grep to list contig names in a FASTA file.
 
-    grep -P '^>' sacCer3.fa | more
+    grep -P '^>' ucsc.hg19.fasta | more
 
 **Notes:**
 - The -P option tells grep to use Perl-style regular expression patterns. 
 - This makes including special characters like Tab ( \t ), Carriage Return ( \r ) or Linefeed ( \n ) much easier that the default Posix paterns.
 - While it is not really required here, it generally doesn't hurt to include this option.
 - '^>' is the regular expression describing the pattern we're looking for (described below)
-- sacCer3.fa is the file to search. Lines with text that match our pattern will be written to standard output; non matching lines will be omitted.
+- ucsc.hg19.fasta is the file to search. Lines with text that match our pattern will be written to standard output; non matching lines will be omitted.
 - We pipe to more just in case there are a lot of contig names.
 
 Now down to the nuts and bolts of our pattern, '^>'
 
-First, the single quotes around the pattern – they are only a signal for the bash shell. As part of its friendly command line parsing and evaluation, the shell will often look for special characters on the command line that mean something to it (for example, the $ in front of an environment variable name, like in $SCRATCH). Well, regular expressions treat the $ specially too – but in a completely different way! Those single quotes tell the shell "don't look inside here for special characters – treat this as a literal string and pass it to the program". The shell will obey, will strip the single quotes off the string, and will pass the actual pattern, ^>, to the grep program. (Aside: We've see that the shell does look inside double quotes ( " ) for certain special signals, such as looking for environment variable names to evaluate.)
+First, the single quotes around the pattern – they are only a signal for the bash shell. As part of its friendly command line parsing and evaluation, the shell will often look for special characters on the command line that mean something to it (for example, the $ in front of an environment variable name, like in $HOME). Well, regular expressions treat the $ specially too – but in a completely different way! Those single quotes tell the shell "don't look inside here for special characters – treat this as a literal string and pass it to the program". The shell will obey, will strip the single quotes off the string, and will pass the actual pattern, ^>, to the grep program. (Aside: We've see that the shell does look inside double quotes ( " ) for certain special signals, such as looking for environment variable names to evaluate.)
 
 So what does ^> mean to grep? Well, from our contig name format description above we see that contig name lines always start with a > character, so > is a literal for grep to use in its pattern match.
 
