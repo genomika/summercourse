@@ -42,10 +42,14 @@ Thus, a large set of computational tools have been developed to quickly, and wit
 
 You have already worked with two human data samples, which we will continue to use here.  The paired end data should already be located at:
 
-    $WORK/archive/original/2014_05.core_ngs
+    workshop@172.16.225.11:/home/workshop/ngscourse/data/sample2/
+
+The files you will be working with:
 
 - Sample_Yeast_L005_R1.cat.fastq.gz	Paired-end Illumina, First of pair, FASTQ	Yeast ChIP-seq
 - Sample_Yeast_L005_R2.cat.fastq.gz	Paired-end Illumina, Second of pair, FASTQ	Yeast ChIP-seq
+- 510-7-BRCA_S8_L001_R1.fastq.gz Paired-end Illumina, First of pair, FASTQ Human Sample-seq
+- 510-7-BRCA_S8_L001_R2.fastq.gz Paired-end Illumina, Second of pair, FASTQ Human Sample-seq
 
 First copy the two human datasets to your $SCRATCH/core_ngs/fastq_prep directory.
 
