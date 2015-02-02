@@ -131,6 +131,165 @@ Like other tools you've worked with so far, you first need to load bwa using the
       first. Please `man ./bwa.1' for the manual. 
 
 
+As you can see, bwa offers a number of sub-commands one can use with to do different things.
+
+#### Building the BWA sacCer3 index
+
+We're going to index the genome with the index command. To learn what this sub-command needs in the way of options and arguments, enter bwa index with no arguments.
+
+    Usage:   bwa index [-a bwtsw|is] [-c] <in.fasta>
+    Options: -a STR    BWT construction algorithm: bwtsw or is [auto]
+          -p STR    prefix of the index [same as fasta name]
+          -6        index files named as <in.fasta>.64.* instead of <in.fasta>.*
+    Warning: `-a bwtsw' does not work for short genomes, while `-a is' and
+         `-a div' do not work not for long genomes. Please choose `-a'
+         according to the length of the genome.
+
+
+Here, we only need to specify two things:
+-   the name of the FASTA file  
+-   whether to use the  bwtsw or is algorithm for indexing
+
+Since sacCer3 is relative large (~12 Mbp) we will specify bwtsw as the indexing option, and the name of the FASTA file is sacCer3.fa.
+
+Importantly, the output of this command is a group of files that are all required together as the index. So, within the references directory, we will create another directory called bwa/sacCer3, make a symbolic link to the yeast FASTA there, and run the index command in that directory.
+
+    mkdir -p $WORK/archive/references/bwa/sacCer3
+    cd $WORK/archive/references/bwa/sacCer3
+    ln -s ../../fasta/sacCer3.fa
+    ls -la
+
+Now execute the bwa index command.
+
+    bwa index -a bwtsw sacCer3.fa
+
+Since the yeast genome is not large when compared to human, this should not take long to execute (otherwise we would do it as a batch job). When it is comple you should see a set of index files like this:
+
+    sacCer3.fa
+    sacCer3.fa.amb
+    sacCer3.fa.ann
+    sacCer3.fa.bwt
+    sacCer3.fa.pac
+    sacCer3.fa.sa
+
+
+A common question is what contigs are in a given FASTA file. You'll usually want to know this before you start the alignment so that you're familiar with the contig naming convention – and to verify that it's the one you expect.
+
+We saw that a FASTA consists of a number of contig entries, each one starting with a name line of the form below, followed by many lines of bases.
+
+    >contigName
+
+How do we dig out just the lines that have the contig names and ignore all the sequences? Well, the contig name lines all follow the pattern above, and since the > character is not a valid base, it will never appear on a sequence line.
+We've discovered a pattern (also known as a regular expression) to use in searching, and the command line tool that does regular expression matching is **grep**.
+
+Regular expressions are so powerful that nearly every modern computer language includes a "regex" module of some sort. There are many online tutorials for regular expressions (and a few different flavors of them). But the most common is the Perl style (http://perldoc.perl.org/perlretut.html). We're only going to use the most simple of regular expressions here, but learning more about them will pay handsome dividends for you in the future.
+
+Here's how to execute grep to list contig names in a FASTA file.
+
+    grep -P '^>' sacCer3.fa | more
+
+**Notes:**
+- The -P option tells grep to use Perl-style regular expression patterns. 
+- This makes including special characters like Tab ( \t ), Carriage Return ( \r ) or Linefeed ( \n ) much easier that the default Posix paterns.
+- While it is not really required here, it generally doesn't hurt to include this option.
+- '^>' is the regular expression describing the pattern we're looking for (described below)
+- sacCer3.fa is the file to search. Lines with text that match our pattern will be written to standard output; non matching lines will be omitted.
+- We pipe to more just in case there are a lot of contig names.
+
+Now down to the nuts and bolts of our pattern, '^>'
+
+First, the single quotes around the pattern – they are only a signal for the bash shell. As part of its friendly command line parsing and evaluation, the shell will often look for special characters on the command line that mean something to it (for example, the $ in front of an environment variable name, like in $SCRATCH). Well, regular expressions treat the $ specially too – but in a completely different way! Those single quotes tell the shell "don't look inside here for special characters – treat this as a literal string and pass it to the program". The shell will obey, will strip the single quotes off the string, and will pass the actual pattern, ^>, to the grep program. (Aside: We've see that the shell does look inside double quotes ( " ) for certain special signals, such as looking for environment variable names to evaluate.)
+
+So what does ^> mean to grep? Well, from our contig name format description above we see that contig name lines always start with a > character, so > is a literal for grep to use in its pattern match.
+
+We might be able to get away with just using this literal alone as our regex, specifying '>' as the command line argument. But for grep, the more specific the pattern, the better. So we constrain where the > can appear on the line. The special carat ( ^ ) character represents "beginning of line". So ^> means "beginning of a line followed by a > character, followed by anything. (Aside: the dollar sign ( $ ) character represents "end of line" in a regex. There are many other special characters, including period ( . ), question mark ( ? ), pipe ( | ), parentheses ( ( ) ), and brackets ( [ ] ), to name the most common.)
+
+
+#### Exercise: How many contigs are there in the sacCer3 reference?
+
+
+### Performing the bwa alignment
+
+Now, we're ready to execute the actual alignment, with the goal of initially producing a SAM file from the input FASTQ files and reference. First go to the align directory, and link to the sacCer3 reference directory (this will make our commands more readable).
+
+    cd $SCRATCH/core_ngs/align
+    ln -s $WORK/archive/references/bwa/sacCer3
+    ls sacCer3
+
+As our workflow indicated, we first use bwa aln on the R1 and R2 FASTQs, producing a BWA-specific .sai intermediate binary files. Since these alignments are completely independent, we can execute them in parallel in a batch job.
+
+There are lots of options, but here is a summary of the most important ones. BWA, is a lot more complex than the options let on. If you look at the BWA manual on the web for the aln sub-command, you'll see numerous options that can increase the alignment rate (as well as decrease it), and all sorts of other things. 
+
+-l	Controls the length of the seed (default = 32)
+-k	Controls the number of mismatches allowable in the seed of each alignment (default = 2)
+-n	Controls the number of mismatches (or fraction of bases in a given alignment that can be mismatches) in the entire alignment (including the seed) (default = 0.04)
+-t	Controls the number of threads
+
+The rest of the options control the details of how much a mismatch or gap is penalized, limits on the number of acceptable hits per read, and so on.  Much more information can be accessed at the BWA manual page.
+
+For a simple alignment like this, we can just go with the default alignment parameters, with one exception. At TACC, we want to optimize our alignment speed by allocating more than one thread (-t) to the alignment. We want to run 2 tasks, and will use a minimum of one 16-core node. So we can assign 8 cores to each alignment by specifying -t 8.
+
+Also note that bwa writes its (binary) output to standard output by default, so we need to redirect that to a .sai file. And of course we need to redirect standard error to a log file, one per file.
+Create an aln.cmds file (using nano) with the following lines:
+
+    bwa aln -t 8 sacCer3/sacCer3.fa fq/Sample_Yeast_L005_R1.cat.fastq.gz > yeast_R1.sai 2> aln.yeast_R1.log
+    bwa aln -t 8 sacCer3/sacCer3.fa fq/Sample_Yeast_L005_R2.cat.fastq.gz > yeast_R2.sai 2> aln.yeast_R2.log
+
+Since you have directed standard error to log files, you can use a neat trick to monitor the progress of the alignment: tail -f. The -f means "follow" the tail, so new lines at the end of the file are displayed as they are added to the file.
+
+    # Use Ctrl-c to stop the output any time
+    tail -f aln.yeast_R1.log
+
+When it's done you should see two .sai files. Next we use the bwa sampe command to pair the reads and output SAM format data. For this command you provide the same reference prefix as for bwa aln, along with the two .sai files and the two original FASTQ files.
+
+Again bwa writes its output to standard output, so redirect that to a .sam file. (Note that bwa sampe is "single threaded" – it does not have an option to use more than one processor for its work.) We'll just execute this at the command line – not in a batch job.
+
+    bwa sampe sacCer3/sacCer3.fa yeast_R1.sai yeast_R2.sai fq/Sample_Yeast_L005_R1.cat.fastq.gz fq/Sample_Yeast_L005_R2.cat.fastq.gz > yeast_pairedend.sam
+
+You did it!  You should now have a SAM file that contains the alignments. It's just a text file, so take a look with head, more, less, tail, or whatever you feel like. In the next section, with samtools, you'll learn some additional ways to analyze the data once you create a BAM file.
+
+#### Exercise: What kind of information is in the first lines of the SAM file?
+
+The SAM or BAM has a number of header lines, which all start with an at sign ( @ ). The @SQ lines describe each contig and its length. There is also a @PG  line that describes the way the bwa sampe was performed.
+
+Exercise: How many alignment records (not header records) are in the SAM file?
+
+This looks for the pattern  '^HWI' which is the start of every read name (which starts every alignment record).
+Remember -c says just count the records, don't display them.
+
+    grep -P -c '^HWI' yeast_pairedend.sam
+
+Or use the -v (invert) option to tell grep to print all lines that don't match a particular pattern, here the header lines starting with @.
+
+     grep -P -v -c '^@' yeast_pairedend.sam
+
+
+After bowtie2 came out with a local alignment option, it wasn't long before bwa developed its own local alignment algorithm called BWA-MEM (for Maximal Exact Matches), implemented by the bwa mem command. bwa mem has the following advantages:
+
+- It incorporates a lot of the simplicity of using bwa with the complexities of local alignment, enabling straightforward alignment of datasets like the mirbase data we just examined
+- It can align different portions of a read to different locations on the genome
+- In a long RNA-seq experiment, reads will (at some frequency) span a splice junction themselves, or a pair of reads in a paired-end library will fall on either side of a splice junction. We want to be able to align reads that do this for many reasons, from accurate transcript quantification to novel fusion transcript discovery.
+- Thus, our last exercise will be the alignment of a human long RNA-seq dataset composed (by design) almost exclusively of reads that cross splice junctions.
+- bwa mem was made available when we loaded the bwa module, so take a look at its usage information. The most important parameters, similar to those we've manipulated in the past two sections, are the following:
+
+-k	Controls the minimum seed length (default = 19)
+-w	Controls the "gap bandwidth", or the length of a maximum gap. This is particularly relevant for MEM, since it can determine whether a read is split into two separate alignments or is reported as one long alignment with a long gap in the middle (default = 100)
+-r	Controls how long an alignment must be relative to its seed before it is re-seeded to try to find a best-fit local match (default = 1.5, e.g. the value of -k multiplied by 1.5)
+-c	Controls how many matches a MEM must have in the genome before it is discarded (default = 10000)
+-t	Controls the number of threads to use
+
+    cds
+    cd core_ngs/align/
+    ls fq
+    gunzip -c fq/human_rnaseq.fastq.gz | echo $((`wc -l`/4))
+
+
+
+
+
+
+
+
 
 Create a ```data``` folder in your **working directory** and download the **reference genome sequence** to be used (human chromosome 21) and *simulated datasets* from **Dropbox** [data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a).
 For the rest of this tutorial the **working directory** will be **cambridge_mda14** and all the **paths** will be relative to that working directory:
