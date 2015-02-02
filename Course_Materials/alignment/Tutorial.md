@@ -80,6 +80,55 @@ First stage the yeast and mirbase reference FASTA files in your work archive are
 
  With that, we're ready to get started on the first exercise.
 
+Exercise #1: BWA – Yeast ChIP-seq
+
+We will perform a global alignment of the paired-end Yeast ChIP-seq sequences using bwa. This workflow generally has the following steps:
+
+
+- Trim the FASTQ sequences down to 50 with fastx_clipper
+   - this removes most of any 5' adapter contamination without the fuss of specific adapter trimming w/cutadapt
+- Prepare the sacCer3 reference index for bwa (one time) using bwa index
+- Perform a global bwa alignment on the R1 reads (bwa aln) producing a BWA-specific binary .sai intermediate file
+- Perform a global bwa alignment on the R2 reads (bwa aln) producing a BWA-specific binary .sai intermediate file
+- Perform pairing of the separately aligned reads and report the alignments in SAM format using bwa sampe
+- Convert the SAM file to a BAM file (samtools view)
+- Sort the BAM file by genomic location (samtools sort)
+- Index the BAM file (samtools index)
+- Gather simple alignment statistics (samtools flagstat and samtools idxstat)
+
+We're going to skip the trimming step for now and see how it goes. We'll perform steps 2 - 5 now and leave samtools for the next course section, since those steps (6 - 10) are common to nearly all post-alignment workflows.
+
+### Introducing BWA
+
+
+Like other tools you've worked with so far, you first need to load bwa using the module system.  Go ahead and do that now, and then enter bwa with no arguments to view the top-level help page (many NGS tools will provide some help when called with no arguments).
+
+    bwa
+    
+
+    Program: bwa (alignment via Burrows-Wheeler transformation)
+    Version: 0.7.7-r441
+
+    Contact: Heng Li <lh3@sanger.ac.uk>
+    Usage:   bwa <command> [options]
+    
+    Command: index         index sequences in the FASTA format
+         mem           BWA-MEM algorithm
+         fastmap       identify super-maximal exact matches
+         pemerge       merge overlapping paired ends (EXPERIMENTAL)
+         aln           gapped/ungapped alignment
+         samse         generate alignment (single ended)
+         sampe         generate alignment (paired ended)
+         bwasw         BWA-SW for long queries
+         fa2pac        convert FASTA to PAC format
+         pac2bwt       generate BWT from PAC
+         pac2bwtgen    alternative algorithm for generating BWT
+         bwtupdate     update .bwt to the new format
+         bwt2sa        generate SA from BWT and Occ
+    Note: To use BWA, you need to first index the genome with `bwa index'.
+      There are three alignment algorithms in BWA: `mem', `bwasw', and
+      `aln/samse/sampe'. If you are not sure which to use, try `bwa mem'
+      first. Please `man ./bwa.1' for the manual. 
 
 
 
