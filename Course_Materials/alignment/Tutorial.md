@@ -247,16 +247,16 @@ You did it!  You should now have a SAM file that contains the alignments. It's j
 
 The SAM or BAM has a number of header lines, which all start with an at sign ( @ ). The @SQ lines describe each contig and its length. There is also a @PG  line that describes the way the bwa sampe was performed.
 
-Exercise: How many alignment records (not header records) are in the SAM file?
+#### Exercise: How many alignment records (not header records) are in the SAM file?
 
-This looks for the pattern  '^HWI' which is the start of every read name (which starts every alignment record).
+This looks for the pattern  '^M00538' which is the start of every read name (which starts every alignment record).
 Remember -c says just count the records, don't display them.
 
-    grep -P -c '^HWI' yeast_pairedend.sam
+    grep -P -c '^M00538' brca_pairedend.sam
 
 Or use the -v (invert) option to tell grep to print all lines that don't match a particular pattern, here the header lines starting with @.
 
-     grep -P -v -c '^@' yeast_pairedend.sam
+     grep -P -v -c '^@' brca_pairedend.sam
 
 
 After bowtie2 came out with a local alignment option, it wasn't long before bwa developed its own local alignment algorithm called BWA-MEM (for Maximal Exact Matches), implemented by the bwa mem command. bwa mem has the following advantages:
