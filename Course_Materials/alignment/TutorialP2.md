@@ -108,3 +108,15 @@ The file types are recognized by their endings, so be sure to have them named as
 By setting the CREATE_INDEX argument to true we automatically create an index file for the generated bam file. 
 
 This file got the same name as the bam file but with the additional extension “.bai” (so sample1.bam got the index file sample1.bam.bai).
+
+Let's do with our sample1
+
+    java -Xmx4g -Djava.io.tmpdir=/tmp \
+    -jar picard/SortSam.jar \
+    SO=coordinate \
+    INPUT=input.sam \
+    OUTPUT=output.bam \
+    VALIDATION_STRINGENCY=LENIENT \
+    CREATE_INDEX=true
+
+###Exercise: Now try the samtools and picard with the CQ16 sample!
