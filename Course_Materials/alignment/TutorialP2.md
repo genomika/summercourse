@@ -24,12 +24,12 @@ Each step above can be done with commands below:
      samtools index <sorted bamfile>
      
 
-###Exercise: Generate "brca_pairedend.sort.bam", a sorted bam file named "yeast_chip_sort.bam", and an index file of the sorted bam file
+###Exercise: Generate "brca_pairedend.sort.bam", a sorted bam file named "brca_paired_sort.bam", and an index file of the sorted bam file
 
     cd /$HOME/core_ngs/align
     samtools view -bS brca_pairedend.sam > brca_pairedend.bam
-    samtools sort yeast_chip.bam yeast_chip_sort
-    samtools index yeast_chip_sort.bam
+    samtools sort brca_paired.bam brca_paired_sort
+    samtools index brca_paired_sort.bam
     
 ### Basic mapping stats
 
@@ -55,9 +55,9 @@ reports on stats related to the chromosome-based indexing done by samtools index
 
 If no region is specified in samtools view command, all the alignments will be printed; otherwise only alignments overlapping the specified regions will be output. A region can be presented, for example, in the following format: ‘chr2’ (the whole chr2), ‘chr2:1000000’ (region starting from 1,000,000bp) or ‘chr2:1,000,000-2,000,000’
 
-#### Count the number of mapped reads overlapping between chromosome III 123456 and chromosome III 124456
+#### Count the number of mapped reads overlapping between chromossome 17 41197694 and chromosome 17 41197819
 
-    samtools view yeast_chip_sort.bam chrIII:123456-124456 | wc -l
+    samtools view brca_paired_sort.bam chr17:41197694-41197819 | wc -l
 
 #### Extract/print mapped sub alignments in BAM format
 
