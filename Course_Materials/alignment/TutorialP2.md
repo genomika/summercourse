@@ -112,11 +112,10 @@ This file got the same name as the bam file but with the additional extension â€
 
 Let's do with our sample1
 
-    java -Xmx4g -Djava.io.tmpdir=/tmp \
-    -jar picard/SortSam.jar \
+    picard-tools SortSam \
     SO=coordinate \
-    INPUT=input.sam \
-    OUTPUT=output.bam \
+    INPUT=brca_pairedend.sam \
+    OUTPUT=brca_pairedend_picard.bam \
     VALIDATION_STRINGENCY=LENIENT \
     CREATE_INDEX=true
 
