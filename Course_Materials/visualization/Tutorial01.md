@@ -1,7 +1,6 @@
-% [NGS data analysis course](http://ngscourse.github.io/)
-% __Visualization of mapped reads__
-% _(updated 29-09-2014)_
-
+[WorkShop de Verão Bioinformática](http://github.com/genomika/summercourse/)
+% __Visualização dos dados__
+% _(updated 03-02-2014)_
 <!-- COMMON LINKS HERE -->
 
 [IGV]: http://www.broadinstitute.org/igv/home "IGV"
