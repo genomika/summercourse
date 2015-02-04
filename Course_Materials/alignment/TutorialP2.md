@@ -64,23 +64,23 @@ If no region is specified in samtools view command, all the alignments will be p
 A bam/sam file includes or does not include unmapped reads depending on mappers or options on mappers. If you use bwa with default options, the output bam includes unmapped reads. In order to extract mapped reads from a bam file, use -F option in samtools view command. -F INT means "Skip alignments with bits present in INT". In other words, -F INT filters reads that have the INT in their flag. Please take a look at page 4 on SAM specification. 0X4 flag is for segment unmapped.
 
 
-#### Count the number of reads mapped on chromosome III
+#### Count the number of reads mapped on chromosome 17
 
-    samtools view -F 0X04 yeast_chip.bam chrIII | wc -l
+    samtools view -F 0X04 brca_paired_sort.bam chr17 | wc -l
     
 #### Extract/print reversely mapped sub alignments in BAM format
 
 If you have a strand-specific RNA-seq data, a mapping direction of a read is critical. For example, you may want to count only reversely-mapped reads on a (-)-direction gene. Directionality of mapped read is also recorded on flag.
 
-#### Count the number of reversely-mapped reads overlapping between chromosome III: 123456 and chromosome III: 124456
+#### Count the number of reversely-mapped reads overlapping between chromosome 17: 41197694 and chromosome 17: 41197819
 **Hint:** flag 0x10 = SEQ being reverse complemented
 
-    samtools view -F 0X04 -f 0X10 yeast_chip.bam chrIII:123456-124456 | wc -l
+    samtools view -F 0X04 -f 0X10 brca_paired_sort.bam chr17:41197694-41197819 | wc -l
 
-#### Count the total number of mappped reads in 'yeast_chip.sam' 
+#### Count the total number of mappped reads in 'brca_pairedend.bam' 
 
-    samtools flagstat yeast_chip_sort.bam
-    samtools view -F 0x04 yeast_chip_sort.bam | wc -l
+    samtools flagstat brca_pairedend.bam
+    samtools view -F 0x04 brca_paired_sort.bam | wc -l
 
 # Output files of mapping (Alternative approach)
 
