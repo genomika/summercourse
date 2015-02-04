@@ -119,4 +119,4 @@ Let's do with our sample1
     VALIDATION_STRINGENCY=LENIENT \
     CREATE_INDEX=true
 
-###Exercise: Now try the samtools and picard with the CQ16 sample!
+###Exercise: Now try the samtools and picard with the [CQ_S16](https://dl.dropboxusercontent.com/u/1977573/sample1.zip) sample!
