@@ -45,7 +45,7 @@ O terceiro dia será voltado para a limpeza e recalibração dos dados de alinha
 
 ### Visualização dos dados NGS PT1
 
-- [Slides](Course_Materials/visualization/presentation/2014-Cambridge_visualisation.pdf) || [Guia de Exemplo](Course_Materials/visualization/tutorial/000_example.html) || [Tutorial 1](Course_Materials/visualization/tutorial/010_example.html) || [Tutorial 2](Course_Materials/visualization/tutorial/020_example.html)
+- [Slides](Course_Materials/visualization/presentation/2014-Cambridge_visualisation.pdf) || [Guia de Exemplo](Course_Materials/visualization/tutorial/000_example.html) || [Tutorial 1](Course_Materials/visualization/Tutorial01.md) || [Tutorial 2](Course_Materials/visualization/Tutorial02.md)
 
 ### Análise de variantes
 
