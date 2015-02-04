@@ -94,8 +94,6 @@ What we want to do with IGV?
 1. Examine coverage
       - High/low coverage
       - No coverage
-2. Visualise alternative splicing
-      - RNA alignment against DNA, not cDNA
 3. Look for base changes -- > SNPs
       - Complete grey reads --> no mismatches
       - Coloured bases --> Change
@@ -114,7 +112,3 @@ What we want to do with IGV?
             - The reference read quality is 0
 4. Load SNP data
       - File > Load from server > Annotations > Variation and repeats > dbSNP 1.3.7
-
-
-
-
