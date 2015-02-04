@@ -27,24 +27,22 @@ File formats explored:
 Guided exercise: IGV introduction
 ================================================================================
 
-Copy the data for the tutorials:
+From the last class let's access the BAM file with the data:
 
-    mkdir -p /home/participant/cambridge_mda14/
-    cp -r /home/participant/Desktop/Open_Share/visualization /home/participant/cambridge_mda14/
-    cd /home/participant/cambridge_mda14/visualization
+    cd $HOME/core_ngs/align
 
-Enter in the example folder:
+Copy the files to your computer:
 
-    cd example_0
+    scp -r youruserid@172.16.225.177:/home/genomika/core_ngs/align/brca_pairedend_picard.* .
 
-This BAM file contains reads only for **chromosome 11**.
+This BAM file contains reads for **BRCA genes**.
 
-Creating indexed files
+Remember to create indexed files
 --------------------------------------------------------------------------------
 
 Use ``samtools`` to index the bam files:
 
-    samtools index igv1.bam
+    samtools index brca_pairedend_picard.bam
 
 
 Run IGV
@@ -71,11 +69,11 @@ Loading and browsing files
 --------------------------------------------------------------------------------
 
 - Go to ``File`` --> ``Load from file...``  
-Select ``igv1.bam``
+Select ``brca_pairedend_picard.bam``
 
 **Steps:**
 
-1. Go to the location box and insert ''chr11:996096-1036047'' in the search box and hit ``Go``.
+1. Go to the location box and insert ''chr13:32,905,246-32,905,285'' in the search box and hit ``Go``.
 2. Move across the alignment
 3. Zoom in
 4. Grey boxes are reads:
@@ -104,10 +102,10 @@ What we want to do with IGV?
       - Bases are also shadowed according to quality
 	    - Darker --> good quality
 	    - Lighter --> bad quality
-      - Inspecting a SNP (``chr11:1,018,335-1,018,412``)
+      - Inspecting a SNP (``chr13:32,905,200-32,905,239``)
 	    - Look at the coverage bar --> percentage and counts
 	    - Sort alignment by base
-      - Inspecting a homozygous variant (``chr11:1,019,336-1,019,413``)
+      - Inspecting a homozygous variant (``chr13:32,905,245-32,905,284``)
             - All reads support the variant but 1
             - The reference read quality is 0
 4. Load SNP data
