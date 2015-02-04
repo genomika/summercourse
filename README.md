@@ -62,7 +62,7 @@ Neste último encontro o foco será na anotação das variantes com alguns banco
 
 ### Anotação de variantes
 
-- [Slides](Course_Materials/variant_annotation/presentation/2014-Cambridge_variant_annotation.pdf) || [Annovar](Course_Materials/variant_annotation/tutorial/annovar.html) || [HPG-Variant](Course_Materials/variant_annotation/tutorial/hpg-variant.html)
+- [Slides](Course_Materials/variant_annotation/presentation/2014-Cambridge_variant_annotation.pdf) || [Annovar](Course_Materials/variant_annotation/tutorial/annovar.html)
 
 ### Priorização de variantes
 
