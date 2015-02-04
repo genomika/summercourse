@@ -29,20 +29,9 @@ File formats explored:
 Exercise 1: Visualising sequencing data
 ================================================================================
 
-In the following **folder** you will find mapped sequencing data from a CEU trio (father, mother and child) from the 1000 Genomes Project:
-
-    cd /home/participant/cambridge_mda14/visualization/example_1
+In the following **folder** you will find mapped sequencing data from a CEU trio (father, mother and child) from the 1000 Genomes Project.
 
 These datasets contain reads only for the [GABBR1](http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000204681;r=6:29523406-29601753) gene.
-
-Creating indexed files
---------------------------------------------------------------------------------
-
-Use ``samtools`` to index the bam files:
-
-    samtools index NA12878_child.bam
-    samtools index NA12891_dad.bam
-    samtools index NA12892_mom.bam
 
 
 Run IGV
@@ -66,8 +55,7 @@ Select **Human hg19**
 Loading and browsing files
 --------------------------------------------------------------------------------
 
-- Go to ``File`` --> ``Load from file...``
-Select NA12878_child.bam, NA12891_dad.bam and NA12892_mom.bam
+- Get some data: File -> Load from Server… -> 1000 genomes -> Alignments -> CEU Trio WGS -> select those 3 samples
 
 **Steps:**
 
