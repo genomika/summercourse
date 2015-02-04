@@ -55,7 +55,7 @@ Select **Human hg19**
 Loading and browsing files
 --------------------------------------------------------------------------------
 
-- Get some data: File -> Load from Server… -> 1000 genomes -> Alignments -> CEU Trio WGS -> select those 3 samples
+- Get some data: File -> Load from Server… -> 1000 genomes -> Alignments -> CEU Trio WGS -> select those 3 samples:  NA12892, NA12891, and NA12878 (mom, dad, child respectively).
 
 **Steps:**
 
