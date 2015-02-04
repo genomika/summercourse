@@ -24,9 +24,10 @@ Each step above can be done with commands below:
      samtools index <sorted bamfile>
      
 
-###Exercise: Generate "yeast_chip.bam", a sorted bam file named "yeast_chip_sort.bam", and an index file of the sorted bam file
+###Exercise: Generate "brca_pairedend.sort.bam", a sorted bam file named "yeast_chip_sort.bam", and an index file of the sorted bam file
 
-    samtools view -bS yeast_chip.sam > yeast_chip.bam
+    cd /$HOME/core_ngs/align
+    samtools view -bS brca_pairedend.sam > brca_pairedend.bam
     samtools sort yeast_chip.bam yeast_chip_sort
     samtools index yeast_chip_sort.bam
     
