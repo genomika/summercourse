@@ -48,3 +48,36 @@ reports on stats related to the chromosome-based indexing done by samtools index
 - Reads mapping to that sequence
 - Reads not mapping to that sequence    
     
+### Additional SAMtools tricks
+
+#### Extract/print sub alignments in BAM format.
+
+If no region is specified in samtools view command, all the alignments will be printed; otherwise only alignments overlapping the specified regions will be output. A region can be presented, for example, in the following format: ‘chr2’ (the whole chr2), ‘chr2:1000000’ (region starting from 1,000,000bp) or ‘chr2:1,000,000-2,000,000’
+
+#### Count the number of mapped reads overlapping between chromosome III 123456 and chromosome III 124456
+
+    samtools view yeast_chip_sort.bam chrIII:123456-124456 | wc -l
+
+#### Extract/print mapped sub alignments in BAM format
+
+A bam/sam file includes or does not include unmapped reads depending on mappers or options on mappers. If you use bwa with default options, the output bam includes unmapped reads. In order to extract mapped reads from a bam file, use -F option in samtools view command. -F INT means "Skip alignments with bits present in INT". In other words, -F INT filters reads that have the INT in their flag. Please take a look at page 4 on SAM specification. 0X4 flag is for segment unmapped.
+
+
+#### Count the number of reads mapped on chromosome III
+
+    samtools view -F 0X04 yeast_chip.bam chrIII | wc -l
+    
+#### Extract/print reversely mapped sub alignments in BAM format
+
+If you have a strand-specific RNA-seq data, a mapping direction of a read is critical. For example, you may want to count only reversely-mapped reads on a (-)-direction gene. Directionality of mapped read is also recorded on flag.
+
+#### Count the number of reversely-mapped reads overlapping between chromosome III: 123456 and chromosome III: 124456
+**Hint:** flag 0x10 = SEQ being reverse complemented
+
+    samtools view -F 0X04 -f 0X10 yeast_chip.bam chrIII:123456-124456 | wc -l
+
+#### Count the total number of mappped reads in 'yeast_chip.sam' 
+
+    samtools flagstat yeast_chip_sort.bam
+    samtools view -F 0x04 yeast_chip_sort.bam | wc -l
+
