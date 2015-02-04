@@ -81,3 +81,30 @@ If you have a strand-specific RNA-seq data, a mapping direction of a read is cri
     samtools flagstat yeast_chip_sort.bam
     samtools view -F 0x04 yeast_chip_sort.bam | wc -l
 
+# Output files of mapping (Alternative approach)
+
+Besides samtools, there's another popular tool available written in java called [Picard](broadinstitute.github.io/picard/). Picard offers many options for manipulating or viewing SAM and BAM.
+
+Commonly, SAM files are processed in this order:
+    - SAM files are converted into BAM files (SortSam.jar)
+    - BAM files are sorted by reference coordinates (SortSam.jar)
+    - Sorted BAM files are indexed (SortSam.jar)
+    - Each step above can be done with commands below
+
+Each step above can be done with only one command below:
+
+    java -Xmx4g -Djava.io.tmpdir=/tmp \
+    -jar picard/SortSam.jar \
+    SO=coordinate \
+    INPUT=input.sam \
+    OUTPUT=output.bam \
+    VALIDATION_STRINGENCY=LENIENT \
+    CREATE_INDEX=true
+
+For having a better overview I put the arguments in separate lines and join them in a script by the “\” sign.
+
+The file types are recognized by their endings, so be sure to have them named as “.sam” and “.bam” files. The SO argument specifies the sort order which is by coordinate in our case. By setting the validation stringency to lenient, picard ignores some validation errors which frequently occur at the alignment step. 
+
+By setting the CREATE_INDEX argument to true we automatically create an index file for the generated bam file. 
+
+This file got the same name as the bam file but with the additional extension “.bai” (so sample1.bam got the index file sample1.bam.bai).
