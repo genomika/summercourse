@@ -43,7 +43,7 @@ Neste segundo dia vamos focar em _Variant Calling_ e _Visualização dos dados_ 
 
 O terceiro dia será voltado para a limpeza e recalibração dos dados de alinhamento e para a chamada de variantes gerando os arquivos VCF.
 
-### Visualização dos dados NGS PT1
+### Visualização dos dados NGS
 
 - [Slides](Course_Materials/visualization/presentation/2014-Cambridge_visualisation.pdf) || [Guia de Exemplo](Course_Materials/visualization/tutorial/000_example.html) || [Tutorial 1](Course_Materials/visualization/Tutorial01.md) || [Tutorial 2](Course_Materials/visualization/Tutorial02.md)
 
