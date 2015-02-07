@@ -66,7 +66,7 @@ Neste último encontro o foco será na anotação das variantes com alguns banco
 
 ### Priorização de variantes
 
-- [Slides](Course_Materials/variant_prioritization/presentation/2014-Cambridge_variant_prioritization.pdf) || [Data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AADPzrs9NGg0PjVqnwQocUJUa/annotation/hpg-variant/examples)
+- [Slides](Course_Materials/priorization/SummerCourse_Priorization.pdf) || [Data](https://www.dropbox.com/sh/4qkqch7gyt888h7/AADPzrs9NGg0PjVqnwQocUJUa/annotation/hpg-variant/examples)
 
 ### Análises, Big Data. 
 
