@@ -57,12 +57,12 @@ Neste último encontro o foco será na anotação das variantes com alguns banco
 
 ### Análise de Cobertura
 
-- [Slides](Course_Materials/coverage/SummerCourse_Coverage.pdf) - [Tutorial](Course_Materials/association_studies/tutorial/association_studies.html)
+- [Slides](Course_Materials/coverage/SummerCourse_Coverage.pdf) - [Tutorial](Course_Materials/coverage/Tutorial01.md)
 
 
 ### Anotação de variantes
 
-- [Slides](Course_Materials/variant_annotation/presentation/2014-Cambridge_variant_annotation.pdf) || [Annovar](Course_Materials/variant_annotation/tutorial/annovar.html)
+- [Slides](Course_Materials/annotation/SummerCourse_Annotation.pdf) || [Annovar](Course_Materials/annotation/Tutorial01.md)
 
 ### Priorização de variantes
 
