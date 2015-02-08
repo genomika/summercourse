@@ -75,7 +75,7 @@ Neste último encontro o foco será na anotação das variantes com alguns banco
 
 ### Para onde podemos seguir a partir de  agora ? 
 
-- [Slides](Course_Materials/variant_prioritization/presentation/2014-Cambridge_variant_prioritization.pdf)
+- [Slides](Course_Materials/conclusions/SummerCourse_Conclusions.pdf)
 
 
 ----
