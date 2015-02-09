@@ -21,7 +21,7 @@ Copy the necessary data in your working directory:
 --------------------------------------------------------------------------------
 
     perl convert2annovar.pl -format vcf4 example/example1.vcf > example/example1.annovar
-	perl convert2annovar.pl -format vcf4 -allsample -withfreq example/example1.vcf > example/example1.annovar
+	perl convert2annovar.pl example/example1.vcf  -format vcf4 -allsample -include -withzyg  -outfile example/example1.annovar
 
 The above command takes example1.vcf as input file, and generate the example1.annovar as output file. The 3 extra columns are zygosity status, genotype quality and read depth.
 
