@@ -1,6 +1,7 @@
-% [NGS data analysis course](http://ngscourse.github.io/)
-% __Variant calling__
-% _(updated 29-09-2014)_
+% [WorkShop de Verão Bioinformática](http://github.com/genomika/summercourse/)
+% __Variant Calling and Post Processing__
+% _(updated 09-02-2014)_
+
 
 <!-- COMMON LINKS HERE -->
 
@@ -32,51 +33,35 @@ Exercise 1: Variant calling with paired-end data
 
 Copy the necessary data in your working directory:
 
-    mkdir -p /home/participant/cambridge_mda14/
-    cp -r /home/participant/Desktop/Open_Share/calling /home/participant/cambridge_mda14/
-    cd /home/participant/cambridge_mda14/calling
+    mkdir -p $HOME/core_ngs/variant_calling/
+    cp -r $HOME/core_ngs/align/*.bam $HOME/core_ngs/variant_calling/
+    cp -r $HOME/core_ngs/align/*.bai $HOME/core_ngs/variant_calling/
+    cd $HOME/core_ngs/variant_calling/
 
-These datasets contain reads only for the **chromosome 21**.
-
-
-1. Prepare reference genome: generate the fasta file index
---------------------------------------------------------------------------------
-Enter in the genome directory:
-
-    cd genome
-
-Use ``SAMTools`` to generate the fasta file index:
-
-    samtools faidx f000_chr21_ref_genome_sequence.fa
-
-This creates a file called samtools faidx f000_chr21_ref_genome_sequence.fa.fai, with one record per line for each of the contigs in the FASTA reference file.
-
-
-Generate the sequence dictionary using ``Picard``:
-
-    java -jar ../picard/CreateSequenceDictionary.jar REFERENCE=f000_chr21_ref_genome_sequence.fa OUTPUT=f000_chr21_ref_genome_sequence.dict
+These datasets contain reads only for the *genes BRCA1, BRCA2**.
 
 
 2. Prepare BAM file
 --------------------------------------------------------------------------------
 
-Go to the example1 folder:
+Go to the folder:
 
-    cd /home/participant/cambridge_mda14/calling/example1
+    cd $HOME/core_ngs/variant_calling/
 
-<!-- The **read group** information is key for downstream GATK functionality. The GATK will not work without a read group tag. Make sure to enter as much metadata as you know about your data in the read group fields provided. For more information about all the possible fields in the @RG tag, take a look at the SAM specification.
+The **read group** information is key for downstream GATK functionality. The GATK will not work without a read group tag. Make sure to enter as much metadata as you know about your data in the read group fields provided. For more information about all the possible fields in the @RG tag, take a look at the SAM specification.
 
-    AddOrReplaceReadGroups.jar I=f000-dna_100_high_pe.bam O=f010-dna_100_high_pe_fixRG.bam RGID=group1 RGLB=lib1 RGPL=illumina RGSM=sample1 RGPU=unit1
+    picard-tools AddOrReplaceReadGroups I=brca_pairedend_mem.bam O=fbrca_pairedend_mem.fixed.bam RGID=group1 RGLB=lib1 RGPL=illumina RGSM=sample1 RGPU=unit1
 
--->
 
 We must sort and index the BAM file before processing it with Picard and GATK. To sort the bam file we use ``samtools``
 
-    samtools sort 000-dna_chr21_100_hq_pe.bam 001-dna_chr21_100_hq_pe_sorted
+    samtools sort brca_pairedend_mem.bam brca_pairedend_mem_sorted
 
 Index the BAM file:
 
-    samtools index 001-dna_chr21_100_hq_pe_sorted.bam
+    samtools index brca_pairedend_mem_sorted.bam
+
+**NOTE**: All those steps above are not recquired if you used **bwa mem** and **picard** as tools for alignment and sam to bam conversion respectively.
 
 
 3. Mark duplicates (using Picard)
