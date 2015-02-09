@@ -63,6 +63,6 @@ Other possible downloads for hg19 (more can be found at http://www.openbioinform
 
     perl annotate_variation.pl -filter -dbtype 1000g2012apr_all -maf 0.01 example/example1.annovar humandb/ -build hg19 --outfile results/2-filter
 
-    perl annotate_variation.pl -filter -dbtype snp135 example/example1.annovar humandb/ -build hg19 --outfile results/2-filter
+    perl annotate_variation.pl -filter -dbtype snp137 example/example1.annovar humandb/ -build hg19 --outfile results/2-filter
 
 
