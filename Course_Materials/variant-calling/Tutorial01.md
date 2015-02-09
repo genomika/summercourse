@@ -87,9 +87,9 @@ There are 2 steps to the realignment process:
 
 **Second**, perform realignment of the target intervals
 
-    java -jar ../gatk/GenomeAnalysisTK.jar -T IndelRealigner -R ../genome/f000_chr21_ref_genome_sequence.fa -I 002-dna_chr21_100_hq_pe_sorted_noDup.bam -targetIntervals 003-indelRealigner.intervals -o 003-dna_chr21_100_hq_pe_sorted_noDup_realigned.bam
+    java -Xmx10g -jar /usr/local/share/tools/GenomeAnalysisTK.jar -I brca_pairedend_mem.marked.bam -R /mnt/data/ucsc.hg19.fasta -T IndelRealigner -targetIntervals brca_pairedend_mem.marked.bam.list -known /mnt/data/Mills_and_1000G_gold_standard.indels.hg19.vcf -known /mnt/data/1000G_phase1.indels.hg19.vcf -o brca_pairedend_mem.marked.realigned.bam
 
-This creates a file called ``003-dna_chr21_100_hq_pe_sorted_noDup_realigned.bam`` containing all the original reads, but with better local alignments in the regions that were realigned.
+This creates a file called ``brca_pairedend_mem.marked.realigned.bam`` containing all the original reads, but with better local alignments in the regions that were realigned.
 
 
 5. Base quality score recalibration (using GATK)
