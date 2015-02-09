@@ -99,20 +99,20 @@ Two steps:
 
 **First**, analyse patterns of covariation in the sequence dataset
 
-    java -jar ../gatk/GenomeAnalysisTK.jar -T BaseRecalibrator -R ../genome/f000_chr21_ref_genome_sequence.fa -I 003-dna_chr21_100_hq_pe_sorted_noDup_realigned.bam -knownSites ../000-dbSNP_chr21.vcf -o 004-recalibration_data.table
+    java -Xmx10g -jar /usr/local/share/tools/GenomeAnalysisTK.jar -nct 2 -l INFO -T BaseRecalibrator -I brca_pairedend_mem.marked.realigned.bam -R /mnt/data/ucsc.hg19.fasta -L brca.list -knownSites /mnt/data/dbsnp_138.hg19.vcf  -knownSites /mnt/data/Mills_and_1000G_gold_standard.indels.hg19.vcf -knownSites /mnt/data/1000G_phase1.indels.hg19.vcf -cov QualityScoreCovariate -cov CycleCovariate -cov ContextCovariate -cov ReadGroupCovariate -o brca_pairedend_mem.marked.realigned.recal_data.table
 
-This creates a GATKReport file called ``004-recalibration_data.table`` containing several tables. These tables contain the covariation data that will be used in a later step to recalibrate the base qualities of your sequence data.
+This creates a GATKReport file called ``brca_pairedend_mem.marked.realigned.recal_data.table`` containing several tables. These tables contain the covariation data that will be used in a later step to recalibrate the base qualities of your sequence data.
 
 It is imperative that you provide the program with a set of **known sites**, otherwise it will refuse to run. The known sites are used to build the covariation model and estimate empirical base qualities. For details on what to do if there are no known sites available for your organism of study, please see the online GATK documentation.
 
 **Second**, apply the recalibration to your sequence data
 
-    java -jar ../gatk/GenomeAnalysisTK.jar -T PrintReads -R ../genome/f000_chr21_ref_genome_sequence.fa -I 003-dna_chr21_100_hq_pe_sorted_noDup_realigned.bam -BQSR 004-recalibration_data.table -o 004-dna_chr21_100_hq_pe_sorted_noDup_realigned_recalibrated.bam
+    java -Xmx10g -jar /usr/local/share/tools/GenomeAnalysisTK.jar -nct 2 -T PrintReads -I brca_pairedend_mem.marked.realigned.bam  -R /mnt/data/ucsc.hg19.fasta -BQSR brca_pairedend_mem.marked.realigned.recal_data.table -o brca_pairedend_mem.marked.realigned.recal.bam
+    
+This creates a file called ``brca_pairedend_mem.marked.realigned.recal.bam`` containing all the original reads, but now with exquisitely accurate base substitution, insertion and deletion quality scores. By default, the original quality scores are discarded in order to keep the file size down. However, you have the option to retain them by adding the flag ``–emit_original_quals`` to the ``PrintReads`` command, in which case the original qualities will also be written in the file, tagged OQ.
 
-This creates a file called ``004-dna_chr21_100_hq_pe_sorted_noDup_realigned_recalibrated.bam`` containing all the original reads, but now with exquisitely accurate base substitution, insertion and deletion quality scores. By default, the original quality scores are discarded in order to keep the file size down. However, you have the option to retain them by adding the flag ``–emit_original_quals`` to the ``PrintReads`` command, in which case the original qualities will also be written in the file, tagged OQ.
 
-
-6. Variant calling (using GATK - **UnifiedGenotyper**)
+6. Variant calling (using GATK - **HaplotypeGenotyper**)
 --------------------------------------------------------------------------------
 
 SNPs and INDELS are called using separate instructions.
