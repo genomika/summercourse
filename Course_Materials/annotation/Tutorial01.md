@@ -1,6 +1,7 @@
-% [NGS data analysis course](http://ngscourse.github.io/)
-% __Variant annotation__
-% _(updated 29-09-2014)_
+% [WorkShop de Verão Bioinformática](http://github.com/genomika/summercourse/)
+% __Variant Annotation__
+% _(updated 09-02-2014)_
+
 
 <!-- COMMON LINKS HERE -->
 
