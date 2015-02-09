@@ -12,9 +12,9 @@ Variant annotation with Annovar
 
 Copy the necessary data in your working directory:
 
-    mkdir -p /home/participant/cambridge_mda14/
-    cp -r /home/participant/Desktop/Open_Share/annotation /home/participant/cambridge_mda14/
-    cd /home/participant/cambridge_mda14/annotation/annovar
+    mkdir -p $HOME/core_ngs/annotation/
+    cp -r $HOME/core_ngs/variant_calling/*.vcf  $HOME/core_ngs/annotation/
+    cd $HOME/core_ngs/annotation/
 
 
 1. VCF to Annovar format
