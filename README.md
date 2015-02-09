@@ -49,7 +49,7 @@ O terceiro dia será voltado para a limpeza e recalibração dos dados de alinha
 
 ### Análise de variantes
 
-- [Slides](Course_Materials/variant-calling/SummerCourse_VariantCalling.pdf) || [Tutorial 1](Course_Materials/variant-calling/Tutorial01.md) || [Tutorial 2](Course_Materials/variant-calling/Tutorial02.md)
+- [Slides](Course_Materials/variant-calling/SummerCourse_VariantCalling.pdf) || [Tutorial 1](Course_Materials/variant-calling/Tutorial01.md)
 
 ## Dia 4
 
