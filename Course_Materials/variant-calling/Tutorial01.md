@@ -117,13 +117,8 @@ This creates a file called ``brca_pairedend_mem.marked.realigned.recal.bam`` con
 
 SNPs and INDELS are called using separate instructions.
 
-**SNP calling**
+    java -Xmx10g -jar /usr/local/share/tools/GenomeAnalysisTK.jar -nct 2 -R /mnt/data/ucsc.hg19.fasta -I brca_pairedend_mem.marked.realigned.recal.bam  --dbsnp /mnt/data/dbsnp_138.hg19.vcf  -T HaplotypeCaller -stand_emit_conf 10.0  -stand_call_conf 30.0 -dcov 5000 --genotyping_mode DISCOVERY -A FisherStrand -A AlleleBalance -A BaseCounts -A StrandOddsRatio -A StrandBiasBySample  --max_alternate_alleles 3 -o brca_pairedend_mem.marked.realigned.recal.vcf -L brca.list
 
-    java -jar ../gatk/GenomeAnalysisTK.jar -T UnifiedGenotyper -R ../genome/f000_chr21_ref_genome_sequence.fa -I 004-dna_chr21_100_hq_pe_sorted_noDup_realigned_recalibrated.bam -glm SNP -o 005-dna_chr21_100_he_pe_snps.vcf
-
-**INDEL calling**
-
-    java -jar ../gatk/GenomeAnalysisTK.jar -T UnifiedGenotyper -R ../genome/f000_chr21_ref_genome_sequence.fa -I 004-dna_chr21_100_hq_pe_sorted_noDup_realigned_recalibrated.bam -glm INDEL -o 005-dna_chr21_100_hq_pe_indel.vcf
 
 
 7. Introduce filters in the VCF file
@@ -131,11 +126,11 @@ SNPs and INDELS are called using separate instructions.
 
 Example: filter SNPs with low confidence calling (QD < 12.0) and flag them as "LowConf".
 
-    java -jar ../gatk/GenomeAnalysisTK.jar -T VariantFiltration -R ../genome/f000_chr21_ref_genome_sequence.fa -V 005-dna_chr21_100_he_pe_snps.vcf --filterExpression "QD < 12.0" --filterName "LowConf" -o 006-dna_chr21_100_he_pe_snps_filtered.vcf
+    java -jar /usr/local/share/tools/GenomeAnalysisTK.jar -T VariantFiltration -R /mnt/data/ucsc.hg19.fasta -V brca_pairedend_mem.marked.realigned.recal.vcf --filterExpression "DP < 10" --filterName "LowDep" -o brca_pairedend_mem.marked.realigned.recal.filtered.vcf
 
 The command ``--filterExpression`` will read the INFO field and check whether variants satisfy the requirement. If a variant does not satisfy your filter expression, the field FILTER will be filled with the indicated ``--filterName``. These commands can be called several times indicating different filtering expression (i.e: --filterName One --filterExpression "X < 1" --filterName Two --filterExpression "X > 2").
 
-**QUESTION:** How many "LowConf" variants have we obtained?
+**QUESTION:** How many "LowDep" variants have we obtained?
 
-    grep LowConf 006-dna_chr21_100_he_pe_snps_filtered.vcf | wc -l
+    grep LowDep brca_pairedend_mem.marked.realigned.recal.filtered.vcf | wc -l
 
