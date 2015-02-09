@@ -69,16 +69,11 @@ Index the BAM file:
 
 Run the following **Picard** command to mark duplicates:
 
-    java -jar ../picard/MarkDuplicates.jar INPUT=001-dna_chr21_100_hq_pe_sorted.bam OUTPUT=002-dna_chr21_100_hq_pe_sorted_noDup.bam METRICS_FILE=002-metrics.txt
+    picard-tools MarkDuplicates INPUT=brca_pairedend_mem.bam OUTPUT=brca_pairedend_mem.marked.bam METRICS_FILE=brca.txt CREATE_INDEX=true
 
-This creates a sorted BAM file called ``002-dna_chr21_100_hq_pe_sorted_noDup.bam`` with the same content as the input file, except that any duplicate reads are marked as such. It also produces a metrics file called ``metrics.txt`` containing (can you guess?) metrics.
+This creates a sorted BAM file called ``brca_pairedend_mem.marked.bam`` with the same content as the input file, except that any duplicate reads are marked as such. It also produces a metrics file called ``brca.txt`` containing (can you guess?) metrics.
 
 **QUESTION:** How many reads are removed as duplicates from the files (hint view the on-screen output from the two commands)?
-
-Run the following **Picard** command to index the new BAM file:
-
-    java -jar ../picard/BuildBamIndex.jar INPUT=002-dna_chr21_100_hq_pe_sorted_noDup.bam
-
 
 4. Local realignment around INDELS (using GATK)
 --------------------------------------------------------------------------------
@@ -86,8 +81,9 @@ Run the following **Picard** command to index the new BAM file:
 There are 2 steps to the realignment process:
 
 **First**, create a target list of intervals which need to be realigned
-  
-    java -jar ../gatk/GenomeAnalysisTK.jar -T RealignerTargetCreator -R ../genome/f000_chr21_ref_genome_sequence.fa -I 002-dna_chr21_100_hq_pe_sorted_noDup.bam -o 003-indelRealigner.intervals
+    
+      java -Xmx2g -jar /usr/local/share/tools/GenomeAnalysisTK.jar -nt 2  -T RealignerTargetCreator  -R /mnt/data/ucsc.hg19.fasta -o brca_pairedend_mem.marked.bam.list -I brca_pairedend_mem.marked.bam -known  /mnt/data/Mills_and_1000G_gold_standard.indels.hg19.vcf -known /mnt/data/1000G_phase1.indels.hg19.vcf -L brca.list
+
 
 **Second**, perform realignment of the target intervals
 
