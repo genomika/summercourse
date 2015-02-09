@@ -57,7 +57,7 @@ Neste último encontro o foco será na anotação das variantes com alguns banco
 
 ### Análise de Cobertura
 
-- [Slides](Course_Materials/coverage/SummerCourse_Coverage.pdf) - [Tutorial](Course_Materials/coverage/Tutorial01.md)
+- [Slides](Course_Materials/coverage/SummerCourse_Coverage.pdf) 
 
 
 ### Anotação de variantes
