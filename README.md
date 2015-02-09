@@ -70,7 +70,7 @@ Neste último encontro o foco será na anotação das variantes com alguns banco
 
 ### Análises, Big Data. 
 
-- [Slides](Course_Materials/variant_prioritization/presentation/2014-Cambridge_variant_prioritization.pdf)
+- [Slides](Course_Materials/big-data/SummerCourse_BigData.pdf)
 
 
 ### Para onde podemos seguir a partir de  agora ? 
